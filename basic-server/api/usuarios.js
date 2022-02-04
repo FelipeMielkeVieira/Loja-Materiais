@@ -1,7 +1,12 @@
 inserirRota('/buscar_usuario', function (dados, resposta) {
-    console.log(dados);
 
-    resposta({ok: 'Requisição Efetuada com Sucesso!'})
+    database(`SELECT * FROM USER`).then(result => {
+        resposta(result)
+    }).catch(erro => {
+        console.log('Erro ao buscar usuário!')
+    })
+
+    return resposta;
 });
 
 inserirRota('/criar_usuario', function (dados, resposta) {
@@ -10,11 +15,11 @@ inserirRota('/criar_usuario', function (dados, resposta) {
     if(!dados.nome) {
         return resposta({erro: 'É necessário preencher o nome!'})
     }
-    if(!dados.nickname) {
-        return resposta({erro: 'É necessário preencher o sobrenome!'})
+    if(!dados.senha) {
+        return resposta({erro: 'É necessário preencher a senha!'})
     }
 
-    database(`INSERT INTO USER (NOME, NICKNAME) VALUES ("${dados.nome}", "${dados.nickname}")
+    database(`INSERT INTO USER (NOME, SENHA) VALUES ("${dados.nome}", "${dados.senha}")
         `)
         .then(result => {
         console.log('Usuário inserido com sucesso!')

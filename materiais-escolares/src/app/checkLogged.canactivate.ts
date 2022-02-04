@@ -12,8 +12,10 @@ class CheckLogged implements CanActivate {
     ): Observable<boolean> | Promise<boolean> | boolean {
 
         if(location.pathname != '/' && location.pathname != '/usuario/cadastro' && location.pathname != '/usuario/login') {
-            let caminho = localStorage.getItem('path')
-            this.router.navigate([caminho])
+            if(localStorage.getItem('usuario') == '' || localStorage.getItem('usuario') == undefined) {
+                let caminho = localStorage.getItem('path')
+                this.router.navigate([caminho])
+            }
         }
 
         localStorage.setItem('path', location.pathname)

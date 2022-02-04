@@ -8,6 +8,7 @@ import { PaginaPrincipalComponent } from './loja/pagina-principal/pagina-princip
 import { UsuarioModule } from './usuario/usuario.module';
 import { LojaModule } from './loja/loja.module';
 import { CarrinhoModule } from './carrinho/carrinho.module';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { CarrinhoModule } from './carrinho/carrinho.module';
     UsuarioModule,
     LojaModule,
     CarrinhoModule,
-    RouterModule
+    RouterModule,
+    FormsModule
   ],
   providers: [CheckLogged],
   bootstrap: [AppComponent]
