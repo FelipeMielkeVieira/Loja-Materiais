@@ -10,6 +10,7 @@ export class PaginaCarrinhoComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    console.log(location.pathname)
   }
 
 }

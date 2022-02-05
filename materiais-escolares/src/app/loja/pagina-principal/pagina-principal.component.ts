@@ -14,6 +14,7 @@ export class PaginaPrincipalComponent implements OnInit {
 
   ngOnInit() {
     console.log(location.pathname)
+    localStorage.setItem('path', location.pathname)
   }
 
   entrar() {
