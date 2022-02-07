@@ -7,19 +7,39 @@ class CheckLogged implements CanActivate {
     constructor(private router: Router) { }
 
     canActivate(
-        route: ActivatedRouteSnapshot, 
+        route: ActivatedRouteSnapshot,
         state: RouterStateSnapshot,
     ): Observable<boolean> | Promise<boolean> | boolean {
 
-        if(location.pathname != '/' && location.pathname != '/usuario/cadastro' && location.pathname != '/usuario/login') {
-            if(localStorage.getItem('usuario')) {
-                console.log('2')
-                let caminho = localStorage.getItem('path')
-                this.router.navigate([caminho])
-            }
-        }
+        if (location.pathname != '/' && location.pathname != '/usuario/cadastro' && location.pathname != '/usuario/login') {
+            
+            let contagem = 0
+            var self = this
 
-        localStorage.setItem('path', location.pathname)
+            fetch('http://localhost:3000/api/buscar_usuario', { method: 'POST' }).then(function (result) {
+
+                result.json().then(function (data) {
+
+                    data.forEach(e => {
+
+                        if (localStorage.getItem('nome') == e.NOME && localStorage.getItem('senha') == e.SENHA) {
+                            contagem = contagem + 1
+                        }
+                    });
+                })
+
+                console.log(contagem)
+
+                if (contagem > 0) {
+                    return true;
+                } else {
+                    let caminho = localStorage.getItem('path')
+                    self.router.navigate([caminho])
+                }
+
+            })
+            
+        }
 
         return true;
     }
