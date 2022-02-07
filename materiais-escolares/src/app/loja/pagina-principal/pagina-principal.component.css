@@ -1,7 +1,7 @@
 header {
     width: 100%;
     height: 13vh;
-    background-color:#1e63d4;
+    background-color:#4ABDAC;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -46,7 +46,7 @@ header {
     justify-content: center;
     width: 100%;
     height: 71%;
-    margin-bottom: 26px;
+    margin-bottom: 32px;
     text-decoration: none;
 }
 
@@ -128,6 +128,6 @@ header {
 }
 
 .carrinho:hover {
-    background-color: rgb(71, 80, 204);
+    background-color: #FC4A1A;
     cursor: pointer;
 }

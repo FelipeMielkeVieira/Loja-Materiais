@@ -10,7 +10,7 @@ export class PaginaPrincipalComponent implements OnInit {
 
   constructor(private router: Router) { }
 
-  usuario = localStorage.getItem('usuario')
+  usuario = localStorage.getItem('nome')
 
   ngOnInit() {
     console.log(location.pathname)
@@ -26,7 +26,15 @@ export class PaginaPrincipalComponent implements OnInit {
   }
 
   carrinho() {
-    this.router.navigate(['carrinho'])
+    if(this.usuario != '') {
+      this.router.navigate(['carrinho'])
+    }
+  }
+
+  logout() {
+    localStorage.setItem('nome', '')
+    localStorage.setItem('senha', '')
+    window.location.reload()
   }
 
 }

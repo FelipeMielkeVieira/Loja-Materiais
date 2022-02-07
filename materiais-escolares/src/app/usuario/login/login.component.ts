@@ -21,6 +21,7 @@ export class LoginComponent implements OnInit {
   entrar() {
     localStorage.setItem('nome', this.nome)
     localStorage.setItem('senha', this.senha)
+    this.router.navigate(['/'])
   }
 
 }

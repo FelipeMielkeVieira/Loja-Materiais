@@ -77,16 +77,15 @@
                 <a (click)="cadastrar()" class='sublinhado'>Cadastre-se</a>
             </div>
             <div class='esclogin' *ngIf="usuario != '' && usuario != undefined">
-              <span>Olá, {{usuario}}</span>
               <div class="dropdown">
-                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  Dropdown button
+                <button class="btn btn-secondary dropdown-toggle" style='background-color: #FC4A1A;' type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                  Olá, {{usuario}}
                 </button>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                  <a class="dropdown-item" href="#">Action</a>
-                  <a class="dropdown-item" href="#">Another action</a>
-                  <a class="dropdown-item" href="#">Something else here</a>
-                </div>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                  <li><a class="dropdown-item" href="#">Action</a></li>
+                  <li><a class="dropdown-item" href="#">Another action</a></li>
+                  <li><button class="dropdown-item" (click)="logout()">Logout</button></li>
+                </ul>
               </div>
           </div>
         </div>

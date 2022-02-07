@@ -11,12 +11,12 @@ class CheckLogged implements CanActivate {
         state: RouterStateSnapshot,
     ): Observable<boolean> | Promise<boolean> | boolean {
 
-        if (location.pathname != '/' && location.pathname != '/usuario/cadastro' && location.pathname != '/usuario/login') {
+        if (location.pathname == '/carrinho' || location.pathname == '/carrinho/pedido') {
 
             let contagem = 0
             var self = this
-
-            fetch('http://localhost:3000/api/buscar_usuario', { method: 'POST' }).then(function (result) {
+            
+            fetch('/api/buscar_usuario', { method: 'POST' }).then(function (result) {
 
                 result.json().then(function (data) {
 
@@ -26,8 +26,6 @@ class CheckLogged implements CanActivate {
                             contagem = contagem + 1
                         }
                     });
-
-                    console.log(contagem)
 
                     if (contagem > 0) {
                         return true;

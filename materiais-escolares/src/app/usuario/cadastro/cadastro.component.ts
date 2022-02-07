@@ -18,7 +18,7 @@ export class CadastroComponent implements OnInit {
   senha = ""
 
   cadastrar() {
-    fetch('http://localhost:3000/api/criar_usuario', { method: 'POST', body: JSON.stringify({ nome: this.nome, senha: this.senha}), headers: {"Content-Type": "application/json"}});
+    fetch('/api/criar_usuario', { method: 'POST', body: JSON.stringify({ nome: this.nome, senha: this.senha}), headers: {"Content-Type": "application/json"}});
     this.router.navigate(['usuario/login'])
   }
 
