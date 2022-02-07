@@ -12,7 +12,7 @@ class CheckLogged implements CanActivate {
     ): Observable<boolean> | Promise<boolean> | boolean {
 
         if (location.pathname != '/' && location.pathname != '/usuario/cadastro' && location.pathname != '/usuario/login') {
-            
+
             let contagem = 0
             var self = this
 
@@ -26,19 +26,19 @@ class CheckLogged implements CanActivate {
                             contagem = contagem + 1
                         }
                     });
+
+                    console.log(contagem)
+
+                    if (contagem > 0) {
+                        return true;
+                    } else {
+                        let caminho = localStorage.getItem('path')
+                        self.router.navigate([caminho])
+                    }
                 })
 
-                console.log(contagem)
-
-                if (contagem > 0) {
-                    return true;
-                } else {
-                    let caminho = localStorage.getItem('path')
-                    self.router.navigate([caminho])
-                }
-
             })
-            
+
         }
 
         return true;
