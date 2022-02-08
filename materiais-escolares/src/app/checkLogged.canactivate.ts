@@ -11,7 +11,7 @@ class CheckLogged implements CanActivate {
         state: RouterStateSnapshot,
     ): Observable<boolean> | Promise<boolean> | boolean {
 
-        if (location.pathname == '/carrinho' || location.pathname == '/carrinho/pedido') {
+        if (location.pathname == '/carrinho' || location.pathname == '/carrinho/pedido' || location.pathname == '/carrinho/pedido' || location.pathname == '/usuario') {
 
             let contagem = 0
             var self = this
