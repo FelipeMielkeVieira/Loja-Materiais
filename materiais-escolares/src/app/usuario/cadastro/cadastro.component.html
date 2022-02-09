@@ -1,5 +1,12 @@
-<div>
-  <input type="text" placeholder="Nome" [(ngModel)]="nome"> <br />
-  <input type="text" placeholder="Senha" [(ngModel)]="senha"> <br />
-  <button (click)="cadastrar()">Cadastrar</button>
+<div class="divPrincipal">
+  <div class="borda">
+    <h1>Criar Conta</h1>
+    <input type="text" placeholder="Nome" [(ngModel)]="nome" class="input">
+    <input type="text" placeholder="Telefone ou Email" [(ngModel)]="transform" class="input">
+    <input type="text" placeholder="Senha" [(ngModel)]="senha" class="input2">
+    <input type="text" placeholder="Repetir Senha" [(ngModel)]="senha2" class="input">
+    <button (click)="cadastrar()" class="botao">Cadastrar</button>
+    <span class='concordar'>Ao criar uma conta, você concorda com a Política de Privacidade da empresa</span>
+    <h6 (click)="login()">Fazer Login</h6>
+  </div>
 </div>
