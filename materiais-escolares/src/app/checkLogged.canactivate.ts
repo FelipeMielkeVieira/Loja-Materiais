@@ -15,7 +15,7 @@ class CheckLogged implements CanActivate {
 
             let contagem = 0
             var self = this
-            
+
             fetch('/api/buscar_usuario', { method: 'POST' }).then(function (result) {
 
                 result.json().then(function (data) {
@@ -30,6 +30,8 @@ class CheckLogged implements CanActivate {
                     if (contagem > 0) {
                         return true;
                     } else {
+                        localStorage.setItem('nome', '')
+                        localStorage.setItem('senha', '')
                         let caminho = localStorage.getItem('path')
                         self.router.navigate([caminho])
                     }

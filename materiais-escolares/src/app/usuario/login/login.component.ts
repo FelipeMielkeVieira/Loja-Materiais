@@ -19,18 +19,43 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     this.usuarioService.buscarUsuario()
-    .then(resultado => {
-      console.log('RESULTADO:', resultado)
-    }).catch(erro => {
-      console.log('ERRO:', erro)
-    })
+      .then(resultado => {
+        console.log('RESULTADO:', resultado)
+      }).catch(erro => {
+        console.log('ERRO:', erro)
+      })
     localStorage.setItem('path', location.pathname)
   }
 
   entrar() {
-    localStorage.setItem('nome', this.nome)
-    localStorage.setItem('senha', this.senha)
-    this.router.navigate(['/'])
+
+    var self = this
+    let contagem = 0;
+
+    fetch('/api/buscar_usuario', { method: 'POST' }).then(function (result) {
+
+      result.json().then(function (data) {
+
+        console.log(data)
+
+        data.forEach(e => {
+
+          console.log(self.nome)
+          console.log(e.NOME)
+          console.log(self.senha)
+          console.log(e.SENHA)
+          if (self.nome == e.NOME && self.senha == e.SENHA) {
+            contagem++
+          }
+        });
+
+        if (contagem > 0) {
+          localStorage.setItem('nome', self.nome)
+          localStorage.setItem('senha', self.senha)
+          self.router.navigate(['/'])
+        }
+      })
+    })
   }
 
 }
