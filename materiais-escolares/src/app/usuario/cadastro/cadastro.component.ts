@@ -29,14 +29,35 @@ export class CadastroComponent implements OnInit {
 
         if (this.senha != "") {
 
-          if(this.transformar()) {
+          if (this.transformar()) {
             if (this.senha == this.senha2) {
 
-              if(this.email != 0) {
-                fetch('/api/criar_usuario', { method: 'POST', body: JSON.stringify({ nome: this.nome, senha: this.senha, email: this.transform, telefone: null }), headers: { "Content-Type": "application/json" } });
+              let data = new Date();
+              let dia = data.getDate();
+              let ano = data.getFullYear();
+              let mes = (data.getMonth() + 1);
+
+              let diaf
+              let mesf
+              
+              if((dia + '').length == 1) {
+                diaf = "0" + dia
+              } else {
+                diaf = dia
+              }
+              if((mes + '').length == 1) {
+                mesf = "0" + mes
+              } else {
+                mesf = mes
+              }
+
+              let dataFinal = diaf + "/" + mesf + "/" + ano
+
+              if (this.email != 0) {
+                fetch('/api/criar_usuario', { method: 'POST', body: JSON.stringify({ nome: this.nome, senha: this.senha, email: this.transform, telefone: null, data: dataFinal }), headers: { "Content-Type": "application/json" } });
                 this.router.navigate(['usuario/login'])
               } else {
-                fetch('/api/criar_usuario', { method: 'POST', body: JSON.stringify({ nome: this.nome, senha: this.senha, email: null, telefone: this.transform }), headers: { "Content-Type": "application/json" } });
+                fetch('/api/criar_usuario', { method: 'POST', body: JSON.stringify({ nome: this.nome, senha: this.senha, email: null, telefone: this.transform, data: dataFinal }), headers: { "Content-Type": "application/json" } });
                 this.router.navigate(['usuario/login'])
               }
             } else {
@@ -58,14 +79,14 @@ export class CadastroComponent implements OnInit {
 
   transformar() {
 
-    this.transform.replace('(','');
-    this.transform.replace(')','');
+    this.transform.replace('(', '');
+    this.transform.replace(')', '');
 
     console.log(isNaN(parseInt(this.transform)))
 
-    if(isNaN(parseInt(this.transform))) {
+    if (isNaN(parseInt(this.transform))) {
 
-      if(this.transform.indexOf("@") >= 0) {
+      if (this.transform.indexOf("@") >= 0) {
         this.email = 1;
         return true;
       } else {

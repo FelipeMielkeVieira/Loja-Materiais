@@ -37,4 +37,12 @@ export class PaginaPrincipalComponent implements OnInit {
     window.location.reload()
   }
 
+  conta() {
+    this.router.navigate(['usuario/'])
+  }
+
+  pedidos() {
+    this.router.navigate(['carrinho/pedidos'])
+  }
+
 }

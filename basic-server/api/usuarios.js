@@ -12,7 +12,7 @@ inserirRota('/buscar_usuario', function (dados, resposta) {
 inserirRota('/criar_usuario', function (dados, resposta) {
     console.log(dados)
 
-    database(`INSERT INTO USER (NOME, SENHA, EMAIL, TELEFONE) VALUES ("${dados.nome}", "${dados.senha}", "${dados.email}", "${dados.telefone}")
+    database(`INSERT INTO USER (NOME, SENHA, EMAIL, TELEFONE, CRIACAO) VALUES ("${dados.nome}", "${dados.senha}", "${dados.email}", "${dados.telefone}", "${dados.data}")
         `)
         .then(result => {
         console.log('Usuário inserido com sucesso!')

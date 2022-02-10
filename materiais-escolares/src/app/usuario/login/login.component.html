@@ -1,5 +1,9 @@
-<div>
-  <input type="text" placeholder="Nome" [(ngModel)]="nome"> <br />
-  <input type="text" placeholder="Senha" [(ngModel)]="senha" type="password"> <br />
-  <button (click)="entrar()">Entrar</button>
+<div class="divPrincipal">
+  <div class="borda">
+    <h1>Fazer Login</h1>
+    <input type="text" placeholder="Nome" [(ngModel)]="nome" class="input">
+    <input type="text" placeholder="Senha" [(ngModel)]="senha" type="password" class="input">
+    <button (click)="entrar()" class="botao">Entrar</button>
+    <h6 (click)="cadastro()">Cadastre-se</h6>
+  </div>
 </div>
