@@ -15,6 +15,7 @@ export class PaginaPrincipalComponent implements OnInit {
   ngOnInit() {
     console.log(location.pathname)
     localStorage.setItem('path', location.pathname)
+    this.colocarMateriais()
   }
 
   entrar() {
@@ -43,6 +44,29 @@ export class PaginaPrincipalComponent implements OnInit {
 
   pedidos() {
     this.router.navigate(['carrinho/pedidos'])
+  }
+
+  colocarMateriais() {
+
+    let divDireita = document.querySelector('.divDireita')
+
+    fetch('/api/buscar_produto', { method: 'POST' }).then(function (result) {
+
+      result.json().then(function (data) {
+
+          data.forEach(e => {
+
+            console.log(e)
+              let divLivro = document.createElement('div')
+              divLivro.className = 'divLivro'
+
+              divLivro.innerText = e.CODIGO
+
+              divDireita.appendChild(divLivro)
+          });
+      })
+
+  })
   }
 
 }

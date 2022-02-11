@@ -5,3 +5,16 @@
     box-sizing: border-box;
     font-family: 'Roboto';
 }
+
+.alert {
+    position: absolute;
+    top: 20px;
+    left: 40vw;
+    width: 20vw;
+    text-align: center;
+    border: 1px black solid;
+    padding: 0;
+    background-color: rgb(235, 49, 49);
+    color: white;
+    padding: 3px;
+}

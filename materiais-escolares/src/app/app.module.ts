@@ -10,6 +10,12 @@ import { LojaModule } from './loja/loja.module';
 import { CarrinhoModule } from './carrinho/carrinho.module';
 import { FormsModule } from '@angular/forms';
 
+import {AtomSpinnerModule} from 'angular-epic-spinners'
+import { NbThemeModule } from '@nebular/theme';
+import { NotifierModule } from 'angular-notifier';
+
+import { StickyNavModule } from 'ng2-sticky-nav';
+
 @NgModule({
   declarations: [
     AppComponent
@@ -27,7 +33,13 @@ import { FormsModule } from '@angular/forms';
     LojaModule,
     CarrinhoModule,
     RouterModule,
-    FormsModule
+    FormsModule,
+    AtomSpinnerModule,
+    NbThemeModule.forRoot(),
+    NotifierModule.withConfig({
+      // Custom options in here
+    }),
+    StickyNavModule
   ],
   providers: [CheckLogged],
   bootstrap: [AppComponent]

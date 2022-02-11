@@ -5,10 +5,15 @@ import { CadastroComponent } from './cadastro/cadastro.component';
 import { FormsModule } from '@angular/forms';
 import { ContaComponent } from './conta/conta.component';
 
+import {AtomSpinnerModule} from 'angular-epic-spinners'
+import { NbAlertModule } from '@nebular/theme';
+
 @NgModule({
   imports: [
     CommonModule,
-    FormsModule
+    FormsModule,
+    AtomSpinnerModule,
+    NbAlertModule
   ],
   declarations: [LoginComponent, CadastroComponent, ContaComponent],
   exports: [CadastroComponent, LoginComponent, ContaComponent]

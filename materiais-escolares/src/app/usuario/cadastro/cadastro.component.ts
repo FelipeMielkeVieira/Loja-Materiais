@@ -1,6 +1,9 @@
+import { analyzeFileForInjectables } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { NgModule } from '@angular/core';
 import { Router } from '@angular/router';
+
+
 
 @Component({
   selector: 'app-cadastro',
@@ -61,19 +64,19 @@ export class CadastroComponent implements OnInit {
                 this.router.navigate(['usuario/login'])
               }
             } else {
-              alert("As senhas não coincidem!")
+              this.alerta("As senhas não coincidem!")
             }
           } else {
-            alert("Insira um email ou número de telefone válido!")
+            this.alerta("Insira um email ou número de telefone válido!")
           }
         } else {
-          alert("Crie uma senha para sua conta!")
+          this.alerta("Crie uma senha para sua conta!")
         }
       } else {
-        alert("Insira um email ou número de telefone!")
+        this.alerta("Insira um email ou número de telefone!")
       }
     } else {
-      alert("Insira um nome de usuário!")
+      this.alerta("Insira um nome de usuário!")
     }
   }
 
@@ -99,5 +102,25 @@ export class CadastroComponent implements OnInit {
 
   login() {
     this.router.navigate(['usuario/login'])
+  }
+
+  alerta(texto) {
+
+    let alertAtual = document.querySelector('.alert')
+    if(alertAtual) {
+      alertAtual.remove()
+    }
+
+    let alert = document.createElement('div')
+    alert.className = 'alert'
+
+    alert.innerText = texto
+
+    let principal = document.querySelector('divPrincipal');
+    document.body.appendChild(alert)
+
+    setTimeout(function () {
+      document.body.removeChild(alert)
+    }, 3000)
   }
 }
