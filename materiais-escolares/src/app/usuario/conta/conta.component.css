@@ -71,3 +71,34 @@ header {
     display: flex;
     align-items: center;
 }
+
+main {
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+}
+
+.divPrincipal {
+    width: 60vw;
+    display: flex;
+    flex-direction: column;
+}
+
+.linha {
+    width: 100%;
+    display: flex;
+}
+
+.bloco {
+    width: 30%;
+    border: 1px solid black;
+    margin: 6px;
+}
+
+.img {
+    width: 100px;
+}
+
+h1 {
+    margin: 15px 0px;
+}
