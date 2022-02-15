@@ -13,31 +13,12 @@ class CheckLogged implements CanActivate {
 
         if (location.pathname == '/carrinho' || location.pathname == '/carrinho/pedido' || location.pathname == '/carrinho/pedido' || location.pathname == '/usuario') {
 
-            let contagem = 0
-            var self = this
-
-            fetch('/api/buscar_usuario', { method: 'POST' }).then(function (result) {
-
-                result.json().then(function (data) {
-
-                    data.forEach(e => {
-
-                        if (localStorage.getItem('nome') == e.NOME && localStorage.getItem('senha') == e.SENHA) {
-                            contagem = contagem + 1
-                        }
-                    });
-
-                    if (contagem > 0) {
-                        return true;
-                    } else {
-                        localStorage.setItem('nome', '')
-                        localStorage.setItem('senha', '')
-                        let caminho = localStorage.getItem('path')
-                        self.router.navigate([caminho])
-                    }
-                })
-
-            })
+            if(localStorage.getItem('nome') != '' && localStorage.getItem('nome') != null) {
+                return true;
+            } else {
+                let caminho = localStorage.getItem('path')
+                this.router.navigate([caminho])
+            }
 
         }
 

@@ -42,13 +42,13 @@ export class CadastroComponent implements OnInit {
 
               let diaf
               let mesf
-              
-              if((dia + '').length == 1) {
+
+              if ((dia + '').length == 1) {
                 diaf = "0" + dia
               } else {
                 diaf = dia
               }
-              if((mes + '').length == 1) {
+              if ((mes + '').length == 1) {
                 mesf = "0" + mes
               } else {
                 mesf = mes
@@ -58,10 +58,15 @@ export class CadastroComponent implements OnInit {
 
               if (this.email != 0) {
                 fetch('/api/criar_usuario', { method: 'POST', body: JSON.stringify({ nome: this.nome, senha: this.senha, email: this.transform, telefone: null, data: dataFinal }), headers: { "Content-Type": "application/json" } });
-                this.router.navigate(['usuario/login'])
+                localStorage.setItem('nome', this.nome)
+                localStorage.setItem('senha', this.senha)
+                this.router.navigate(['/'])
               } else {
                 fetch('/api/criar_usuario', { method: 'POST', body: JSON.stringify({ nome: this.nome, senha: this.senha, email: null, telefone: this.transform, data: dataFinal }), headers: { "Content-Type": "application/json" } });
-                this.router.navigate(['usuario/login'])
+                localStorage.setItem('nome', this.nome)
+                localStorage.setItem('senha', this.senha)
+                let caminho = localStorage.getItem('path')
+                this.router.navigate([caminho])
               }
             } else {
               this.alerta("As senhas não coincidem!")
@@ -107,7 +112,7 @@ export class CadastroComponent implements OnInit {
   alerta(texto) {
 
     let alertAtual = document.querySelector('.alert')
-    if(alertAtual) {
+    if (alertAtual) {
       alertAtual.remove()
     }
 
@@ -122,5 +127,10 @@ export class CadastroComponent implements OnInit {
     setTimeout(function () {
       document.body.removeChild(alert)
     }, 3000)
+  }
+
+  voltar() {
+    let caminho = localStorage.getItem('path')
+    this.router.navigate([caminho])
   }
 }

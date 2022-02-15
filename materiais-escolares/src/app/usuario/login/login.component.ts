@@ -24,7 +24,6 @@ export class LoginComponent implements OnInit {
       }).catch(erro => {
         console.log('ERRO:', erro)
       })
-    localStorage.setItem('path', location.pathname)
   }
 
   entrar() {
@@ -52,7 +51,8 @@ export class LoginComponent implements OnInit {
         if (contagem > 0) {
           localStorage.setItem('nome', self.nome)
           localStorage.setItem('senha', self.senha)
-          self.router.navigate(['/'])
+          let caminho = localStorage.getItem('path')
+          self.router.navigate([caminho])
         }
       })
     })
@@ -60,5 +60,10 @@ export class LoginComponent implements OnInit {
 
   cadastro() {
     this.router.navigate(['usuario/cadastro/'])
+  }
+
+  voltar() {
+    let caminho = localStorage.getItem('path')
+    this.router.navigate([caminho])
   }
 }

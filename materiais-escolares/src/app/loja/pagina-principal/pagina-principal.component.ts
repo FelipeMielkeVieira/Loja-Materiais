@@ -15,6 +15,12 @@ export class PaginaPrincipalComponent implements OnInit {
   ngOnInit() {
     console.log(location.pathname)
     localStorage.setItem('path', location.pathname)
+
+    if(! localStorage.getItem('variavelBanco')) {
+      fetch('/api/adicionar_automatico', { method: 'POST' })
+      localStorage.setItem('variavelBanco', "1")
+    }
+
     this.colocarMateriais()
   }
 

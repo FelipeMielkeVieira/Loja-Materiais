@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-conta',
@@ -7,9 +8,28 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ContaComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
   }
 
+  pedidos() {
+    this.router.navigate(['carrinho/pedidos'])
+  }
+
+  info() {
+    this.router.navigate(['usuario/info'])
+  }
+
+  enderecos() {
+    this.router.navigate(['usuario/enderecos'])
+  }
+
+  pagamentos() {
+    this.router.navigate(['usuario/pagamentos'])
+  }
+
+  vales() {
+    this.router.navigate(['usuario/vales'])
+  }
 }

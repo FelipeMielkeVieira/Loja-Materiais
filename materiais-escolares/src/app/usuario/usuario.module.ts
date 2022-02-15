@@ -7,6 +7,10 @@ import { ContaComponent } from './conta/conta.component';
 
 import {AtomSpinnerModule} from 'angular-epic-spinners'
 import { NbAlertModule } from '@nebular/theme';
+import { InfoComponent } from './info/info.component';
+import { EnderecosComponent } from './enderecos/enderecos.component';
+import { PagamentosComponent } from './pagamentos/pagamentos.component';
+import { ValesComponent } from './vales/vales.component';
 
 @NgModule({
   imports: [
@@ -15,7 +19,7 @@ import { NbAlertModule } from '@nebular/theme';
     AtomSpinnerModule,
     NbAlertModule
   ],
-  declarations: [LoginComponent, CadastroComponent, ContaComponent],
+  declarations: [LoginComponent, CadastroComponent, ContaComponent, InfoComponent, EnderecosComponent, PagamentosComponent, ValesComponent],
   exports: [CadastroComponent, LoginComponent, ContaComponent]
 })
 export class UsuarioModule { }
