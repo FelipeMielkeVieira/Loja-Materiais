@@ -16,12 +16,18 @@ export class PaginaPrincipalComponent implements OnInit {
     console.log(location.pathname)
     localStorage.setItem('path', location.pathname)
 
-    if(! localStorage.getItem('variavelBanco')) {
-      fetch('/api/adicionar_automatico', { method: 'POST' })
-      localStorage.setItem('variavelBanco', "1")
-    }
+    fetch('/api/buscar_produto', { method: 'POST' }).then(function (result) {
 
-    this.colocarMateriais()
+      result.json().then(function (data) {
+
+        if(data.length < 1) {
+          fetch('/api/adicionar_automatico', { method: 'POST' });
+        }
+      })
+
+    }).then (function (e) {
+      this.colocarMateriais()
+    })
   }
 
   entrar() {

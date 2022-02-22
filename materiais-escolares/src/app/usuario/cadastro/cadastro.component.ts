@@ -54,7 +54,7 @@ export class CadastroComponent implements OnInit {
                 mesf = mes
               }
 
-              let dataFinal = diaf + "/" + mesf + "/" + ano
+              let dataFinal = ano + '-' + mesf + '-' + diaf
 
               if (this.email != 0) {
                 fetch('/api/criar_usuario', { method: 'POST', body: JSON.stringify({ nome: this.nome, senha: this.senha, email: this.transform, telefone: null, data: dataFinal }), headers: { "Content-Type": "application/json" } });
