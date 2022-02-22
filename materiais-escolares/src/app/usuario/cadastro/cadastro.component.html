@@ -1,10 +1,10 @@
 <div class="divPrincipal">
   <div class="borda">
     <h1>Criar Conta</h1>
-    <input type="text" placeholder="Nome" [(ngModel)]="nome" class="input">
-    <input type="text" placeholder="Telefone ou Email" [(ngModel)]="transform" class="input">
-    <input type="text" placeholder="Senha" [(ngModel)]="senha" class="input2" type="password">
-    <input type="text" placeholder="Repetir Senha" [(ngModel)]="senha2" class="input" type="password">
+    <input type="text" placeholder="Nome" [(ngModel)]="nome" class="input" maxlength="100">
+    <input type="text" placeholder="Telefone ou Email" [(ngModel)]="transform" class="input" maxlength="100">
+    <input type="text" placeholder="Senha" [(ngModel)]="senha" class="input2" type="password" maxlength="30">
+    <input type="text" placeholder="Repetir Senha" [(ngModel)]="senha2" class="input" type="password" maxlength="30">
     <button (click)="cadastrar()" class="botao">Cadastrar</button>
     <span class='concordar'>Ao criar uma conta, você concorda com a Política de Privacidade da empresa</span>
     <h6 (click)="login()">Fazer Login</h6>
@@ -14,7 +14,7 @@
   [size]="60"
   [color]="'#ff1d5e'"
  ></app-atom-spinner> -->
- <span class="cancelar" (click)="voltar()">
-  Cancelar
- </span>
+  <span class="cancelar" (click)="voltar()">
+    Cancelar
+  </span>
 </div>
