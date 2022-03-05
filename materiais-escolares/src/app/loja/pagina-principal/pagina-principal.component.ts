@@ -16,6 +16,8 @@ export class PaginaPrincipalComponent implements OnInit {
     console.log(location.pathname)
     localStorage.setItem('path', location.pathname)
 
+    var self = this;
+
     fetch('/api/buscar_produto', { method: 'POST' }).then(function (result) {
 
       result.json().then(function (data) {
@@ -26,7 +28,7 @@ export class PaginaPrincipalComponent implements OnInit {
       })
 
     }).then (function (e) {
-      this.colocarMateriais()
+      self.colocarMateriais()
     })
   }
 
