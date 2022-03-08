@@ -11,18 +11,12 @@ class CheckLogged implements CanActivate {
         state: RouterStateSnapshot,
     ): Observable<boolean> | Promise<boolean> | boolean {
 
-        if (location.pathname == '/carrinho' || location.pathname == '/carrinho/pedido' || location.pathname == '/carrinho/pedido' || location.pathname == '/usuario') {
-
-            if(localStorage.getItem('nome') != '' && localStorage.getItem('nome') != null) {
-                return true;
-            } else {
-                let caminho = localStorage.getItem('path')
-                this.router.navigate([caminho])
-            }
-
+        if (localStorage.getItem('nome') != '' && localStorage.getItem('nome') != null) {
+            return true;
+        } else {
+            let caminho = localStorage.getItem('path')
+            this.router.navigate([caminho])
         }
-
-        return true;
     }
 }
 

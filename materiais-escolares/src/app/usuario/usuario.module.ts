@@ -11,15 +11,18 @@ import { InfoComponent } from './info/info.component';
 import { EnderecosComponent } from './enderecos/enderecos.component';
 import { PagamentosComponent } from './pagamentos/pagamentos.component';
 import { ValesComponent } from './vales/vales.component';
+import { UtilitariosModule } from '../utilitarios/utilitarios.module';
+import { EditarComponent } from './editar/editar.component';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     AtomSpinnerModule,
-    NbAlertModule
+    NbAlertModule,
+    UtilitariosModule
   ],
-  declarations: [LoginComponent, CadastroComponent, ContaComponent, InfoComponent, EnderecosComponent, PagamentosComponent, ValesComponent],
+  declarations: [LoginComponent, CadastroComponent, ContaComponent, InfoComponent, EnderecosComponent, PagamentosComponent, ValesComponent, EditarComponent],
   exports: [CadastroComponent, LoginComponent, ContaComponent]
 })
 export class UsuarioModule { }

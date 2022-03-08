@@ -22,3 +22,15 @@ inserirRota('/criar_usuario', function (dados, resposta) {
         resposta({erro: 'Erro ao inserir usuário!'})
     });
 })
+
+inserirRota('/usuario_especifico', function (dados, resposta) {
+
+    database(`SELECT * FROM USER WHERE NOME = "${dados.nome}"`)
+    .then(result => {
+        console.log('Usuário inserido com sucesso!')
+        resposta(result)
+    }).catch(erro => {
+        console.log('Erro ao inserir usuário!')
+        resposta(result)
+    });
+})

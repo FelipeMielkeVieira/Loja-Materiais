@@ -15,10 +15,11 @@ import { NbThemeModule } from '@nebular/theme';
 import { NotifierModule } from 'angular-notifier';
 
 import { StickyNavModule } from 'ng2-sticky-nav';
+import { UtilitariosModule } from './utilitarios/utilitarios.module';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     RouterModule.forRoot([
@@ -39,7 +40,8 @@ import { StickyNavModule } from 'ng2-sticky-nav';
     NotifierModule.withConfig({
       // Custom options in here
     }),
-    StickyNavModule
+    StickyNavModule,
+    UtilitariosModule
   ],
   providers: [CheckLogged],
   bootstrap: [AppComponent]

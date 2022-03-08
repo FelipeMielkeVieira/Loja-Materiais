@@ -18,34 +18,44 @@ import { EnderecosComponent } from '../usuario/enderecos/enderecos.component';
 import { PagamentosComponent } from '../usuario/pagamentos/pagamentos.component';
 import { ValesComponent } from '../usuario/vales/vales.component';
 
+import { UtilitariosModule } from '../utilitarios/utilitarios.module';
+import { EditarComponent } from '../usuario/editar/editar.component';
+
 const routes: Routes = [
   {
     path: 'produtos', canActivate: [CheckLogged], children: [
-      { path: '', component: PaginaPrincipalComponent},
-      { path: ':codigo', component: ProdutoComponent}
+      { path: '', component: PaginaPrincipalComponent },
+      { path: ':codigo', component: ProdutoComponent }
     ]
   },
-  { path: 'usuario', canActivate: [CheckLogged], children: [
-    { path: '', component: ContaComponent},
-    { path: 'cadastro', component: CadastroComponent},
-    { path: 'login', component: LoginComponent},
-    { path: 'info', component: InfoComponent},
-    { path: 'enderecos', component: EnderecosComponent},
-    { path: 'pagamentos', component: PagamentosComponent},
-    { path: 'vales', component: ValesComponent}
-  ]
+  {
+    path: 'usuario', children: [
+      { path: '', canActivate: [CheckLogged], component: ContaComponent },
+      { path: 'cadastro', component: CadastroComponent },
+      { path: 'login', component: LoginComponent },
+      { path: 'info', canActivate: [CheckLogged], children: [
+        { path: '', component: InfoComponent},
+        { path: ':editor', component: EditarComponent}
+      ] },
+      { path: 'enderecos', canActivate: [CheckLogged], component: EnderecosComponent },
+      { path: 'pagamentos', canActivate: [CheckLogged], component: PagamentosComponent },
+      { path: 'vales', canActivate: [CheckLogged], component: ValesComponent }
+    ]
   },
-  { path: 'carrinho', canActivate: [CheckLogged], children: [
-    { path: '', component: PaginaCarrinhoComponent},
-    { path: 'pedidos', component: PedidosComponent},
-    { path: 'pedido', component: PedidoComponent}
-  ]}
+  {
+    path: 'carrinho', canActivate: [CheckLogged], children: [
+      { path: '', component: PaginaCarrinhoComponent },
+      { path: 'pedidos', component: PedidosComponent },
+      { path: 'pedido', component: PedidoComponent }
+    ]
+  }
 ]
 
 @NgModule({
   imports: [
     RouterModule.forRoot(routes),
-    CommonModule
+    CommonModule,
+    UtilitariosModule
   ],
   declarations: [PaginaPrincipalComponent, ProdutoComponent],
   exports: [PaginaPrincipalComponent, ProdutoComponent],

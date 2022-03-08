@@ -21,4 +21,22 @@ export class UsuarioService {
     })
   }
 
+  usuarioEspecifico(nome) {
+
+    return new Promise((resolvido, rejeitado) => {
+
+      fetch('/api/usuario_especifico', {
+        method: 'POST',
+        body: JSON.stringify(
+          {
+          nome: nome
+        }),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }).then(resultado => resultado.json())
+      .then(resolvido)
+      .catch(rejeitado);
+    })
+  }
 }
