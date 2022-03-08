@@ -39,4 +39,23 @@ export class UsuarioService {
       .catch(rejeitado);
     })
   }
+
+  excluirUsuario(nome) {
+
+    return new Promise((resolvido, rejeitado) => {
+
+      fetch('/api/excluir_usuario', {
+        method: 'POST',
+        body: JSON.stringify(
+          {
+          nome: nome
+        }),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }).then(resultado => resultado.json())
+      .then(resolvido)
+      .catch(rejeitado);
+    })
+  }
 }

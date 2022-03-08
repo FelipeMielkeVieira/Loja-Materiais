@@ -67,7 +67,7 @@ export class InfoComponent implements OnInit {
   }
 
   excluir() {
-    
+    this.usuarioService.excluirUsuario(this.usuario);
   }
 
 }
