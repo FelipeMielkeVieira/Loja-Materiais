@@ -22,22 +22,26 @@
     <div class="linha" style="border-bottom: 1px black solid;">
       <span style="font-weight: bold;">Nome: </span>
       <span>{{usuario}}</span>
-      <button class="editar" (click)="editar('nome')">Editar</button>
+      <button *ngIf="usuario != '-'" class="editar" (click)="editar('nome')">Editar</button>
+      <button *ngIf="usuario == '-'" class="editar" (click)="editar('nome')">Adicionar</button>
     </div>
     <div class="linha" style="border-bottom: 1px black solid;">
       <span style="font-weight: bold;">E-mail: </span>
       <span>{{email}}</span>
-      <button class="editar" (click)="editar('nome')">Editar</button>
+      <button *ngIf="email != '-'" class="editar" (click)="editar('email')">Editar</button>
+      <button *ngIf="email == '-'" class="editar" (click)="editar('email')">Adicionar</button>
     </div>
     <div class="linha" style="border-bottom: 1px black solid;">
       <span style="font-weight: bold;">Número de Telefone: </span>
       <span>{{telefone}}</span>
-      <button class="editar" (click)="editar('nome')">Editar</button>
+      <button *ngIf="telefone != '-'" class="editar" (click)="editar('telefone')">Editar</button>
+      <button *ngIf="telefone == '-'" class="editar" (click)="editar('telefone')">Adicionar</button>
     </div>
     <div class="linha" style="border-bottom: 1px black solid;">
       <span style="font-weight: bold;">Senha: </span>
       <span>{{senha}}</span>
-      <button class="editar" (click)="editar('nome')">Editar</button>
+      <button *ngIf="senha != '-'" class="editar" (click)="editar('senha')">Editar</button>
+      <button *ngIf="senha == '-'" class="editar" (click)="editar('senha')">Adicionar</button>
     </div>
     <div class="linha">
       <span style="font-weight: bold;">Data de Criação: </span>

@@ -26,38 +26,6 @@ export class LoginComponent implements OnInit {
       })
   }
 
-  entrar() {
-
-    var self = this
-    let contagem = 0;
-
-    fetch('/api/buscar_usuario', { method: 'POST' }).then(function (result) {
-
-      result.json().then(function (data) {
-
-        console.log(data)
-
-        data.forEach(e => {
-
-          console.log(self.nome)
-          console.log(e.NOME)
-          console.log(self.senha)
-          console.log(e.SENHA)
-          if (self.nome == e.NOME && self.senha == e.SENHA) {
-            contagem++
-          }
-        });
-
-        if (contagem > 0) {
-          localStorage.setItem('nome', self.nome)
-          localStorage.setItem('senha', self.senha)
-          let caminho = localStorage.getItem('path')
-          self.router.navigate([caminho])
-        }
-      })
-    })
-  }
-
   cadastro() {
     this.router.navigate(['usuario/cadastro/'])
   }
@@ -65,5 +33,30 @@ export class LoginComponent implements OnInit {
   voltar() {
     let caminho = localStorage.getItem('path')
     this.router.navigate([caminho])
+  }
+
+  logar() {
+
+    var self = this;
+    fetch('http://localhost:3000/api/login', { method: 'POST', body: JSON.stringify({ nome: this.nome, senha: this.senha }), headers: { "Content-Type": "application/json" } }).then(function (e) {
+
+      console.log(e)
+
+      e.json().then(function (data) {
+
+        console.log("teste2: ", data)
+        console.log(data.user.NOME)
+
+        if (data.user) {
+
+          localStorage.setItem('nome', data.user.NOME)
+
+          localStorage.setItem('senha', self.senha)
+
+          let caminho = localStorage.getItem('path')
+          self.router.navigate([caminho])
+        }
+      })
+    })
   }
 }

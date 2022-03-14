@@ -27,7 +27,7 @@ export class PaginaPrincipalComponent implements OnInit {
         }
       })
 
-    }).then (function (e) {
+    }).then (function () {
       self.colocarMateriais()
     })
   }

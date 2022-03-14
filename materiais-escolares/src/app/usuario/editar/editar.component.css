@@ -1,0 +1,57 @@
+.divPrincipal {
+    width: 40vw;
+    height: 30vh;
+    margin: 20px;
+    padding: 15px;
+    border: 1px black solid;
+    border-radius: 6px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.spanCima {
+    margin-right: 20px;
+}
+
+.spanCima:hover {
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.divConta {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+}
+
+h2 {
+    margin-top: 40px;
+    font-size: 26px;
+}
+
+.linha {
+    margin: 10px;
+    padding: 20px;
+}
+
+.editar {
+    float: right;
+    border: 1px solid black;
+    border-radius: 8px;
+    padding: 5px;
+}
+
+.salvar {
+    border: 1px solid black;
+    border-radius: 6px;
+    padding: 10px;
+    background-color: #66B9Bf;
+    color: white;
+}
+
+.inputEditar {
+    width: 80%;
+    padding: 4px 10px;
+}

@@ -36,19 +36,23 @@ export class InfoComponent implements OnInit {
       let data = new Date(dados[0].CRIACAO)
       let ano = data.getFullYear();
       let mes = data.getMonth();
-      let dia = data.getDate();
+      let dia = String(data.getDate()).padStart(2,'0');
 
       let diaf
       let mesf
 
-      if(mes.toString.length == 1) {
+      if(mes < 10) {
         mesf = "0" + mes
+      } else {
+        mesf = mes;
       }
-      if(dia.toString.length == 1) {
+      if(dia.length == 1) {
         diaf = "0" + dia
+      } else {
+        diaf = dia;
       }
 
-      this.criacao = diaf + "/" + mesf + "/" + ano
+      this.criacao = dia + "/" + mesf + "/" + ano
     })
   }
 
@@ -68,6 +72,8 @@ export class InfoComponent implements OnInit {
 
   excluir() {
     this.usuarioService.excluirUsuario(this.usuario);
+    localStorage.setItem('nome', '')
+    this.router.navigate(['/usuario/login'])
   }
 
 }

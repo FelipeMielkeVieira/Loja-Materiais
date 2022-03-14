@@ -58,4 +58,25 @@ export class UsuarioService {
       .catch(rejeitado);
     })
   }
+
+  editarUsuario(valorEditar, novoValor, nome) {
+
+    return new Promise((resolvido, rejeitado) => {
+
+      fetch('/api/editar_usuario', {
+        method: 'POST',
+        body: JSON.stringify(
+          {
+          valorEditar: (valorEditar.toUpperCase()),
+          novoValor: novoValor,
+          nome: nome
+        }),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }).then(resultado => resultado.json())
+      .then(resolvido)
+      .catch(rejeitado);
+    })
+  }
 }
