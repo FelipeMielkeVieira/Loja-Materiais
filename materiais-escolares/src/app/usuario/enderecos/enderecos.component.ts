@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { EnderecoService } from 'src/app/services/endereco.service';
 
 @Component({
   selector: 'app-enderecos',
@@ -7,9 +8,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EnderecosComponent implements OnInit {
 
-  constructor() { }
+  constructor(private enderecoService: EnderecoService) { }
 
   ngOnInit() {
+    this.enderecoService.criarEndereco("Felipe", "Jaraguá", "Centro", "Amazonas", 240, "Fundos", 1)
   }
 
 }

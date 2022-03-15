@@ -50,7 +50,6 @@ export class LoginComponent implements OnInit {
         if (data.user) {
 
           localStorage.setItem('nome', data.user.NOME)
-
           localStorage.setItem('senha', self.senha)
 
           let caminho = localStorage.getItem('path')
