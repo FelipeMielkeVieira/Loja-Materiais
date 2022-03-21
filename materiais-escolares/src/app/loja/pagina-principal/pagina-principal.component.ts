@@ -18,6 +18,26 @@ export class PaginaPrincipalComponent implements OnInit {
 
     var self = this;
 
+    fetch('/api/buscar_paises', { method: 'POST'}).then(function (result) {
+
+      result.json().then(function (data) {
+
+        if(data.length < 1) {
+          fetch('/api/adicionar_paises', { method: 'POST'});
+        }
+      })
+    })
+
+    fetch('/api/buscar_estados', { method: 'POST'}).then(function (result) {
+
+      result.json().then(function (data) {
+
+        if(data.length < 1) {
+          fetch('/api/adicionar_estados', { method: 'POST'});
+        }
+      })
+    })
+
     fetch('/api/buscar_produto', { method: 'POST' }).then(function (result) {
 
       result.json().then(function (data) {

@@ -51,6 +51,7 @@ export class LoginComponent implements OnInit {
 
           localStorage.setItem('nome', data.user.NOME)
           localStorage.setItem('senha', self.senha)
+          localStorage.setItem('codigo', data.user.CODIGO)
 
           let caminho = localStorage.getItem('path')
           self.router.navigate([caminho])

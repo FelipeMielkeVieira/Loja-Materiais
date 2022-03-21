@@ -30,6 +30,7 @@ export class NavbarComponent implements OnInit {
   logout() {
     localStorage.setItem('nome', '')
     localStorage.setItem('senha', '')
+    localStorage.setItem('codigo', '')
     window.location.reload()
   }
 

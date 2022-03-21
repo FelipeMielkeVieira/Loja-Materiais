@@ -2,6 +2,7 @@ import { analyzeFileForInjectables } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { NgModule } from '@angular/core';
 import { Router } from '@angular/router';
+import { UsuarioService } from 'src/app/services/usuario.service';
 
 
 
@@ -12,7 +13,7 @@ import { Router } from '@angular/router';
 })
 export class CadastroComponent implements OnInit {
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private usuarioService: UsuarioService) { }
 
   ngOnInit() {
   }
@@ -25,6 +26,8 @@ export class CadastroComponent implements OnInit {
   email = 0;
 
   cadastrar() {
+
+    var self = this;
 
     if (this.nome != "") {
 
@@ -60,13 +63,32 @@ export class CadastroComponent implements OnInit {
                 fetch('/api/criar_usuario', { method: 'POST', body: JSON.stringify({ nome: this.nome, senha: this.senha, email: this.transform, telefone: null, data: dataFinal }), headers: { "Content-Type": "application/json" } });
                 localStorage.setItem('nome', this.nome)
                 localStorage.setItem('senha', this.senha)
-                this.router.navigate(['/'])
+                let caminho = localStorage.getItem('path')
+                let contagem = 1;
+                this.usuarioService.buscarUsuario().then(function (result: any) {
+                  console.log(result)
+                  result.forEach(e => {
+                    contagem++;
+                  });
+                }).then(function (e) {
+                  localStorage.setItem('codigo', JSON.stringify(contagem));
+                  self.router.navigate([caminho])
+                })
               } else {
                 fetch('/api/criar_usuario', { method: 'POST', body: JSON.stringify({ nome: this.nome, senha: this.senha, email: null, telefone: this.transform, data: dataFinal }), headers: { "Content-Type": "application/json" } });
                 localStorage.setItem('nome', this.nome)
                 localStorage.setItem('senha', this.senha)
                 let caminho = localStorage.getItem('path')
-                this.router.navigate([caminho])
+                let contagem = 1;
+                this.usuarioService.buscarUsuario().then(function (result: any) {
+                  console.log(result)
+                  result.forEach(e => {
+                    contagem++;
+                  });
+                }).then(function (e) {
+                  localStorage.setItem('codigo', JSON.stringify(contagem));
+                  self.router.navigate([caminho])
+                })
               }
             } else {
               this.alerta("As senhas não coincidem!")

@@ -7,46 +7,74 @@ export class EnderecoService {
 
   constructor() { }
 
-  criarEndereco(nome, cidade, bairro, rua, numero, complemento, estado) {
+  criarEndereco(cidade, bairro, rua, numero, complemento, estado, codigo) {
 
     return new Promise((resolvido, rejeitado) => {
 
-      fetch('/api/coletar_codigo', {
+      fetch('/api/adicionar_endereco', {
         method: 'POST',
         body: JSON.stringify(
           {
-            nome: nome
-          }),
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      }).then(result => {
+            cidade: cidade,
+            bairro: bairro,
+            rua: rua,
+            numero: numero,
+            complemento: complemento,
+            usuario: codigo,
+            estado: estado
+          }
+        ),
+        headers: { "Content-Type": "application/json" }
+      }).then(resultado => resultado.json())
+        .then(resolvido)
+        .catch(rejeitado);
+    })
+  }
 
-        result.json().then(function (data) {
+  buscarEndereco(codigo) {
 
-          var codigo = data.CODIGO
+    return new Promise((resolvido, rejeitado) => {
 
-          fetch('/api/adicionar_endereco', {
-            method: 'POST',
-            body: JSON.stringify(
-              {
-                cidade: cidade,
-                bairro: bairro,
-                rua: rua,
-                numero: numero,
-                complemento: complemento,
-                usuario: codigo,
-                estado: estado
-              }
-            )
-          }).then(resultado => resultado.json())
-          .then(resolvido)
-          .catch(rejeitado);
-        })
+      fetch('/api/buscar_enderecos', {
+        method: 'POST',
+        body: JSON.stringify(
+          {
+            codigo: codigo
+          }
+        ),
+        headers: { "Content-Type": "application/json" }
+      }).then(resultado => resultado.json())
+        .then(resolvido)
+        .catch(rejeitado);
+    })
+  }
 
-      }).catch(erro => {
+  buscarPaises() {
+    return new Promise((resolvido, rejeitado) => {
 
-      });
+      fetch('/api/buscar_paises', {
+        method: 'POST',
+        headers: { "Content-Type": "application/json" }
+      }).then(resultado => resultado.json())
+        .then(resolvido)
+        .catch(rejeitado);
+    })
+  }
+
+  buscarEstados(codigo) {
+    return new Promise((resolvido, rejeitado) => {
+
+      fetch('/api/buscar_estados', {
+        method: 'POST',
+        body: JSON.stringify(
+          {
+            codigo: codigo
+          }
+        ),
+        headers: { "Content-Type": "application/json" }
+      }).then(resultado => resultado.json())
+        .then(resolvido)
+        .catch(rejeitado);
     })
   }
 }
