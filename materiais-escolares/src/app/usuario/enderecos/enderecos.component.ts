@@ -8,12 +8,16 @@ import { EnderecoService } from 'src/app/services/endereco.service';
 })
 export class EnderecosComponent implements OnInit {
 
-  constructor(private enderecoService: EnderecoService) { }
+  estado = 0;
+  
+  cidade: String
+  bairro: String
+  rua: String
 
-  bairro = "";
-  rua = "";
   complemento = "";
   numero = null;
+
+  constructor(private enderecoService: EnderecoService) { }
 
   ngOnInit() {
     var self = this;
@@ -22,7 +26,6 @@ export class EnderecosComponent implements OnInit {
       self.listarEnderecos(result);
     })
     this.paisesSelect();
-    // this.enderecoService.criarEndereco('Jaraguá', 'Centro', 'Amazonas', 240, 'Fundos', 1, localStorage.getItem('codigo'))
   }
 
   listarEnderecos(result) {
@@ -33,7 +36,7 @@ export class EnderecosComponent implements OnInit {
   }
 
   adicionarEndereco() {
-
+    this.enderecoService.criarEndereco(this.cidade, this.bairro, this.rua, this.numero, this.complemento, this.estado, localStorage.getItem('codigo'))
   }
 
   paisesSelect() {
@@ -65,6 +68,10 @@ export class EnderecosComponent implements OnInit {
         }) 
       })
     }
+  }
+
+  estadoSelecionado(valor) {
+    this.estado = valor
   }
 
 }
