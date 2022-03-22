@@ -34,10 +34,6 @@ export class EditarComponent implements OnInit {
 
     if(this.novoValor != "") {
 
-      // if(this.valorEditar == "Nome") {
-      //   this.usuarioService.editarUsuario(this.valorEditar, this.novoValor, localStorage.getItem('nome'))
-      // }
-
       this.usuarioService.editarUsuario(this.valorEditar, this.novoValor, localStorage.getItem('nome'))
 
       if(this.valorEditar == "Nome") {

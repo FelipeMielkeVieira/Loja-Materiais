@@ -13,6 +13,7 @@ import { PagamentosComponent } from './pagamentos/pagamentos.component';
 import { ValesComponent } from './vales/vales.component';
 import { UtilitariosModule } from '../utilitarios/utilitarios.module';
 import { EditarComponent } from './editar/editar.component';
+import { EditarEnderecoComponent } from './editar-endereco/editar-endereco.component';
 
 @NgModule({
   imports: [
@@ -22,7 +23,7 @@ import { EditarComponent } from './editar/editar.component';
     NbAlertModule,
     UtilitariosModule
   ],
-  declarations: [LoginComponent, CadastroComponent, ContaComponent, InfoComponent, EnderecosComponent, PagamentosComponent, ValesComponent, EditarComponent],
+  declarations: [LoginComponent, CadastroComponent, ContaComponent, InfoComponent, EnderecosComponent, PagamentosComponent, ValesComponent, EditarComponent, EditarEnderecoComponent],
   exports: [CadastroComponent, LoginComponent, ContaComponent]
 })
 export class UsuarioModule { }

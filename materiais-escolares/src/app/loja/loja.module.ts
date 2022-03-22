@@ -20,6 +20,7 @@ import { ValesComponent } from '../usuario/vales/vales.component';
 
 import { UtilitariosModule } from '../utilitarios/utilitarios.module';
 import { EditarComponent } from '../usuario/editar/editar.component';
+import { EditarEnderecoComponent } from '../usuario/editar-endereco/editar-endereco.component';
 
 const routes: Routes = [
   {
@@ -37,7 +38,10 @@ const routes: Routes = [
         { path: '', component: InfoComponent},
         { path: ':editor', component: EditarComponent}
       ] },
-      { path: 'enderecos', canActivate: [CheckLogged], component: EnderecosComponent },
+      { path: 'enderecos', canActivate: [CheckLogged], children: [
+        { path: '', component: EnderecosComponent},
+        { path: ':editor', component: EditarEnderecoComponent}
+      ] },
       { path: 'pagamentos', canActivate: [CheckLogged], component: PagamentosComponent },
       { path: 'vales', canActivate: [CheckLogged], component: ValesComponent }
     ]
