@@ -1,15 +1,4 @@
 <div>
-  <app-navbar></app-navbar>
-  <select class="selectPais" #f (change)="selectEstado(f.value)">
-    <option [value]="0" selected>Selecionar País</option>
-  </select>
-  <select class="selectEstado" #t (change)="estadoSelecionado(t.value)">
-    <option value="0" selected>Selecionar Estado</option>
-  </select>
-  <button (click)="adicionarEndereco()">Adicionar Endereço</button>
-  <input placeholder="cidade" [(ngModel)]="cidade">
-  <input placeholder="bairro" [(ngModel)]="bairro">
-  <input placeholder="rua" [(ngModel)]="rua">
-  <input placeholder="numero" [(ngModel)]="numero">
-  <input placeholder="complemento" [(ngModel)]="complemento">
+    <app-navbar></app-navbar>
+    <button (click)="adicionarEndereco()">Adicionar Endereço</button>
 </div>
