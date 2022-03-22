@@ -28,7 +28,7 @@ export class PaginaPrincipalComponent implements OnInit {
       })
     })
 
-    fetch('/api/buscar_estados', { method: 'POST'}).then(function (result) {
+    fetch('/api/buscar_todos_estados', { method: 'POST'}).then(function (result) {
 
       result.json().then(function (data) {
 

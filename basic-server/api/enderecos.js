@@ -13,27 +13,69 @@ return resposta;
 
 inserirRota('/buscar_estados', function (dados, resposta) {
 
-    database(`SELECT * FROM ESTADO WHERE ESTADO.PAIS_CODIGO = ${dados.codigo}`)
+    database(`SELECT * FROM ESTADO WHERE PAIS_CODIGO = ${dados.codigo}`)
     .then(result => {
         console.log('Usuário inserido com sucesso!')
         resposta(result)
     }).catch(erro => {
         console.log('Erro ao inserir usuário!')
-        resposta(result)
+        resposta(erro)
     });
+
+    return resposta
+}) 
+
+inserirRota('/buscar_todos_estados', function (dados, resposta) {
+
+    database(`SELECT * FROM ESTADO`)
+    .then(result => {
+        console.log('Usuário inserido com sucesso!')
+        resposta(result)
+    }).catch(erro => {
+        console.log('Erro ao inserir usuário!')
+        resposta(erro)
+    });
+
+    return resposta
 }) 
 
 inserirRota('/adicionar_estados', function (dados, resposta) {
 
     database(`INSERT INTO ESTADO VALUES
-    (NULL, "Santa Catarina", "SC", 1)`
-    ).then(result => {
-        console.log('Adicionado aos produtos!')
+    (NULL, "Acre", "AC", 1),
+    (NULL, "Alagoas", "AL", 1),
+    (NULL, "Amapá", "AM", 1),
+    (NULL, "Amazonas", "AM", 1),
+    (NULL, "Bahia", "BA", 1),
+    (NULL, "Ceará", "CE", 1),
+    (NULL, "Espírito Santo", "ES", 1),
+    (NULL, "Goiás", "GO", 1),
+    (NULL, "Maranhão", "MA", 1),
+    (NULL, "Mato Grosso", "MT", 1),
+    (NULL, "Mato Grosso do Sul", "MS", 1),
+    (NULL, "Minas Gerais", "MG", 1),
+    (NULL, "Pará", "PA", 1),
+    (NULL, "Paraíba", "PB", 1),
+    (NULL, "Paraná", "PR", 1),
+    (NULL, "Pernambuco", "PE", 1),
+    (NULL, "Piauí", "PI", 1),
+    (NULL, "Rio de Janeiro", "RJ", 1),
+    (NULL, "Rio Grande do Norte", "RN", 1),
+    (NULL, "Rio Grande do Sul", "RS", 1),
+    (NULL, "Rondônia", "RO", 1),
+    (NULL, "Roraima", "RR", 1),
+    (NULL, "Santa Catarina", "SC", 1),
+    (NULL, "São Paulo", "SP", 1),
+    (NULL, "Sergipe", "SE", 1),
+    (NULL, "Tocantins", "TO", 1)
+    `).then(result => {
+        console.log('Adicionado aos estados!')
+        resposta(result)
     }).catch(erro => {
-        console.log('Produtos com erro!')
+        console.log('Estados com erro!')
     });
 
-return resposta;
+    return resposta;
 })
 
 inserirRota('/buscar_paises', function (dados, resposta) {
@@ -46,6 +88,8 @@ inserirRota('/buscar_paises', function (dados, resposta) {
         console.log('Erro ao inserir usuário!')
         resposta(result)
     });
+
+    return resposta;
 }) 
 
 inserirRota('/adicionar_endereco', function (dados, resposta) {
