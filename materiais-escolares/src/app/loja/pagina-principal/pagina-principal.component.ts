@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ValesService } from 'src/app/services/vales.service';
 
 @Component({
   selector: 'app-pagina-principal',
@@ -8,7 +9,7 @@ import { Router } from '@angular/router';
 })
 export class PaginaPrincipalComponent implements OnInit {
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private valesService: ValesService) { }
 
   usuario = localStorage.getItem('nome')
 
@@ -49,6 +50,16 @@ export class PaginaPrincipalComponent implements OnInit {
 
     }).then (function () {
       self.colocarMateriais()
+    })
+
+    fetch('/api/buscar_todos_vales', {method: 'POST'}).then(function (result) {
+
+      result.json().then(function (data) {
+
+        if(data.length < 1) {
+          self.valesService.adicionarValesAutomatico();
+        }
+      })
     })
   }
 

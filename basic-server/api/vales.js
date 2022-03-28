@@ -1,13 +1,13 @@
 inserirRota('/adicionar_vales', function (dados, resposta) {
 
     database(`INSERT INTO VALE VALUES
-    ("E45Y86F95", 0, 20, NULL),
-    ("H69K63L63", 0, 10, NULL),
-    ("N65C21X04", 0, 30, NULL),
+    ("E45Y86F95", 0, 20),
+    ("H69K63L63", 0, 10),
+    ("N65C21X04", 0, 30)
     `).then(result => {
-        console.log('Adicionado aos produtos!')
+        console.log('Adicionado aos vales!')
     }).catch(erro => {
-        console.log('Produtos com erro!')
+        console.log('Vales com erro!')
     });
 })
 
@@ -17,7 +17,7 @@ inserirRota('/buscar_todos_vales', function (dados, resposta) {
         console.log(result)
         resposta(result)
     }).catch(erro => {
-        console.log('Erro ao buscar produtos!')
+        console.log('Erro ao buscar vales!')
     })
 
     return resposta;
@@ -33,4 +33,13 @@ inserirRota('/buscar_vale', function (dados, resposta) {
     })
 
     return resposta;
+})
+
+inserirRota('/resgatar_vale', function (dados, resposta) {
+
+    database(`UPDATE VALE SET USADO = 1 WHERE CODIGO = '${dados.codigo}'`).then(result => {
+        console.log('Vale de código ' + dados.codigo + ' resgatado!')
+    }).catch(erro => {
+        console.log('Vales com erro!')
+    });
 })
