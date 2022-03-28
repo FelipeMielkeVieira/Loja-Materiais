@@ -37,6 +37,7 @@ inserirRota('/buscar_vale', function (dados, resposta) {
 
 inserirRota('/resgatar_vale', function (dados, resposta) {
 
+    console.log(dados)
     database(`UPDATE VALE SET USADO = 1 WHERE CODIGO = '${dados.codigo}'`).then(result => {
         console.log('Vale de código ' + dados.codigo + ' resgatado!')
     }).catch(erro => {

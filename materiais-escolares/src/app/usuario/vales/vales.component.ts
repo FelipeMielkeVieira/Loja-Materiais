@@ -23,7 +23,7 @@ export class ValesComponent implements OnInit {
       method: 'POST',
       body: JSON.stringify(
         {
-          codigo: self.vale
+          codigo: this.vale
         }
       ),
       headers: { "Content-Type": "application/json" }
@@ -38,7 +38,7 @@ export class ValesComponent implements OnInit {
                 codigo: self.vale
               }
             ),
-            headers: { "Content-Type": "applicattion/json" }
+            headers: { "Content-Type": "application/json" }
           }).then(function (a) {
             console.log('Vale Resgatado!')
             localStorage.setItem('desconto', (localStorage.getItem('desconto') + data.DESCONTO))

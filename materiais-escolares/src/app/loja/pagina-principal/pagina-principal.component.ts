@@ -12,6 +12,7 @@ export class PaginaPrincipalComponent implements OnInit {
   constructor(private router: Router, private valesService: ValesService) { }
 
   usuario = localStorage.getItem('nome')
+  botaoCategoria
 
   ngOnInit() {
     console.log(location.pathname)
@@ -19,22 +20,22 @@ export class PaginaPrincipalComponent implements OnInit {
 
     var self = this;
 
-    fetch('/api/buscar_paises', { method: 'POST'}).then(function (result) {
+    fetch('/api/buscar_paises', { method: 'POST' }).then(function (result) {
 
       result.json().then(function (data) {
 
-        if(data.length < 1) {
-          fetch('/api/adicionar_paises', { method: 'POST'});
+        if (data.length < 1) {
+          fetch('/api/adicionar_paises', { method: 'POST' });
         }
       })
     })
 
-    fetch('/api/buscar_todos_estados', { method: 'POST'}).then(function (result) {
+    fetch('/api/buscar_todos_estados', { method: 'POST' }).then(function (result) {
 
       result.json().then(function (data) {
 
-        if(data.length < 1) {
-          fetch('/api/adicionar_estados', { method: 'POST'});
+        if (data.length < 1) {
+          fetch('/api/adicionar_estados', { method: 'POST' });
         }
       })
     })
@@ -43,23 +44,35 @@ export class PaginaPrincipalComponent implements OnInit {
 
       result.json().then(function (data) {
 
-        if(data.length < 1) {
+        if (data.length < 1) {
           fetch('/api/adicionar_automatico', { method: 'POST' });
         }
       })
 
-    }).then (function () {
+    }).then(function () {
       self.colocarMateriais()
     })
 
-    fetch('/api/buscar_todos_vales', {method: 'POST'}).then(function (result) {
+    fetch('/api/buscar_todos_vales', { method: 'POST' }).then(function (result) {
 
       result.json().then(function (data) {
 
-        if(data.length < 1) {
+        if (data.length < 1) {
           self.valesService.adicionarValesAutomatico();
         }
       })
+    })
+
+    fetch('/api/buscar_categorias', { method: 'POST' }).then(function (result) {
+
+      result.json().then(function (data) {
+
+        if (data.length < 1) {
+          fetch('/api/adicionar_categorias', { method: 'POST' });
+        }
+      })
+    }).then(function () {
+      self.header();
     })
   }
 
@@ -72,7 +85,7 @@ export class PaginaPrincipalComponent implements OnInit {
   }
 
   carrinho() {
-    if(this.usuario != '') {
+    if (this.usuario != '') {
       this.router.navigate(['carrinho'])
     }
   }
@@ -91,6 +104,27 @@ export class PaginaPrincipalComponent implements OnInit {
     this.router.navigate(['carrinho/pedidos'])
   }
 
+  header() {
+
+    let header = document.querySelector('.header2')
+    var self = this;
+
+    fetch('/api/buscar_categorias', { method: 'POST' }).then(function (result) {
+
+      result.json().then(function (data) {
+        data.forEach(function (e) {
+
+          self.botaoCategoria = document.createElement('button');
+          self.botaoCategoria.innerText = e.NOME
+          self.botaoCategoria.className = 'botaoCategoria'
+          self.botaoCategoria.onclick = self.filtrarCategoria(e.CODIGO);
+
+          header.appendChild(self.botaoCategoria)
+        })
+      })
+    })
+  }
+
   colocarMateriais() {
 
     let divDireita = document.querySelector('.divDireita')
@@ -99,19 +133,23 @@ export class PaginaPrincipalComponent implements OnInit {
 
       result.json().then(function (data) {
 
-          data.forEach(e => {
+        data.forEach(e => {
 
-            console.log(e)
-              let divLivro = document.createElement('div')
-              divLivro.className = 'divLivro'
+          console.log(e)
+          let divLivro = document.createElement('div')
+          divLivro.className = 'divLivro'
 
-              divLivro.innerText = e.CODIGO
+          divLivro.innerText = e.CODIGO
 
-              divDireita.appendChild(divLivro)
-          });
+          divDireita.appendChild(divLivro)
+        });
       })
 
-  })
+    })
+  }
+
+  filtrarCategoria(categoria) {
+
   }
 
 }
