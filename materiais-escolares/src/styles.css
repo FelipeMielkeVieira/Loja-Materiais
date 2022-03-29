@@ -21,4 +21,8 @@
 
 .botaoCategoria {
     width: 9.3%;
+    padding: 0.5%;
+    border: 1px solid black;
+    background-color: #66b9bf;
+    font-weight: bold;
 }
