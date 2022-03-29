@@ -4,6 +4,34 @@
     justify-content: center;
 }
 
+.divImagemPrincipal {
+    margin-top: 20px;
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.carrossel {
+    width: 30vw;
+    margin-bottom: 40px;
+}
+
+.imgCarrosel {
+    width: 100%;
+    height: 100%;
+}
+
+.preferencias {
+    display: flex;
+    align-items: center;
+    width: 60vw;
+}
+
+.imagensPreferencias {
+    float: right;
+}
+
 .divEsquerda {
     width: 30vw;
 }

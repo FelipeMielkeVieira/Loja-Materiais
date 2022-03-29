@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ValesService } from 'src/app/services/vales.service';
 
+
 @Component({
   selector: 'app-pagina-principal',
   templateUrl: './pagina-principal.component.html',
