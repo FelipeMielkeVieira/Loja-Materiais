@@ -1,7 +1,7 @@
 <div>
 
     <body style="display: flex; flex-direction: column; align-items: center;">
-        <app-navbar style="width: 98.8vw;"></app-navbar>
+        <app-navbar style="width: 98.8vw;" (clickPesquisa)="filtrar(1, $event)"></app-navbar>
         <div class="header2"></div>
         <div class="divImagemPrincipal">
             <div class="carrossel">

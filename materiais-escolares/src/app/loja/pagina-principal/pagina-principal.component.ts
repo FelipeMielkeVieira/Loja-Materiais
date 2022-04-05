@@ -14,6 +14,8 @@ export class PaginaPrincipalComponent implements OnInit {
 
   usuario = localStorage.getItem('nome')
   botaoCategoria
+  listaProdutos = []
+  listaCategorias = []
 
   ngOnInit() {
     console.log(location.pathname)
@@ -50,6 +52,7 @@ export class PaginaPrincipalComponent implements OnInit {
           fetch('/api/adicionar_automatico', { method: 'POST' });
         }
 
+        self.listaProdutos = data2;
         self.colocarMateriais(data2)
       })
     })
@@ -71,6 +74,8 @@ export class PaginaPrincipalComponent implements OnInit {
         if (data.length < 1) {
           fetch('/api/adicionar_categorias', { method: 'POST' });
         }
+
+        self.listaCategorias = data;
       })
     }).then(function () {
       self.header();
@@ -118,7 +123,7 @@ export class PaginaPrincipalComponent implements OnInit {
           self.botaoCategoria = document.createElement('button');
           self.botaoCategoria.innerText = e.NOME
           self.botaoCategoria.className = 'botaoCategoria'
-          self.botaoCategoria.onclick = self.filtrarCategoria(e.CODIGO);
+          this.botaoCategoria.onclick = self.filtrar(2, e.CODIGO);
 
           header.appendChild(self.botaoCategoria)
         })
@@ -131,9 +136,10 @@ export class PaginaPrincipalComponent implements OnInit {
     let divDireita = document.querySelector('.divDireita')
     let contagem = 0;
     var self = this;
+    let linhaAtual
 
     let divAtual = document.getElementById('divProdutos')
-    if(divAtual) {
+    if (divAtual) {
       divAtual.remove();
     }
 
@@ -145,9 +151,8 @@ export class PaginaPrincipalComponent implements OnInit {
     data.forEach(e => {
 
       console.log(e.IMAGEM_NOME)
-      let linhaAtual
 
-      if(contagem == 0) {
+      if (contagem == 0) {
         linhaAtual = document.createElement('div')
         linhaAtual.className = 'linha'
 
@@ -185,7 +190,7 @@ export class PaginaPrincipalComponent implements OnInit {
       precoProduto.style.fontSize = '22px'
       divProduto.appendChild(precoProduto)
 
-      divProduto.onclick = function() {
+      divProduto.onclick = function () {
         self.router.navigate(['/produtos/' + e.CODIGO])
       }
 
@@ -193,6 +198,11 @@ export class PaginaPrincipalComponent implements OnInit {
       linhaAtual.appendChild(divProduto)
     });
 
+    if (contagem == 1) {
+      let divProduto = document.createElement('div')
+      divProduto.className = 'divProduto2'
+      linhaAtual.appendChild(divProduto)
+    }
   }
 
   layout1() {
@@ -211,8 +221,30 @@ export class PaginaPrincipalComponent implements OnInit {
     imgLayout2.setAttribute('src', 'https://i.ibb.co/cgNXRrh/icons8-dados-de-sa-de-30.png')
   }
 
-  filtrarCategoria(categoria) {
+  filtrar(tipo, valor) {
 
+    console.log(valor)
+    if (tipo == 1) {
+
+      const listaFiltrada = this.listaProdutos.filter(function (a) {
+
+        return a.NOME.toLowerCase().indexOf(valor.toLowerCase()) > -1
+      });
+
+      this.colocarMateriais(listaFiltrada);
+    }
+
+    if (tipo == 2) {
+
+      const listaFiltrada = this.listaProdutos.filter(function (a) {
+
+        if(a.CATEGORIA == valor) {
+          return a;
+        }
+      });
+
+      this.colocarMateriais(listaFiltrada)
+    }
   }
 
 }

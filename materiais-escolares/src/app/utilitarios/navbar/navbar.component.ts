@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter,  } from '@angular/core';
 
 import { Router } from '@angular/router';
 
@@ -9,6 +9,10 @@ import { Router } from '@angular/router';
 })
 export class NavbarComponent implements OnInit {
   constructor(private router: Router) { }
+
+  @Output() clickPesquisa = new EventEmitter<string>();
+
+  pesquisa = "";
 
   ngOnInit() {
   }
@@ -44,6 +48,10 @@ export class NavbarComponent implements OnInit {
 
   paginaInicial() {
     this.router.navigate([''])
+  }
+
+  pesquisar() {
+    this.clickPesquisa.emit(this.pesquisa);
   }
 
 }
