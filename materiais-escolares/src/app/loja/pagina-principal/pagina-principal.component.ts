@@ -120,10 +120,13 @@ export class PaginaPrincipalComponent implements OnInit {
       result.json().then(function (data) {
         data.forEach(function (e) {
 
+          let codigo = e.CODIGO
           self.botaoCategoria = document.createElement('button');
           self.botaoCategoria.innerText = e.NOME
           self.botaoCategoria.className = 'botaoCategoria'
-          this.botaoCategoria.onclick = self.filtrar(2, e.CODIGO);
+          self.botaoCategoria.onclick = function(a) {
+            self.filtrar(2, codigo);
+          }
 
           header.appendChild(self.botaoCategoria)
         })
@@ -235,7 +238,7 @@ export class PaginaPrincipalComponent implements OnInit {
     }
 
     if (tipo == 2) {
-
+      console.log(valor)
       const listaFiltrada = this.listaProdutos.filter(function (a) {
 
         if(a.CATEGORIA == valor) {
