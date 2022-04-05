@@ -1,19 +1,19 @@
 .header2 {
-    width: 100vw;
+    width: 98.8vw;
     display: flex;
     justify-content: center;
 }
 
 .divImagemPrincipal {
     margin-top: 20px;
-    width: 100vw;
+    width: 98.8vw;
     display: flex;
     align-items: center;
     flex-direction: column;
 }
 
 .carrossel {
-    width: 30vw;
+    width: 40vw;
     margin-bottom: 40px;
 }
 
@@ -23,19 +23,43 @@
 }
 
 .preferencias {
+    float: left;
+    width: 80vw;
+    padding-bottom: 5px;
+    border-bottom: 0.5px solid rgb(99, 97, 97);
+}
+
+.layout {
+    float: right;
     display: flex;
-    align-items: center;
-    width: 60vw;
 }
 
 .imagensPreferencias {
     float: right;
 }
 
+.imagensPreferencias:hover {
+    cursor: pointer;
+}
+
+.loja {
+    display: flex;
+    flex-direction: column;
+    width: 80vw;
+    margin-top: 15px;
+}
+
 .divEsquerda {
-    width: 30vw;
+    padding: 10px;
+    width: 35%;
+    border-radius: 2px;
+    background-color: #dfdce3;
+    display: flex;
+    flex-direction: column;
 }
 
 .divDireita {
-    width: 70vw;
+    width: 65%;
+    display: flex;
+    flex-direction: column;
 }

@@ -24,7 +24,7 @@ import { EditarEnderecoComponent } from '../usuario/editar-endereco/editar-ender
 
 const routes: Routes = [
   {
-    path: 'produtos', canActivate: [CheckLogged], children: [
+    path: 'produtos', children: [
       { path: '', component: PaginaPrincipalComponent },
       { path: ':codigo', component: ProdutoComponent }
     ]
