@@ -77,8 +77,6 @@ export class PaginaPrincipalComponent implements OnInit {
 
         self.listaCategorias = data;
       })
-    }).then(function () {
-      self.header();
     })
   }
 
@@ -110,28 +108,25 @@ export class PaginaPrincipalComponent implements OnInit {
     this.router.navigate(['carrinho/pedidos'])
   }
 
-  header() {
+  categorias(valor) {
 
-    let header = document.querySelector('.header2')
-    var self = this;
+    console.log(valor)
+    let botao = document.getElementById(valor);
 
-    fetch('/api/buscar_categorias', { method: 'POST' }).then(function (result) {
-
-      result.json().then(function (data) {
-        data.forEach(function (e) {
-
-          let codigo = e.CODIGO
-          self.botaoCategoria = document.createElement('button');
-          self.botaoCategoria.innerText = e.NOME
-          self.botaoCategoria.className = 'botaoCategoria'
-          self.botaoCategoria.onclick = function(a) {
-            self.filtrar(2, codigo);
-          }
-
-          header.appendChild(self.botaoCategoria)
-        })
-      })
-    })
+    console.log(botao.style.backgroundColor)
+    if(botao.style.backgroundColor == 'rgb(7, 136, 155)') {
+      botao.style.backgroundColor = '#66b9bf'
+      botao.style.color = 'black';
+    } else {
+      for(let i = 1; i < 12; i++) {
+        let botaoSelecionado = document.getElementById(i.toString())
+        botaoSelecionado.style.backgroundColor = '#66b9bf'
+        botaoSelecionado.style.color = 'black'
+      }
+      botao.style.backgroundColor = '#07889b';
+      botao.style.color = 'white'
+    }
+    this.filtrar(2, valor)
   }
 
   colocarMateriais(data) {
@@ -226,7 +221,6 @@ export class PaginaPrincipalComponent implements OnInit {
 
   filtrar(tipo, valor) {
 
-    console.log(valor)
     if (tipo == 1) {
 
       const listaFiltrada = this.listaProdutos.filter(function (a) {
@@ -238,7 +232,7 @@ export class PaginaPrincipalComponent implements OnInit {
     }
 
     if (tipo == 2) {
-      console.log(valor)
+
       const listaFiltrada = this.listaProdutos.filter(function (a) {
 
         if(a.CATEGORIA == valor) {
