@@ -1,5 +1,5 @@
 body {
-    width: 100vw;
+    width: 98.7vw;
     display: flex;
     justify-content: center;
 }
@@ -33,7 +33,7 @@ body {
 .divEsquerda {
     display: flex;
     flex-direction: column;
-    width: 60%;
+    width: 58%;
 }
 
 .marca {
@@ -42,7 +42,7 @@ body {
 }
 
 .divDireita {
-    width: 40%;
+    width: 38%;
 }
 
 .divCompra {
@@ -50,4 +50,19 @@ body {
     border: 1px solid black;
     border-radius: 6px;
     padding: 20px;
+}
+
+.endereco {
+    padding: 15px;
+    border: 1px solid #07889b;
+    border-radius: 8px;
+}
+
+.linhaEnderecos {
+    display: flex;
+}
+
+.selecionaEndereco:hover {
+    cursor: pointer;
+    text-decoration: underline;
 }

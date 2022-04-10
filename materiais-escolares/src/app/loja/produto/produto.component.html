@@ -1,4 +1,4 @@
-<app-navbar></app-navbar>
+<app-navbar style="width: 98.8vw;"></app-navbar>
 <body>
     <div class="divCentral">
         <div class="redirecionamento">
@@ -12,7 +12,17 @@
             </div>
             <div class="divDireita">
                 <div class="divCompra">
-                    <h4 style="color: #07889b; padding: 4px; border-bottom: 0.5px solid #4abdac;">{{valorProduto}}</h4>
+                    <h4 style="color: #07889b; padding: 4px; border-bottom: 0.5px solid #4abdac; margin-bottom: 15px;">{{valorProduto}}</h4>
+                    <span style="color: #66b9bf" class="selecionaEndereco">Selecionar Endereço</span>
+                    <div style="margin-top: 5px; margin-bottom: 10px;" class="endereco">
+                        <span style="color: #66b9bf;">{{pais}}</span>
+                        <div class="linhaEnderecos">
+                            <span style="color: #66b9bf; margin-right: 20%;">{{primeiroEndereco.RUA}}</span>
+                            <span style="color: #66b9bf; margin-right: 20%;">{{primeiroEndereco.BAIRRO}}</span>
+                            <span style="color: #66b9bf;">{{primeiroEndereco.CIDADE}}</span>
+                        </div>
+                    </div>
+                    <span style="color: #66b9bf;">Receba em até {{diasEntrega}} dias úteis - {{frete}}</span>
                 </div>
             </div>
         </div>

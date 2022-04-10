@@ -8,36 +8,36 @@ inserirRota('/adicionar_paises', function (dados, resposta) {
         console.log('Produtos com erro!')
     });
 
-return resposta;
+    return resposta;
 })
 
 inserirRota('/buscar_estados', function (dados, resposta) {
 
     database(`SELECT * FROM ESTADO WHERE PAIS_CODIGO = ${dados.codigo}`)
-    .then(result => {
-        console.log('Usuário inserido com sucesso!')
-        resposta(result)
-    }).catch(erro => {
-        console.log('Erro ao inserir usuário!')
-        resposta(erro)
-    });
+        .then(result => {
+            console.log('Usuário inserido com sucesso!')
+            resposta(result)
+        }).catch(erro => {
+            console.log('Erro ao inserir usuário!')
+            resposta(erro)
+        });
 
     return resposta
-}) 
+})
 
 inserirRota('/buscar_todos_estados', function (dados, resposta) {
 
     database(`SELECT * FROM ESTADO`)
-    .then(result => {
-        console.log('Usuário inserido com sucesso!')
-        resposta(result)
-    }).catch(erro => {
-        console.log('Erro ao inserir usuário!')
-        resposta(erro)
-    });
+        .then(result => {
+            console.log('Usuário inserido com sucesso!')
+            resposta(result)
+        }).catch(erro => {
+            console.log('Erro ao inserir usuário!')
+            resposta(erro)
+        });
 
     return resposta
-}) 
+})
 
 inserirRota('/adicionar_estados', function (dados, resposta) {
 
@@ -81,40 +81,71 @@ inserirRota('/adicionar_estados', function (dados, resposta) {
 inserirRota('/buscar_paises', function (dados, resposta) {
 
     database(`SELECT * FROM PAIS`)
-    .then(result => {
-        console.log('Usuário inserido com sucesso!')
-        resposta(result)
-    }).catch(erro => {
-        console.log('Erro ao inserir usuário!')
-        resposta(result)
-    });
+        .then(result => {
+            console.log('Usuário inserido com sucesso!')
+            resposta(result)
+        }).catch(erro => {
+            console.log('Erro ao inserir usuário!')
+            resposta(result)
+        });
 
     return resposta;
-}) 
+})
 
 inserirRota('/adicionar_endereco', function (dados, resposta) {
 
     database(`INSERT INTO ENDERECO VALUES 
     (NULL, '${dados.cidade}', '${dados.bairro}', '${dados.rua}', '${dados.numero}', '${dados.complemento}', '${dados.usuario}', '${dados.estado}')`)
-    .then(result => {
-        console.log('Endereço inserido com sucesso!')
-        resposta({ message: 'Endereço inserido com sucesso!' })
-    }).catch(erro => {
-        console.log('Erro ao inserir endereço!')
-        resposta({ erro: 'Erro ao inserir endereço!' })
-    });
+        .then(result => {
+            console.log('Endereço inserido com sucesso!')
+            resposta({ message: 'Endereço inserido com sucesso!' })
+        }).catch(erro => {
+            console.log('Erro ao inserir endereço!')
+            resposta({ erro: 'Erro ao inserir endereço!' })
+        });
 })
 
 inserirRota('/buscar_enderecos', function (dados, resposta) {
 
     database(`SELECT * FROM ENDERECO WHERE ENDERECO.USER_CODIGO = ${dados.codigo}`)
-    .then(result => {
-        console.log('Usuário inserido com sucesso!')
-        resposta(result)
-    }).catch(erro => {
-        console.log('Erro ao inserir usuário!')
-        resposta(result)
-    });
+        .then(result => {
+            console.log('Usuário inserido com sucesso!')
+            resposta(result)
+        }).catch(erro => {
+            console.log('Erro ao inserir usuário!')
+            resposta(result)
+        });
+
+    return resposta;
+})
+
+inserirRota('/buscar_estado', function (dados, resposta) {
+
+    database(`SELECT ESTADO.NOME FROM ESTADO 
+    INNER JOIN ENDERECO ON ESTADO.CODIGO = ENDERECO.ESTADO_CODIGO AND ENDERECO.CODIGO = ${dados.codigoEndereco}`)
+        .then(result => {
+            console.log('Usuário inserido com sucesso!')
+            resposta(result)
+        }).catch(erro => {
+            console.log('Erro ao inserir usuário!')
+            resposta(result)
+        });
+
+    return resposta;
+})
+
+inserirRota('/buscar_pais', function (dados, resposta) {
+
+    database(`SELECT PAIS.NOME FROM PAIS 
+    INNER JOIN ESTADO ON PAIS.CODIGO = ESTADO.PAIS_CODIGO
+    INNER JOIN ENDERECO ON ESTADO.CODIGO = ENDERECO.ESTADO_CODIGO AND ENDERECO.CODIGO = ${dados.codigoEndereco}`)
+        .then(result => {
+            console.log('Usuário inserido com sucesso!')
+            resposta(result)
+        }).catch(erro => {
+            console.log('Erro ao inserir usuário!')
+            resposta(result)
+        });
 
     return resposta;
 })
