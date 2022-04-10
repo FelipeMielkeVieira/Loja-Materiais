@@ -16,6 +16,7 @@ export class PaginaPrincipalComponent implements OnInit {
   botaoCategoria
   listaProdutos = []
   listaCategorias = []
+  pesquisaProduto = "";
 
   ngOnInit() {
     console.log(location.pathname)
@@ -53,7 +54,8 @@ export class PaginaPrincipalComponent implements OnInit {
         }
 
         self.listaProdutos = data2;
-        self.colocarMateriais(data2)
+        localStorage.setItem('layout', '2')
+        self.colocarMateriais(data2, '2')
       })
     })
 
@@ -110,13 +112,12 @@ export class PaginaPrincipalComponent implements OnInit {
 
   categorias(valor) {
 
-    console.log(valor)
     let botao = document.getElementById(valor);
 
-    console.log(botao.style.backgroundColor)
     if(botao.style.backgroundColor == 'rgb(7, 136, 155)') {
       botao.style.backgroundColor = '#66b9bf'
       botao.style.color = 'black';
+      this.filtrar(2, 'nada')
     } else {
       for(let i = 1; i < 12; i++) {
         let botaoSelecionado = document.getElementById(i.toString())
@@ -125,11 +126,11 @@ export class PaginaPrincipalComponent implements OnInit {
       }
       botao.style.backgroundColor = '#07889b';
       botao.style.color = 'white'
+      this.filtrar(2, valor)
     }
-    this.filtrar(2, valor)
   }
 
-  colocarMateriais(data) {
+  colocarMateriais(data, layout) {
 
     let divDireita = document.querySelector('.divDireita')
     let contagem = 0;
@@ -146,61 +147,112 @@ export class PaginaPrincipalComponent implements OnInit {
     divProdutos.id = 'divProdutos'
     divDireita.appendChild(divProdutos)
 
-    data.forEach(e => {
+    if(layout == 1) {
 
-      console.log(e.IMAGEM_NOME)
+      data.forEach(e => {
 
-      if (contagem == 0) {
         linhaAtual = document.createElement('div')
+        linhaAtual.className = 'linha2'
+
+        divProdutos.appendChild(linhaAtual);
+
+        let divProduto = document.createElement('div')
+        divProduto.className = 'divProduto2'
+  
+        let imagem = document.createElement('img')
+        imagem.src = e.IMAGEM_NOME
+        imagem.className = 'imagensProduto2'
+        divProduto.appendChild(imagem)
+  
+        let divNome = document.createElement('div')
+        divNome.className = 'divNome'
+        divProduto.appendChild(divNome)
+
+        let nomeProduto = document.createElement('div')
+        nomeProduto.innerText = e.NOME
+        nomeProduto.style.marginBottom = '5px'
+        divNome.appendChild(nomeProduto)
+  
+        let marcaProduto = document.createElement('span')
+        marcaProduto.innerText = e.MARCA
+        marcaProduto.style.width = '100%'
+        marcaProduto.style.color = 'gray'
+        divNome.appendChild(marcaProduto)
+  
+        let precoProduto = document.createElement('div')
+        let preco = (e.VALOR).toString();
+        let precoNovo = preco.replace('.', ',')
+        precoProduto.innerText = "R$ " + precoNovo
+        precoProduto.style.fontSize = '22px'
+        divProduto.appendChild(precoProduto)
+        divProduto.style.marginBottom = '5px'
+  
+        divProduto.onclick = function () {
+          self.router.navigate(['/produtos/' + e.CODIGO])
+        }
+  
         linhaAtual.className = 'linha'
+        linhaAtual.appendChild(divProduto)
+      })
 
-        divProdutos.appendChild(linhaAtual)
-        contagem = 1;
-      } else {
-        linhaAtual = document.querySelector('.linha')
-        contagem = 0;
+    } else {
+
+      data.forEach(e => {
+
+        console.log(e.IMAGEM_NOME)
+  
+        if (contagem == 0) {
+          linhaAtual = document.createElement('div')
+          linhaAtual.className = 'linha'
+  
+          divProdutos.appendChild(linhaAtual)
+          contagem = 1;
+        } else {
+          linhaAtual = document.querySelector('.linha')
+          contagem = 0;
+        }
+  
+        let divProduto = document.createElement('div')
+        divProduto.className = 'divProduto'
+  
+        let imagem = document.createElement('img')
+        imagem.src = e.IMAGEM_NOME
+        imagem.className = 'imagensProduto'
+        divProduto.appendChild(imagem)
+  
+        let nomeProduto = document.createElement('div')
+        nomeProduto.innerText = e.NOME
+        nomeProduto.style.marginBottom = '12px'
+        divProduto.appendChild(nomeProduto)
+  
+        let marcaProduto = document.createElement('span')
+        marcaProduto.innerText = e.MARCA
+        marcaProduto.style.width = '100%'
+        marcaProduto.style.color = 'gray'
+        divProduto.appendChild(marcaProduto)
+  
+        let precoProduto = document.createElement('div')
+        let preco = (e.VALOR).toString();
+        let precoNovo = preco.replace('.', ',')
+        precoProduto.innerText = "R$ " + precoNovo
+        precoProduto.style.width = '100%'
+        precoProduto.style.fontSize = '22px'
+        divProduto.appendChild(precoProduto)
+  
+        divProduto.onclick = function () {
+          self.router.navigate(['/produtos/' + e.CODIGO])
+        }
+  
+        linhaAtual.appendChild(divProduto)
+      });
+
+      if (contagem == 1) {
+        let divProduto = document.createElement('div')
+        divProduto.className = 'divProduto11'
+        linhaAtual.appendChild(divProduto)
       }
-
-      let divProduto = document.createElement('div')
-      divProduto.className = 'divProduto'
-
-      let imagem = document.createElement('img')
-      imagem.src = e.IMAGEM_NOME
-      imagem.className = 'imagensProduto'
-      divProduto.appendChild(imagem)
-
-      let nomeProduto = document.createElement('div')
-      nomeProduto.innerText = e.NOME
-      nomeProduto.style.marginBottom = '12px'
-      divProduto.appendChild(nomeProduto)
-
-      let marcaProduto = document.createElement('span')
-      marcaProduto.innerText = e.MARCA
-      marcaProduto.style.width = '100%'
-      marcaProduto.style.color = 'gray'
-      divProduto.appendChild(marcaProduto)
-
-      let precoProduto = document.createElement('div')
-      let preco = (e.VALOR).toString();
-      let precoNovo = preco.replace('.', ',')
-      precoProduto.innerText = "R$ " + precoNovo
-      precoProduto.style.width = '100%'
-      precoProduto.style.fontSize = '22px'
-      divProduto.appendChild(precoProduto)
-
-      divProduto.onclick = function () {
-        self.router.navigate(['/produtos/' + e.CODIGO])
-      }
-
-      linhaAtual.className = 'linha'
-      linhaAtual.appendChild(divProduto)
-    });
-
-    if (contagem == 1) {
-      let divProduto = document.createElement('div')
-      divProduto.className = 'divProduto2'
-      linhaAtual.appendChild(divProduto)
     }
+
   }
 
   layout1() {
@@ -209,6 +261,8 @@ export class PaginaPrincipalComponent implements OnInit {
 
     imgLayout1.setAttribute('src', 'data:image/svg+xml;base64,PHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHZpZXdCb3g9IjAgMCAxNzIgMTcyIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9Im5vbnplcm8iIHN0cm9rZT0ibm9uZSIgc3Ryb2tlLXdpZHRoPSIxIiBzdHJva2UtbGluZWNhcD0iYnV0dCIgc3Ryb2tlLWxpbmVqb2luPSJtaXRlciIgc3Ryb2tlLW1pdGVybGltaXQ9IjEwIiBzdHJva2UtZGFzaGFycmF5PSIiIHN0cm9rZS1kYXNob2Zmc2V0PSIwIiBmb250LWZhbWlseT0ibm9uZSIgZm9udC13ZWlnaHQ9Im5vbmUiIGZvbnQtc2l6ZT0ibm9uZSIgdGV4dC1hbmNob3I9Im5vbmUiIHN0eWxlPSJtaXgtYmxlbmQtbW9kZTogbm9ybWFsIj48cGF0aCBkPSJNMCwxNzJ2LTE3MmgxNzJ2MTcyeiIgZmlsbD0ibm9uZSI+PC9wYXRoPjxnIGZpbGw9IiNmYzRhMWEiPjxwYXRoIGQ9Ik0xNjUuMTIsNjEuOTJ2LTM0LjRjMCwtMS44OTg4OCAtMS41NDExMiwtMy40NCAtMy40NCwtMy40NGgtMTUxLjM2Yy0xLjg5ODg4LDAgLTMuNDQsMS41NDExMiAtMy40NCwzLjQ0djM0LjR6TTYuODgsNjguOGgxNTguMjR2MzAuOTZoLTE1OC4yNHpNNi44OCwxMDYuNjR2MzQuNGMwLDEuODk4ODggMS41NDExMiwzLjQ0IDMuNDQsMy40NGgxNTEuMzZjMS44OTg4OCwwIDMuNDQsLTEuNTQxMTIgMy40NCwtMy40NHYtMzQuNHoiPjwvcGF0aD48L2c+PC9nPjwvc3ZnPg==')
     imgLayout2.setAttribute('src', 'https://i.ibb.co/jMhS3HY/icons8-dados-de-sa-de-30-1.png')
+    localStorage.setItem('layout', '1');
+    this.filtrar(1, this.pesquisaProduto)
   }
 
   layout2() {
@@ -217,30 +271,44 @@ export class PaginaPrincipalComponent implements OnInit {
 
     imgLayout1.setAttribute('src', 'data:image/svg+xml;base64,PHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHZpZXdCb3g9IjAgMCAxNzIgMTcyIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9Im5vbnplcm8iIHN0cm9rZT0ibm9uZSIgc3Ryb2tlLXdpZHRoPSIxIiBzdHJva2UtbGluZWNhcD0iYnV0dCIgc3Ryb2tlLWxpbmVqb2luPSJtaXRlciIgc3Ryb2tlLW1pdGVybGltaXQ9IjEwIiBzdHJva2UtZGFzaGFycmF5PSIiIHN0cm9rZS1kYXNob2Zmc2V0PSIwIiBmb250LWZhbWlseT0ibm9uZSIgZm9udC13ZWlnaHQ9Im5vbmUiIGZvbnQtc2l6ZT0ibm9uZSIgdGV4dC1hbmNob3I9Im5vbmUiIHN0eWxlPSJtaXgtYmxlbmQtbW9kZTogbm9ybWFsIj48cGF0aCBkPSJNMCwxNzJ2LTE3MmgxNzJ2MTcyeiIgZmlsbD0ibm9uZSI+PC9wYXRoPjxnIGZpbGw9IiNmYzRhMWEiPjxwYXRoIGQ9Ik0xMC4zMiwyNC4wOGMtMS44OTk3OCwwLjAwMDE5IC0zLjQzOTgxLDEuNTQwMjIgLTMuNDQsMy40NHYxMTMuNTJjMC4wMDAxOSwxLjg5OTc4IDEuNTQwMjIsMy40Mzk4MSAzLjQ0LDMuNDRoMTUxLjM2YzEuODk5NzgsLTAuMDAwMTkgMy40Mzk4MSwtMS41NDAyMiAzLjQ0LC0zLjQ0di0xMTMuNTJjLTAuMDAwMTksLTEuODk5NzggLTEuNTQwMjIsLTMuNDM5ODEgLTMuNDQsLTMuNDR6TTEzLjc2LDMwLjk2aDE0NC40OHYzMC45NmgtMTQ0LjQ4ek0xMy43Niw2OC44aDE0NC40OHYzMC45NmgtMTQ0LjQ4ek0xMy43NiwxMDYuNjRoMTQ0LjQ4djMwLjk2aC0xNDQuNDh6Ij48L3BhdGg+PC9nPjwvZz48L3N2Zz4=')
     imgLayout2.setAttribute('src', 'https://i.ibb.co/cgNXRrh/icons8-dados-de-sa-de-30.png')
+    localStorage.setItem('layout', '2');
+    this.filtrar(1, this.pesquisaProduto)
   }
 
   filtrar(tipo, valor) {
 
     if (tipo == 1) {
 
+      this.pesquisaProduto = valor;
       const listaFiltrada = this.listaProdutos.filter(function (a) {
 
-        return a.NOME.toLowerCase().indexOf(valor.toLowerCase()) > -1
+        if(valor == 'nada' || valor == '') {
+          return a;
+        } else {
+          if(a.CATEGORIA == localStorage.getItem('categoriaAtiva')) {
+            return a.NOME.toLowerCase().indexOf(valor.toLowerCase()) > -1
+          }
+        }
       });
 
-      this.colocarMateriais(listaFiltrada);
+      this.colocarMateriais(listaFiltrada, localStorage.getItem('layout'));
     }
 
     if (tipo == 2) {
 
       const listaFiltrada = this.listaProdutos.filter(function (a) {
 
-        if(a.CATEGORIA == valor) {
+        if(valor == 'nada') {
           return a;
+        } else {
+          localStorage.setItem('categoriaAtiva', valor)
+          if(a.CATEGORIA == valor) {
+            return a;
+          }
         }
       });
 
-      this.colocarMateriais(listaFiltrada)
+      this.colocarMateriais(listaFiltrada, localStorage.getItem('layout'))
     }
   }
 
