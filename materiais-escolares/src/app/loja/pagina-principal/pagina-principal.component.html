@@ -1,7 +1,7 @@
+<app-navbar style="width: 98.8vw;" (clickPesquisa)="filtrar(1, $event)"></app-navbar>
 <div>
 
     <body style="display: flex; flex-direction: column; align-items: center;">
-        <app-navbar style="width: 98.8vw;" (clickPesquisa)="filtrar(1, $event)"></app-navbar>
         <div class="header2">
             <button class="botaoCategoria" id="1" value="1" #a (click)="categorias(a.value)">Cadernos</button>
             <button class="botaoCategoria" id="2" value="2" #b (click)="categorias(b.value)">Lápis</button>

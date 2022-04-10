@@ -1,5 +1,5 @@
+<app-navbar style="width: 100vw;"></app-navbar>
 <div style="display: flex; flex-direction: column; align-items: center;">
-  <app-navbar style="width: 100vw;"></app-navbar>
   <div class='divConta'>
     <span class="spanCima" (click)="conta()">Conta</span>
     <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="10" height="30" viewBox="0 0 172 172"
@@ -19,31 +19,31 @@
   </div>
   <h2>Informações da Conta</h2>
   <div class="divPrincipal">
-    <div class="linha" style="border-bottom: 1px black solid;">
+    <div class="linhaa" style="border-bottom: 1px black solid;">
       <span style="font-weight: bold;">Nome: </span>
       <span>{{usuario}}</span>
       <button *ngIf="usuario != '-'" class="editar" (click)="editar('nome')">Editar</button>
       <button *ngIf="usuario == '-'" class="editar" (click)="editar('nome')">Adicionar</button>
     </div>
-    <div class="linha" style="border-bottom: 1px black solid;">
+    <div class="linhaa" style="border-bottom: 1px black solid;">
       <span style="font-weight: bold;">E-mail: </span>
       <span>{{email}}</span>
       <button *ngIf="email != '-'" class="editar" (click)="editar('email')">Editar</button>
       <button *ngIf="email == '-'" class="editar" (click)="editar('email')">Adicionar</button>
     </div>
-    <div class="linha" style="border-bottom: 1px black solid;">
+    <div class="linhaa" style="border-bottom: 1px black solid;">
       <span style="font-weight: bold;">Número de Telefone: </span>
       <span>{{telefone}}</span>
       <button *ngIf="telefone != '-'" class="editar" (click)="editar('telefone')">Editar</button>
       <button *ngIf="telefone == '-'" class="editar" (click)="editar('telefone')">Adicionar</button>
     </div>
-    <div class="linha" style="border-bottom: 1px black solid;">
+    <div class="linhaa" style="border-bottom: 1px black solid;">
       <span style="font-weight: bold;">Senha: </span>
       <span>{{senha}}</span>
       <button *ngIf="senha != '-'" class="editar" (click)="editar('senha')">Editar</button>
       <button *ngIf="senha == '-'" class="editar" (click)="editar('senha')">Adicionar</button>
     </div>
-    <div class="linha">
+    <div class="linhaa">
       <span style="font-weight: bold;">Data de Criação: </span>
       <span>{{criacao}}</span>
     </div>

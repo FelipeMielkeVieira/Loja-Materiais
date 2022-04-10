@@ -1,0 +1,53 @@
+body {
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+}
+
+.divCentral {
+    width: 90vw;
+}
+
+.redirecionamento {
+    margin-top: 25px;
+    font-size: 14px;
+    padding-bottom: 5px;
+    border-bottom: 0.5px solid rgb(129, 126, 126);
+    margin-bottom: 40px;
+}
+
+.spanRedirecionamento {
+    margin-left: 25px;
+}
+
+.spanRedirecionamento:hover {
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.divPrincipal {
+    width: 100%;
+    display: flex;
+}
+
+.divEsquerda {
+    display: flex;
+    flex-direction: column;
+    width: 60%;
+}
+
+.marca {
+    color: gray;
+    margin-bottom: 10px;
+}
+
+.divDireita {
+    width: 40%;
+}
+
+.divCompra {
+    width: 100%;
+    border: 1px solid black;
+    border-radius: 6px;
+    padding: 20px;
+}

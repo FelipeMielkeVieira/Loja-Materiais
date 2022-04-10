@@ -10,6 +10,18 @@ inserirRota('/buscar_produto', function (dados, resposta) {
     return resposta;
 });
 
+inserirRota('/buscar_produto_especifico', function (dados, resposta) {
+
+    database(`SELECT * FROM PRODUTOS WHERE CODIGO = ${dados.codigo}`).then(result => {
+        console.log(result)
+        resposta(result)
+    }).catch(erro => {
+        console.log('Erro ao buscar produtos!')
+    })
+
+    return resposta;
+});
+
 inserirRota('/adicionar_automatico', function (dados, resposta) {
 
     database(`INSERT INTO PRODUTOS VALUES 

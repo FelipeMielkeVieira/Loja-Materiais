@@ -25,7 +25,7 @@ h2 {
     font-size: 26px;
 }
 
-.linha {
+.linhaa {
     margin: 10px;
     padding: 20px;
 }
@@ -43,4 +43,5 @@ h2 {
     padding: 10px;
     background-color: #FC4A1A;
     color: white;
+    margin-bottom: 10px;
 }

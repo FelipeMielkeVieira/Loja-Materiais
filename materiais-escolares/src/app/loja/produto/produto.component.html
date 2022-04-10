@@ -1,0 +1,20 @@
+<app-navbar></app-navbar>
+<body>
+    <div class="divCentral">
+        <div class="redirecionamento">
+            <span class="spanRedirecionamento" (click)="inicio()">Início</span>
+        </div>
+        <div class="divPrincipal">
+            <div class="divEsquerda">
+                <h4>{{produto.NOME}}</h4>
+                <span class="marca">{{produto.MARCA}}</span>
+                <img style="width: 60%" src={{produto.IMAGEM_NOME}}>
+            </div>
+            <div class="divDireita">
+                <div class="divCompra">
+                    <h4 style="color: #07889b; padding: 4px; border-bottom: 0.5px solid #4abdac;">{{valorProduto}}</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
