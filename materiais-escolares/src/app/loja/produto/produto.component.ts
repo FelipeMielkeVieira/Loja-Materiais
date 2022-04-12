@@ -12,16 +12,29 @@ export class ProdutoComponent implements OnInit {
   codigoUser;
   codigoProduto = "";
   valorProduto = "";
-  produto;
+  produto = {
+    CODIGO: 0,
+    NOME: "",
+    DESCRICAO: "",
+    ESPECIFICACOES: "",
+    IMAGEM_NOME: "",
+    VALOR: 0,
+    AVALIACOES: 0,
+    ESTRELAS: 0,
+    MARCA: "",
+    CATEGORIA: 0,
+    quantidade: 0
+  }
   enderecos;
   primeiroEndereco;
-  pais; 
+  pais;
   estado;
   diasEntrega;
   frete;
   quantidade = 1;
   especificacoes;
   listaProdutos;
+  possuiNoCarrinho = false;
 
   constructor(private Router: Router, private route: ActivatedRoute, private enderecoService: EnderecoService) {
     this.codigoProduto = route.snapshot.paramMap.get('codigo')
@@ -35,6 +48,7 @@ export class ProdutoComponent implements OnInit {
     this.frete = ((this.diasEntrega * 2.38).toFixed(2)).toString();
     let freteNovo = this.frete.replace('.', ',')
     this.frete = "R$ " + freteNovo;
+
     fetch('/api/buscar_produto_especifico', {
       method: 'POST', body: JSON.stringify(
         {
@@ -50,13 +64,23 @@ export class ProdutoComponent implements OnInit {
           let preco = (e.VALOR).toString();
           let precoNovo = preco.replace('.', ',')
           self.valorProduto = "R$ " + precoNovo
+
+          let carrinhoAtual = JSON.parse(localStorage.getItem('carrinho')) || [];
+          carrinhoAtual.forEach(e => {
+            if (e.CODIGO == self.produto.CODIGO) {
+              self.possuiNoCarrinho = true;
+            }
+          });
         });
       })
     })
-    if(localStorage.getItem('codigo') && localStorage.getItem('codigo') != '') {
-      this.enderecoService.buscarEndereco(localStorage.getItem('codigo')).then(function (result) {
-        self.enderecos = result;
-        self.guardarEndereco(result);
+
+    if (localStorage.getItem('codigo') && localStorage.getItem('codigo') != '') {
+      this.enderecoService.buscarEndereco(localStorage.getItem('codigo')).then(function (result: any) {
+        if (result.length > 0) {
+          self.enderecos = result;
+          self.guardarEndereco(result);
+        }
       })
     }
 
@@ -71,7 +95,6 @@ export class ProdutoComponent implements OnInit {
 
       result.json().then(function (data2) {
 
-        console.log('NgOninit1: ', data2)
         if (data2.length < 1) {
           fetch('/api/adicionar_automatico', { method: 'POST' });
         }
@@ -88,7 +111,7 @@ export class ProdutoComponent implements OnInit {
     var self = this;
     let contagem = 0;
     result.forEach(e => {
-      if(contagem == 0) {
+      if (contagem == 0) {
         self.primeiroEndereco = e;
         contagem++;
       }
@@ -101,7 +124,7 @@ export class ProdutoComponent implements OnInit {
     fetch('/api/buscar_pais', {
       method: 'POST', body: JSON.stringify(
         {
-          codigoEndereco: this.primeiroEndereco.CODIGO
+          codigoEndereco: self.primeiroEndereco.CODIGO
         }
       ),
       headers: { "Content-Type": "application/json" }
@@ -112,7 +135,7 @@ export class ProdutoComponent implements OnInit {
         });
       })
     })
-    
+
   }
 
   getRandomIntInclusive(min, max) {
@@ -122,11 +145,11 @@ export class ProdutoComponent implements OnInit {
   }
 
   adicionarCarrinho() {
-    if(this.codigoUser && this.codigoUser != '') {
+    if (this.codigoUser && this.codigoUser != '') {
+
 
       let carrinhoAtual = JSON.parse(localStorage.getItem('carrinho')) || [];
       this.produto.quantidade = this.quantidade;
-      console.log(this.produto);
       carrinhoAtual.push(this.produto)
       localStorage.setItem('carrinho', JSON.stringify(carrinhoAtual));
       this.Router.navigate(['/carrinho'])

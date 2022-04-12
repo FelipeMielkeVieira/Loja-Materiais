@@ -37,3 +37,13 @@ body {
     display: flex;
     flex-direction: column;
 }
+
+.valorExcluir {
+    display: flex;
+    flex-direction: column;
+}
+
+.excluir {
+    cursor: pointer;
+    text-decoration: underline;
+}

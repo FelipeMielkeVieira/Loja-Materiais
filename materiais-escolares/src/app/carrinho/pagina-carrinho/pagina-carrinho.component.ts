@@ -27,4 +27,9 @@ export class PaginaCarrinhoComponent implements OnInit {
     this.router.navigate(['/'])
   }
 
+  excluir(index) {
+    this.carrinho.splice(index, 1);
+    localStorage.setItem('carrinho', JSON.stringify(this.carrinho));
+  }
+
 }

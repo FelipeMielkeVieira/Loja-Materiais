@@ -32,7 +32,8 @@
                             <span style="margin-right: 5px; color: #07889b;">Quantidade: </span>
                             <input class="inputQtd" [(ngModel)]="quantidade" type="number" min="1">
                         </div>
-                        <button class="botaoQtd" (click)="adicionarCarrinho()">Adicionar ao Carrinho</button>
+                        <button *ngIf="!possuiNoCarrinho" class="botaoQtd" (click)="adicionarCarrinho()">Adicionar ao Carrinho</button>
+                        <button *ngIf="possuiNoCarrinho" class="botaoQtd">No Carrinho</button>
                     </div>
                 </div>
             </div>

@@ -12,13 +12,17 @@
       </div>
     </div>
     <div *ngIf="carrinho.length != 0">
-      <div *ngFor="let produto of carrinho">
+      <div *ngFor="let produto of carrinho; let i=index">
         <div class="produto">
           <img class="imagensProduto3" src="{{produto.IMAGEM_NOME}}">
           <div class="info">
             <span>{{produto.NOME}}</span>
             <span>{{produto.MARCA}}</span>
             <span>{{produto.quantidade}}</span>
+          </div>
+          <div class="valorExcluir">
+            <span>{{getPreco(produto.VALOR)}}</span>
+            <span class="excluir" (click)="excluir(i)">Excluir</span>
           </div>
         </div>
       </div>
