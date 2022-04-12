@@ -1,0 +1,28 @@
+body {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.spanCima {
+    margin-right: 20px;
+}
+
+.spanCima:hover {
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.botaoAdicionar {
+    padding: 5px 10px;
+    border: 1px solid black;
+    border-radius: 6px;
+    margin: 5px;
+    background-color: #66b9bf;
+    color: white;
+}
+
+.divBody {
+    width: 80%;
+    margin-top: 40px;
+}
