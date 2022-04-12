@@ -44,7 +44,14 @@ export class PaginaPrincipalComponent implements OnInit {
       })
     })
 
-    fetch('/api/buscar_produto', { method: 'POST' }).then(function (result) {
+    fetch('/api/buscar_produto', {
+      method: 'POST', body: JSON.stringify(
+        {
+          ordenar: 1
+        }
+      ),
+      headers: { "Content-Type": "application/json" }
+    }).then(function (result) {
 
       result.json().then(function (data2) {
 
@@ -55,7 +62,7 @@ export class PaginaPrincipalComponent implements OnInit {
 
         self.listaProdutos = data2;
         localStorage.setItem('layout', '2')
-        self.colocarMateriais(data2, '2')
+        self.colocarMateriais(data2, localStorage.getItem('layout'))
       })
     })
 
@@ -114,12 +121,12 @@ export class PaginaPrincipalComponent implements OnInit {
 
     let botao = document.getElementById(valor);
 
-    if(botao.style.backgroundColor == 'rgb(7, 136, 155)') {
+    if (botao.style.backgroundColor == 'rgb(7, 136, 155)') {
       botao.style.backgroundColor = '#66b9bf'
       botao.style.color = 'black';
       this.filtrar(2, 'nada')
     } else {
-      for(let i = 1; i < 12; i++) {
+      for (let i = 1; i < 12; i++) {
         let botaoSelecionado = document.getElementById(i.toString())
         botaoSelecionado.style.backgroundColor = '#66b9bf'
         botaoSelecionado.style.color = 'black'
@@ -147,7 +154,7 @@ export class PaginaPrincipalComponent implements OnInit {
     divProdutos.id = 'divProdutos'
     divDireita.appendChild(divProdutos)
 
-    if(layout == 1) {
+    if (layout == 1) {
 
       data.forEach(e => {
 
@@ -158,12 +165,12 @@ export class PaginaPrincipalComponent implements OnInit {
 
         let divProduto = document.createElement('div')
         divProduto.className = 'divProduto2'
-  
+
         let imagem = document.createElement('img')
         imagem.src = e.IMAGEM_NOME
         imagem.className = 'imagensProduto2'
         divProduto.appendChild(imagem)
-  
+
         let divNome = document.createElement('div')
         divNome.className = 'divNome'
         divProduto.appendChild(divNome)
@@ -172,13 +179,13 @@ export class PaginaPrincipalComponent implements OnInit {
         nomeProduto.innerText = e.NOME
         nomeProduto.style.marginBottom = '5px'
         divNome.appendChild(nomeProduto)
-  
+
         let marcaProduto = document.createElement('span')
         marcaProduto.innerText = e.MARCA
         marcaProduto.style.width = '100%'
         marcaProduto.style.color = 'gray'
         divNome.appendChild(marcaProduto)
-  
+
         let precoProduto = document.createElement('div')
         let preco = (e.VALOR).toString();
         let precoNovo = preco.replace('.', ',')
@@ -186,11 +193,11 @@ export class PaginaPrincipalComponent implements OnInit {
         precoProduto.style.fontSize = '22px'
         divProduto.appendChild(precoProduto)
         divProduto.style.marginBottom = '5px'
-  
+
         divProduto.onclick = function () {
           self.router.navigate(['/produtos/' + e.CODIGO])
         }
-  
+
         linhaAtual.className = 'linha'
         linhaAtual.appendChild(divProduto)
       })
@@ -200,49 +207,48 @@ export class PaginaPrincipalComponent implements OnInit {
       data.forEach(e => {
 
         console.log(e.IMAGEM_NOME)
-  
+
         if (contagem == 0) {
           linhaAtual = document.createElement('div')
           linhaAtual.className = 'linha'
-  
+
           divProdutos.appendChild(linhaAtual)
           contagem = 1;
         } else {
           linhaAtual = document.querySelector('.linha')
           contagem = 0;
         }
-  
+
         let divProduto = document.createElement('div')
         divProduto.className = 'divProduto'
-  
+
         let imagem = document.createElement('img')
         imagem.src = e.IMAGEM_NOME
         imagem.className = 'imagensProduto'
         divProduto.appendChild(imagem)
-  
+
         let nomeProduto = document.createElement('div')
         nomeProduto.innerText = e.NOME
         nomeProduto.style.marginBottom = '12px'
         divProduto.appendChild(nomeProduto)
-  
+
         let marcaProduto = document.createElement('span')
         marcaProduto.innerText = e.MARCA
         marcaProduto.style.width = '100%'
         marcaProduto.style.color = 'gray'
         divProduto.appendChild(marcaProduto)
-  
+
         let precoProduto = document.createElement('div')
-        let preco = (e.VALOR).toString();
-        let precoNovo = preco.replace('.', ',')
-        precoProduto.innerText = "R$ " + precoNovo
+        let preco = self.getPreco(e.VALOR);
+        precoProduto.innerText = preco
         precoProduto.style.width = '100%'
         precoProduto.style.fontSize = '22px'
         divProduto.appendChild(precoProduto)
-  
+
         divProduto.onclick = function () {
           self.router.navigate(['/produtos/' + e.CODIGO])
         }
-  
+
         linhaAtual.appendChild(divProduto)
       });
 
@@ -277,15 +283,16 @@ export class PaginaPrincipalComponent implements OnInit {
 
   filtrar(tipo, valor) {
 
+    var self = this;
     if (tipo == 1) {
 
       this.pesquisaProduto = valor;
       const listaFiltrada = this.listaProdutos.filter(function (a) {
 
-        if(valor == 'nada' || valor == '') {
+        if (valor == 'nada' || valor == '') {
           return a;
         } else {
-          if(a.CATEGORIA == localStorage.getItem('categoriaAtiva')) {
+          if (a.CATEGORIA == localStorage.getItem('categoriaAtiva')) {
             return a.NOME.toLowerCase().indexOf(valor.toLowerCase()) > -1
           }
         }
@@ -298,11 +305,37 @@ export class PaginaPrincipalComponent implements OnInit {
 
       const listaFiltrada = this.listaProdutos.filter(function (a) {
 
-        if(valor == 'nada') {
+        if (valor == 'nada') {
           return a;
         } else {
           localStorage.setItem('categoriaAtiva', valor)
-          if(a.CATEGORIA == valor) {
+          if (a.CATEGORIA == valor) {
+            return a;
+          }
+        }
+      });
+
+      this.colocarMateriais(listaFiltrada, localStorage.getItem('layout'))
+    }
+
+    if (tipo == 3) {
+
+      const listaFiltrada = this.listaProdutos.filter(function (a) {
+
+        if(self.pesquisaProduto) {
+          if(localStorage.getItem('categoriaAtiva')) {
+            if (a.CATEGORIA == localStorage.getItem('categoriaAtiva')) {
+              return a.NOME.toLowerCase().indexOf(this.pesquisaProduto.toLowerCase()) > -1
+            }
+          } else {
+            return a.NOME.toLowerCase().indexOf(this.pesquisaProduto.toLowerCase()) > -1
+          }
+        } else {
+          if(localStorage.getItem('categoriaAtiva')) {
+            if (a.CATEGORIA == localStorage.getItem('categoriaAtiva')) {
+              return a;
+            }
+          } else {
             return a;
           }
         }
@@ -312,4 +345,30 @@ export class PaginaPrincipalComponent implements OnInit {
     }
   }
 
+  ordenar(valor) {
+    var self = this;
+    fetch('/api/buscar_produto', {
+      method: 'POST', body: JSON.stringify(
+        {
+          ordenar: valor
+        }
+      ),
+      headers: { "Content-Type": "application/json" }
+    }).then(function (result) {
+
+      result.json().then(function (data2) {
+
+        if (data2.length < 1) {
+          fetch('/api/adicionar_automatico', { method: 'POST' });
+        }
+
+        self.listaProdutos = data2;
+        self.filtrar(3, 0)
+      })
+    })
+  }
+
+  getPreco(valor) {
+    return valor.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' });
+  }
 }

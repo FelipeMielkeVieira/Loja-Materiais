@@ -107,7 +107,7 @@ inserirRota('/adicionar_endereco', function (dados, resposta) {
 
 inserirRota('/buscar_enderecos', function (dados, resposta) {
 
-    database(`SELECT * FROM ENDERECO WHERE ENDERECO.USER_CODIGO = ${dados.codigo}`)
+    database(`SELECT * FROM ENDERECO WHERE USER_CODIGO = ${dados.codigo}`)
         .then(result => {
             console.log('Usuário inserido com sucesso!')
             resposta(result)

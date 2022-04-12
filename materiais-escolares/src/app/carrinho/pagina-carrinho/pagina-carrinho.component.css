@@ -1,0 +1,39 @@
+body {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.divCarrinho {
+    margin-top: 40px;
+    width: 80%;
+}
+
+.carrinhoVazio {
+    border: 1px solid rgb(161, 159, 159);
+    border-radius: 6px;
+    padding: 40px 20px;
+}
+
+.divTotal {
+    margin-top: 10px;
+}
+
+.paginaPrincipal:hover {
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.produto {
+    border: 1px solid rgb(160, 158, 158);
+    border-radius: 6px;
+    width: 100%;
+    padding: 15px;
+    margin-bottom: 20px;
+    display: flex;
+}
+
+.info {
+    display: flex;
+    flex-direction: column;
+}

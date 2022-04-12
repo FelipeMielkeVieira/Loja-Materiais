@@ -1,11 +1,61 @@
 inserirRota('/buscar_produto', function (dados, resposta) {
 
-    database(`SELECT * FROM PRODUTOS`).then(result => {
-        console.log(result)
-        resposta(result)
-    }).catch(erro => {
-        console.log('Erro ao buscar produtos!')
-    })
+    if(dados.ordenar == 1) {
+        database(`SELECT * FROM PRODUTOS`).then(result => {
+            console.log(result)
+            resposta(result)
+        }).catch(erro => {
+            console.log('Erro ao buscar produtos!')
+        })
+    }
+    if(dados.ordenar == 2) {
+        database(`SELECT * FROM PRODUTOS ORDER BY AVALIACOES DESC`).then(result => {
+            console.log(result)
+            resposta(result)
+        }).catch(erro => {
+            console.log('Erro ao buscar produtos!')
+        })
+    }
+    if(dados.ordenar == 3) {
+        database(`SELECT * FROM PRODUTOS ORDER BY VALOR DESC`).then(result => {
+            console.log(result)
+            resposta(result)
+        }).catch(erro => {
+            console.log('Erro ao buscar produtos!')
+        })
+    }
+    if(dados.ordenar == 4) {
+        database(`SELECT * FROM PRODUTOS ORDER BY VALOR`).then(result => {
+            console.log(result)
+            resposta(result)
+        }).catch(erro => {
+            console.log('Erro ao buscar produtos!')
+        })
+    }
+    if(dados.ordenar == 5) {
+        database(`SELECT * FROM PRODUTOS ORDER BY NOME`).then(result => {
+            console.log(result)
+            resposta(result)
+        }).catch(erro => {
+            console.log('Erro ao buscar produtos!')
+        })
+    }
+    if(dados.ordenar == 6) {
+        database(`SELECT * FROM PRODUTOS ORDER BY NOME`).then(result => {
+            console.log(result)
+            resposta(result)
+        }).catch(erro => {
+            console.log('Erro ao buscar produtos!')
+        })
+    }
+    if(dados.ordenar == 7) {
+        database(`SELECT * FROM PRODUTOS LIMIT 3`).then(result => {
+            console.log(result)
+            resposta(result)
+        }).catch(erro => {
+            console.log('Erro ao buscar produtos!')
+        })
+    }
 
     return resposta;
 });

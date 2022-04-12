@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-pagina-carrinho',
@@ -7,10 +8,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PaginaCarrinhoComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router) { }
+
+  carrinho = [];
+  valor = 0.00;
 
   ngOnInit() {
-    console.log(location.pathname)
+    localStorage.setItem('path', location.pathname)
+    this.carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
+    console.log(this.carrinho)
+  }
+
+  getPreco(valor) {
+    return valor.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' });
+  }
+
+  paginaPrincipal() {
+    this.router.navigate(['/'])
   }
 
 }

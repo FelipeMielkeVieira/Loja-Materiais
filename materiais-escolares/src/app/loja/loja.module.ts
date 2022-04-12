@@ -21,6 +21,7 @@ import { ValesComponent } from '../usuario/vales/vales.component';
 import { UtilitariosModule } from '../utilitarios/utilitarios.module';
 import { EditarComponent } from '../usuario/editar/editar.component';
 import { EditarEnderecoComponent } from '../usuario/editar-endereco/editar-endereco.component';
+import { FormsModule } from '@angular/forms';
 
 const routes: Routes = [
   {
@@ -59,7 +60,8 @@ const routes: Routes = [
   imports: [
     RouterModule.forRoot(routes),
     CommonModule,
-    UtilitariosModule
+    UtilitariosModule,
+    FormsModule
   ],
   declarations: [PaginaPrincipalComponent, ProdutoComponent],
   exports: [PaginaPrincipalComponent, ProdutoComponent],

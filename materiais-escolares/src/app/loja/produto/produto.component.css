@@ -47,7 +47,7 @@ body {
 
 .divCompra {
     width: 100%;
-    border: 1px solid black;
+    border: 1px solid rgb(95, 93, 93);
     border-radius: 6px;
     padding: 20px;
 }
@@ -65,4 +65,39 @@ body {
 .selecionaEndereco:hover {
     cursor: pointer;
     text-decoration: underline;
+}
+
+.inputQtd {
+    width: 25%;
+    padding: 5px;
+    border: 1px solid #66b9bf;
+    border-radius: 4px;
+    color: #66b9bf;
+}
+
+.botaoQtd {
+    padding: 5px;
+    border: 1px solid #66b9bf;
+    background-color: #66b9bf;
+    color:#07889b;
+    border-radius: 4px;
+    width: 60%;
+}
+
+.especificacoes {
+    margin-top: 40px;
+    margin-bottom: 60px;
+    padding: 20px 60px;
+    border: 0.5px solid rgb(138, 135, 135);
+    border-radius: 6px;
+}
+
+.divProduto3 {
+    width: 30%;
+    border: 1px solid black;
+    border-radius: 6px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 15px 20px 20px 15px;
 }

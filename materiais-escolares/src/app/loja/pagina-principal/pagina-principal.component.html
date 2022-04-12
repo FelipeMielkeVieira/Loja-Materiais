@@ -45,15 +45,14 @@
                 <div style="display: flex; width: 40%; float: left; align-items: center;">
                     <span style="margin-right:6px">Ordenar Por: </span>
                     <div class="form-group">
-                        <select class="form-control" id="sel1"
+                        <select class="form-control" id="sel1" #z (change)="ordenar(z.value)"
                             style="background-color: #eeaa7b; height:30px; padding: 0px 7px; display: flex; justify-content: center; float: left">
                             <option value="1">Relevância</option>
-                            <option value="2">Mais Vendidos</option>
-                            <option value="3">Avaliações</option>
-                            <option value="4">Maior Preço</option>
-                            <option value="5">Menor Preço</option>
-                            <option value="6">A-Z</option>
-                            <option value="7">Z-A</option>
+                            <option value="2">Avaliações</option>
+                            <option value="3">Maior Preço</option>
+                            <option value="4">Menor Preço</option>
+                            <option value="5">A-Z</option>
+                            <option value="6">Z-A</option>
                         </select>
                     </div>
                 </div>

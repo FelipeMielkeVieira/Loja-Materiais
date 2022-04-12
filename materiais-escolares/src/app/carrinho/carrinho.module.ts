@@ -3,10 +3,12 @@ import { CommonModule } from '@angular/common';
 import { PaginaCarrinhoComponent } from './pagina-carrinho/pagina-carrinho.component';
 import { PedidoComponent } from './pedido/pedido.component';
 import { PedidosComponent } from './pedidos/pedidos.component';
+import { UtilitariosModule } from '../utilitarios/utilitarios.module';
 
 @NgModule({
   imports: [
-    CommonModule
+    CommonModule,
+    UtilitariosModule
   ],
   declarations: [PaginaCarrinhoComponent, PedidoComponent, PedidosComponent],
   exports: [PedidoComponent, PaginaCarrinhoComponent, PedidosComponent]
