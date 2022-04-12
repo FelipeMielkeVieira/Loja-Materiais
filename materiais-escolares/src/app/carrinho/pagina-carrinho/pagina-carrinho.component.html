@@ -1,31 +1,37 @@
 <app-navbar style="width: 100%;"></app-navbar>
 
 <body>
-  <div class="divCarrinho">
-    <h3 *ngIf="carrinho.length == 0" style="margin-bottom: 40px;">Seu Carrinho está Vazio</h3>
-    <h3 *ngIf="carrinho.length != 0" style="margin-bottom: 40px;">Seu Carrinho</h3>
-    <div *ngIf="carrinho.length == 0">
-      <div class="carrinhoVazio">
-        <span (click)="paginaPrincipal()" class="paginaPrincipal">Página Principal</span>
-      </div>
-      <div style="width: 100%; justify-content: right; margin-top: 10px; display: flex;" class="divTotal">Total: {{getPreco(valor)}}
-      </div>
-    </div>
-    <div *ngIf="carrinho.length != 0">
-      <div *ngFor="let produto of carrinho; let i=index">
-        <div class="produto">
-          <img class="imagensProduto3" src="{{produto.IMAGEM_NOME}}">
-          <div class="info">
-            <span>{{produto.NOME}}</span>
-            <span>{{produto.MARCA}}</span>
-            <span>{{produto.quantidade}}</span>
-          </div>
-          <div class="valorExcluir">
-            <span>{{getPreco(produto.VALOR)}}</span>
-            <span class="excluir" (click)="excluir(i)">Excluir</span>
-          </div>
+    <div class="divCarrinho">
+        <h3 *ngIf="carrinho.length == 0" style="margin-bottom: 40px;">Seu Carrinho está Vazio</h3>
+        <h3 *ngIf="carrinho.length != 0" style="margin-bottom: 40px;">Seu Carrinho</h3>
+        <div *ngIf="carrinho.length == 0">
+            <div class="carrinhoVazio">
+                <span (click)="paginaPrincipal()" class="paginaPrincipal">Página Principal</span>
+            </div>
+            <div style="width: 100%; justify-content: right; margin-top: 10px; display: flex;" class="divTotal">Total: {{getPreco(valor)}}
+            </div>
         </div>
-      </div>
+        <div *ngIf="carrinho.length != 0">
+            <div *ngFor="let produto of carrinho; let i=index">
+                <div class="produto">
+                    <img class="imagensProduto3" src="{{produto.IMAGEM_NOME}}">
+                    <div class="info">
+                        <div class="nomeMarca">
+                            <span style="margin-bottom: 10px; font-size:18px">{{produto.NOME}}</span>
+                            <span style="color:gray">{{produto.MARCA}}</span>
+                        </div>
+                        <span class="qtd">{{produto.quantidade}}</span>
+                    </div>
+                    <div class="valorExcluir">
+                        <span style="color: #07889b; font-size: 20px">{{getPreco(produto.VALOR)}}</span>
+                        <span class="excluir" (click)="excluir(i, produto.VALOR)">Excluir</span>
+                    </div>
+                </div>
+            </div>
+            <div style="display: flex; justify-content: space-between">
+                <button class="fazerPedido" (click)="fazerPedido()">Fazer Pedido</button>
+                <span style="font-size:18px">Total: {{getPreco(valor)}}</span>
+            </div>
+        </div>
     </div>
-  </div>
 </body>

@@ -36,14 +36,42 @@ body {
 .info {
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
+    width: 75%;
+}
+
+.nomeMarca {
+    display: flex;
+    flex-direction: column;
+}
+
+.qtd {
+    border: 0.5px solid black;
+    border-radius: 6px;
+    width: 50px;
+    display: flex;
+    justify-content: center;
 }
 
 .valorExcluir {
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
 }
 
 .excluir {
+    color: gray;
+}
+
+.excluir:hover {
     cursor: pointer;
     text-decoration: underline;
+}
+
+.fazerPedido {
+    width: 40%;
+    border: 0.5px solid rgb(131, 130, 130);
+    background-color: #66b9bf;
+    color: white;
+    padding: 3px 0px;
 }

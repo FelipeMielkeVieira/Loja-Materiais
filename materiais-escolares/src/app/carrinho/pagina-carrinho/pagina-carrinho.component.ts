@@ -14,9 +14,14 @@ export class PaginaCarrinhoComponent implements OnInit {
   valor = 0.00;
 
   ngOnInit() {
+    var self = this;
     localStorage.setItem('path', location.pathname)
     this.carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
     console.log(this.carrinho)
+
+    this.carrinho.forEach(function (e) {
+      self.valor += e.VALOR
+    })
   }
 
   getPreco(valor) {
@@ -27,9 +32,10 @@ export class PaginaCarrinhoComponent implements OnInit {
     this.router.navigate(['/'])
   }
 
-  excluir(index) {
+  excluir(index, valor) {
     this.carrinho.splice(index, 1);
     localStorage.setItem('carrinho', JSON.stringify(this.carrinho));
+    this.valor = this.valor - valor
   }
 
 }
