@@ -43,6 +43,40 @@ export class PagamentosComponent implements OnInit {
     titulo.className = 'titulo'
     modal.appendChild(titulo)
 
+    let titular = document.createElement('input')
+    titular.className = 'titular'
+    titular.placeholder = 'Nome do Titular'
+    modal.appendChild(titular)
+
+    let numeroCartao = document.createElement('input')
+    numeroCartao.className = 'titular'
+    numeroCartao.placeholder = 'Número do Cartão'
+    modal.appendChild(numeroCartao)
+
+    let divCodigoData = document.createElement('div')
+    divCodigoData.className = 'titular'
+    divCodigoData.style.padding = '0'
+    modal.appendChild(divCodigoData)
+
+    let codigoSeguranca = document.createElement('input')
+    codigoSeguranca.style.width = '55%'
+    codigoSeguranca.style.marginRight = '5%'
+    codigoSeguranca.style.padding = '5px 10px'
+    codigoSeguranca.placeholder = 'Código de Segurança'
+
+    let validade = document.createElement('input')
+    validade.placeholder = '__/__/____'
+    validade.style.width = '40%'
+    validade.style.padding = '5px 10px'
+
+    let botaoCadastro = document.createElement('button')
+    botaoCadastro.className = 'cadastroCartao'
+    botaoCadastro.innerText = 'Cadastrar'
+    modal.appendChild(botaoCadastro)
+
+    divCodigoData.appendChild(codigoSeguranca)
+    divCodigoData.appendChild(validade)
+
     body.appendChild(modal);
   }
 
