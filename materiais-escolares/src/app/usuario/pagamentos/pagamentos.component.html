@@ -1,11 +1,11 @@
 <app-navbar></app-navbar>
+
 <body>
-  <div class="divBody" id="teste">
-    <div style="display: flex; justify-content: center; width: 100%; margin-bottom: 20px;">
-      <div class='divConta'>
-        <span class="spanCima" (click)="conta()">Conta</span>
-        <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="10" height="30" viewBox="0 0 172 172"
-          style=" fill:#000000; margin-right: 20px;">
+    <div class="divBody" id="teste">
+        <div style="display: flex; justify-content: center; width: 100%; margin-bottom: 20px;">
+            <div class='divConta'>
+                <span class="spanCima" (click)="conta()">Conta</span>
+                <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="10" height="30" viewBox="0 0 172 172" style=" fill:#000000; margin-right: 20px;">
           <g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter"
             stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none"
             font-size="none" text-anchor="none" style="mix-blend-mode: normal">
@@ -17,15 +17,18 @@
             </g>
           </g>
         </svg>
-        <span>Pagamentos</span>
-      </div>
+                <span>Pagamentos</span>
+            </div>
+        </div>
+        <div style="border-bottom: 1px black solid; display: flex; justify-content: space-between;">
+            <h3>Formas de Pagamento</h3>
+            <button class="botaoAdicionar" (click)="adicionar()">Adicionar Cartão de Crédito</button>
+        </div>
+        <div *ngFor="let forma of listaPagamentos" style="display: flex; justify-content: center">
+            <div class=" divPagamento ">
+                Oi
+                <span>{{forma.TITULAR}}</span>
+            </div>
+        </div>
     </div>
-    <div style="border-bottom: 1px black solid; display: flex; justify-content: space-between;">
-      <h3>Formas de Pagamento</h3>
-      <button class="botaoAdicionar" (click)="adicionar()">Adicionar Cartão de Crédito</button>
-    </div>
-    <div *ngFor="let forma of listaPagamentos">
-
-    </div>
-  </div>
 </body>
