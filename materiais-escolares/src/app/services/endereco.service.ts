@@ -49,6 +49,24 @@ export class EnderecoService {
     })
   }
 
+  buscarEnderecoCompleto(codigo) {
+
+    return new Promise((resolvido, rejeitado) => {
+
+      fetch('/api/buscar_enderecos_completo', {
+        method: 'POST',
+        body: JSON.stringify(
+          {
+            codigo: codigo
+          }
+        ),
+        headers: { "Content-Type": "application/json" }
+      }).then(resultado => resultado.json())
+        .then(resolvido)
+        .catch(rejeitado);
+    })
+  }
+
   buscarPaises() {
     return new Promise((resolvido, rejeitado) => {
 

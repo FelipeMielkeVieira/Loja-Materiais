@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ValesService } from 'src/app/services/vales.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-vales',
@@ -8,11 +9,12 @@ import { ValesService } from 'src/app/services/vales.service';
 })
 export class ValesComponent implements OnInit {
 
-  constructor(private valesService: ValesService) { }
+  constructor(private valesService: ValesService, private router: Router) { }
 
   vale = "";
 
   ngOnInit() {
+    localStorage.setItem('desconto', "0")
   }
 
   resgatar() {
@@ -29,24 +31,34 @@ export class ValesComponent implements OnInit {
       headers: { "Content-Type": "application/json" }
     }).then(function (e) {
       e.json().then(function (data) {
-
-        if (!data.USADO) {
-          fetch('/api/resgatar_vale', {
-            method: 'POST',
-            body: JSON.stringify(
-              {
-                codigo: self.vale
+        data.forEach(element => {
+          console.log(element)
+          if (element.USADO == 0) {
+            fetch('/api/resgatar_vale', {
+              method: 'POST',
+              body: JSON.stringify(
+                {
+                  codigo: self.vale
+                }
+              ),
+              headers: { "Content-Type": "application/json" }
+            }).then(function () {
+              alert('Vale Resgatado!')
+              if (localStorage.getItem('desconto')) {
+                localStorage.setItem('desconto', ((localStorage.getItem('desconto') + element.DESCONTO).toString()))
+              } else {
+                localStorage.setItem('desconto', (element.DESCONTO).toString())
               }
-            ),
-            headers: { "Content-Type": "application/json" }
-          }).then(function (a) {
-            console.log('Vale Resgatado!')
-            localStorage.setItem('desconto', (localStorage.getItem('desconto') + data.DESCONTO))
-          })
-        } else {
-          alert("Código Inválido!")
-        }
+            })
+          } else {
+            alert("Código Inválido!")
+          }
+        });
       })
     })
+  }
+
+  cancelar() {
+    this.router.navigate(['/usuario/'])
   }
 }

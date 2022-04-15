@@ -1,0 +1,8 @@
+.spanEndereco {
+    margin: 15px;
+}
+
+.spanEndereco:hover {
+    cursor: pointer;
+    text-decoration: underline;
+}

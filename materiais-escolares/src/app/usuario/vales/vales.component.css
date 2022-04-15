@@ -1,0 +1,26 @@
+.quadradoVale {
+    border: 1px solid black;
+    border-radius: 4px;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+}
+
+.botaoVale {
+    margin-top: 10px;
+    border: 1px solid black;
+    background-color: #66b9bf;
+    color: white;
+    margin-bottom: 20px;
+}
+
+.spanVale {
+    padding-top: 10px;
+    border-top: 1px rgb(114, 113, 113) solid;
+    text-align: center;
+}
+
+.spanVale:hover {
+    cursor: pointer;
+    text-decoration: underline;
+}

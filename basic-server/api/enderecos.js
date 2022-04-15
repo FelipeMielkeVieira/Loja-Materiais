@@ -119,6 +119,22 @@ inserirRota('/buscar_enderecos', function (dados, resposta) {
     return resposta;
 })
 
+inserirRota('/buscar_enderecos_completo', function (dados, resposta) {
+
+    database(`SELECT ENDERECO.CIDADE, ENDERECO.BAIRRO, ENDERECO.RUA, ENDERECO.RUA, ENDERECO.COMPLEMENTO, ESTADO.NOME AS ESTADO, PAIS.NOME AS PAIS FROM ENDERECO 
+    INNER JOIN ESTADO ON ENDERECO.ESTADO_CODIGO = ESTADO.CODIGO AND ENDERECO.USER_CODIGO = ${dados.codigo}
+    INNER JOIN PAIS ON ESTADO.PAIS_CODIGO = PAIS.CODIGO`)
+        .then(result => {
+            console.log('Usuário inserido com sucesso!')
+            resposta(result)
+        }).catch(erro => {
+            console.log('Erro ao inserir usuário!')
+            resposta(result)
+        });
+
+    return resposta;
+})
+
 inserirRota('/buscar_estado', function (dados, resposta) {
 
     database(`SELECT ESTADO.NOME FROM ESTADO 

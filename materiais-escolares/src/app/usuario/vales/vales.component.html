@@ -1,7 +1,13 @@
 <div>
   <app-navbar style="width: 100vw;"></app-navbar>
-  <div>
-    <input [(ngModel)]="vale">
-    <button (click)="resgatar()">Resgatar</button>
+  <div style="width: 100%; display: flex; align-items: center; justify-content: center; height: 80vh;">
+    <div class="quadradoVale">
+      <h4 style="text-align: center; margin-bottom: 25px;">Resgatar Vale-Presente</h4>
+      <div>Digite abaixo o código do vale-presente</div>
+      <div style="margin-bottom: 15px;">para poder resgatá-lo:</div>
+      <input [(ngModel)]="vale">
+      <button (click)="resgatar()" class="botaoVale">Resgatar</button>
+      <div class="spanVale" (click)="cancelar()">Cancelar</div>
+    </div>
   </div>
 </div>
