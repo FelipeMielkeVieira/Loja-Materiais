@@ -32,5 +32,26 @@ body {
     padding: 6px;
     border: 1px solid black;
     border-radius: 6px;
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.titular2 {
+    color: #66b9bf;
+    font-size: 20px;
     width: 40%;
+    margin-left: 10px;
+}
+
+.numero {
+    width: 30%;
+}
+
+.excluirPagamento {
+    padding: 4px;
+    border: 1px solid black;
+    border-radius: 4px;
+    background-color: #f7b733;
 }
