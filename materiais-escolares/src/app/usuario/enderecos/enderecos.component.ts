@@ -25,29 +25,20 @@ export class EnderecosComponent implements OnInit {
     
     this.listaEnderecos = result;
     var self = this;
-    let linhaAtual
-    let contagem = 0;
+    let linhaAtual = document.createElement('div')
+    linhaAtual.className = 'linhaEnderecos'
+    let divEnderecos = document.querySelector('.enderecos')
+    divEnderecos.appendChild(linhaAtual)
 
     result.forEach(e => {
-      let divEnderecos = document.querySelector('.enderecos')
-      divEnderecos.className = 'divEnderecos'
-
-      if (contagem == 0) {
-        linhaAtual = document.createElement('div')
-        linhaAtual.className = 'linha'
-
-        divEnderecos.appendChild(linhaAtual)
-        contagem = 1;
-      } else {
-        linhaAtual = document.querySelector('.linha')
-        contagem = 0;
-      }
+      let divEndereco = document.createElement('div')
+      linhaAtual.appendChild(divEndereco)
+      divEndereco.className = 'divEndereco'
 
       let pais = document.createElement('div')
+      pais.className = 'divPais'
       pais.innerText = e.PAIS
       linhaAtual.appendChild(pais)
-
-      contagem++;
     });
   }
 
