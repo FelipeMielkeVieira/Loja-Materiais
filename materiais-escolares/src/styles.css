@@ -132,14 +132,3 @@
     border-radius: 6px;
     background-color: #f7b733;
 }
-
-.linhaEnderecos {
-    width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
-}
-
-.divPais {
-    width: 50%;
-}

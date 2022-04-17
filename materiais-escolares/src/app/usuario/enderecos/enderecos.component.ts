@@ -11,35 +11,28 @@ export class EnderecosComponent implements OnInit {
 
   constructor(private enderecoService: EnderecoService, private router: Router) { }
 
-  listaEnderecos = [];
+  listaEnderecos
 
   ngOnInit() {
     var self = this;
 
     this.enderecoService.buscarEnderecoCompleto(localStorage.getItem('codigo')).then(function (result) {
-      self.listarEnderecos(result);
+      self.listaEnderecos = result
     })
   }
 
-  listarEnderecos(result) {
-    
-    this.listaEnderecos = result;
-    var self = this;
-    let linhaAtual = document.createElement('div')
-    linhaAtual.className = 'linhaEnderecos'
-    let divEnderecos = document.querySelector('.enderecos')
-    divEnderecos.appendChild(linhaAtual)
+  excluir(index, codigo) {
+    this.listaEnderecos.splice(index, 1);
+    fetch('/api/excluir_endereco', {
+      method: 'POST', body: JSON.stringify({
+        codigo: codigo
+      }),
+      headers: { "Content-Type": "application/json" }
+    })
+  }
 
-    result.forEach(e => {
-      let divEndereco = document.createElement('div')
-      linhaAtual.appendChild(divEndereco)
-      divEndereco.className = 'divEndereco'
-
-      let pais = document.createElement('div')
-      pais.className = 'divPais'
-      pais.innerText = e.PAIS
-      linhaAtual.appendChild(pais)
-    });
+  editar(codigo) {
+    this.router.navigate(['/usuario/enderecos', codigo])
   }
 
   adicionarEndereco() {

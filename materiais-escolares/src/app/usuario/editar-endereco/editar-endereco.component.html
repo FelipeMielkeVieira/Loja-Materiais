@@ -1,15 +1,23 @@
+<app-navbar style="width: 100vw;"></app-navbar>
 <div>
-    <app-navbar style="width: 100vw;"></app-navbar>
-    <select class="selectPais" #f (change)="selectEstado(f.value)">
-    <option [value]="0" selected>Selecionar País</option>
-  </select>
-    <select class="selectEstado" #t (change)="estadoSelecionado(t.value)">
-    <option value="0" selected>Selecionar Estado</option>
-  </select>
-    <button (click)="adicionarEndereco()">Adicionar Endereço</button>
-    <input placeholder="cidade" [(ngModel)]="cidade">
-    <input placeholder="bairro" [(ngModel)]="bairro">
-    <input placeholder="rua" [(ngModel)]="rua">
-    <input placeholder="numero" [(ngModel)]="numero">
-    <input placeholder="complemento" [(ngModel)]="complemento">
+  <h6 class="spanEndereco" (click)="voltar()">Voltar</h6>
+  <div class="divPrincipal">
+    <div class="modalEndereco">
+      <select class="selectPais" #f (change)="selectEstado(f.value)">
+        <option [value]="0" selected>Selecionar País</option>
+      </select>
+      <select class="selectEstado" #t (change)="estadoSelecionado(t.value)">
+        <option value="0" selected>Selecionar Estado</option>
+      </select>
+      <input placeholder="Cidade" style="padding: 7px;" [(ngModel)]="cidade">
+      <input placeholder="Bairro" style="width: 31%; margin-top: 15px; padding: 7px;" [(ngModel)]="bairro">
+      <input placeholder="Rua" style="width: 60%; margin-top: 15px; padding: 7px;" [(ngModel)]="rua">
+      <input placeholder="Numero" style="width: 31%; margin-top: 15px; padding: 7px;" [(ngModel)]="numero">
+      <input placeholder="Complemento" style="width: 60%; margin-top: 15px; padding: 7px;" [(ngModel)]="complemento">
+    </div>
+  </div>
+</div>
+<div style="width: 100%; display: flex; justify-content: center;">
+  <button *ngIf="codigoEndereco == 0" (click)="adicionarEndereco()" class="botaoAdicionar">Adicionar Endereço</button>
+  <button *ngIf="codigoEndereco != 0" (click)="adicionarEndereco()" class="botaoAdicionar">Editar Endereço</button>
 </div>

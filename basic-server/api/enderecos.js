@@ -105,6 +105,23 @@ inserirRota('/adicionar_endereco', function (dados, resposta) {
         });
 })
 
+inserirRota('/editar_endereco', function (dados, resposta) {
+
+    database(`UPDATE ENDERECO SET CIDADE = '${dados.cidade}' WHERE CODIGO = ${dados.codigo}
+    UPDATE TABLE ENDERECO SET BAIRRO = '${dados.bairro}' WHERE CODIGO = ${dados.codigo}
+    UPDATE TABLE ENDERECO SET RUA = '${dados.rua}' WHERE CODIGO = ${dados.codigo}
+    UPDATE TABLE ENDERECO SET NUMERO = ${dados.numero} WHERE CODIGO = ${dados.codigo}
+    UPDATE TABLE ENDERECO SET COMPLEMENTO = '${dados.complemento}' WHERE CODIGO = ${dados.codigo}
+    UPDATE TABLE ENDERECO SET ESTADO_CODIGO = ${dados.estado} WHERE CODIGO = ${dados.codigo}`)
+        .then(result => {
+            console.log('Endereço inserido com sucesso!')
+            resposta({ message: 'Endereço inserido com sucesso!' })
+        }).catch(erro => {
+            console.log('Erro ao inserir endereço!')
+            resposta({ erro: 'Erro ao inserir endereço!' })
+        });
+})
+
 inserirRota('/buscar_enderecos', function (dados, resposta) {
 
     database(`SELECT * FROM ENDERECO WHERE USER_CODIGO = ${dados.codigo}`)
@@ -119,9 +136,23 @@ inserirRota('/buscar_enderecos', function (dados, resposta) {
     return resposta;
 })
 
+inserirRota('/buscar_endereco', function (dados, resposta) {
+
+    database(`SELECT * FROM ENDERECO WHERE CODIGO = ${dados.codigo}`)
+        .then(result => {
+            console.log('Usuário inserido com sucesso!')
+            resposta(result)
+        }).catch(erro => {
+            console.log('Erro ao inserir usuário!')
+            resposta(result)
+        });
+
+    return resposta;
+})
+
 inserirRota('/buscar_enderecos_completo', function (dados, resposta) {
 
-    database(`SELECT ENDERECO.CIDADE, ENDERECO.BAIRRO, ENDERECO.RUA, ENDERECO.RUA, ENDERECO.COMPLEMENTO, ESTADO.NOME AS ESTADO, PAIS.NOME AS PAIS FROM ENDERECO 
+    database(`SELECT ENDERECO.CODIGO, ENDERECO.CIDADE, ENDERECO.BAIRRO, ENDERECO.RUA, ENDERECO.NUMERO, ENDERECO.COMPLEMENTO, ESTADO.NOME AS ESTADO, PAIS.NOME AS PAIS FROM ENDERECO 
     INNER JOIN ESTADO ON ENDERECO.ESTADO_CODIGO = ESTADO.CODIGO AND ENDERECO.USER_CODIGO = ${dados.codigo}
     INNER JOIN PAIS ON ESTADO.PAIS_CODIGO = PAIS.CODIGO`)
         .then(result => {
@@ -164,4 +195,16 @@ inserirRota('/buscar_pais', function (dados, resposta) {
         });
 
     return resposta;
+})
+
+inserirRota('/excluir_endereco', function (dados, resposta) {
+
+    database(`DELETE FROM ENDERECO WHERE CODIGO = ${dados.codigo}`)
+        .then(result => {
+            console.log('Endereço inserido com sucesso!')
+            resposta({ message: 'Endereço inserido com sucesso!' })
+        }).catch(erro => {
+            console.log('Erro ao inserir endereço!')
+            resposta({ erro: 'Erro ao inserir endereço!' })
+        });
 })
