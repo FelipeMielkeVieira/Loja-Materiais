@@ -23,7 +23,6 @@ export class PaginaPrincipalComponent implements OnInit {
   ordenacao = 1;
 
   ngOnInit() {
-    console.log(location.pathname)
     localStorage.setItem('path', location.pathname)
 
     var self = this;
@@ -59,7 +58,6 @@ export class PaginaPrincipalComponent implements OnInit {
 
       result.json().then(function (data2) {
 
-        console.log('NgOninit1: ', data2)
         if (data2.length < 1) {
           fetch('/api/adicionar_automatico', { method: 'POST' });
         }
@@ -67,6 +65,12 @@ export class PaginaPrincipalComponent implements OnInit {
         self.listaProdutosTotais = data2;
         self.listaProdutos = data2;
         self.layout = 2;
+
+        if(localStorage.getItem('pesquisa') && localStorage.getItem('pesquisa') != '') {
+          self.pesquisaProduto = localStorage.getItem('pesquisa')
+          self.filtroPesquisa(self.pesquisaProduto);
+          localStorage.setItem('pesquisa', '')
+        }
       })
     })
 
@@ -165,13 +169,15 @@ export class PaginaPrincipalComponent implements OnInit {
 
   filtroPesquisa(valor) {
 
-    if (valor != '') {
+    console.log(valor)
+    if (valor != '' && valor) {
       const listaFiltrada = this.listaProdutos.filter(function (a) {
         return a.NOME.toLowerCase().indexOf(valor.toLowerCase()) > -1
       });
       this.listaProdutos = listaFiltrada;
     } else {
-      if(this.categoriaAtiva == '') {
+      console.log(this.categoriaAtiva)
+      if(this.categoriaAtiva == '' || this.categoriaAtiva || this.categoriaAtiva == undefined) {
         this.listaProdutos = this.listaProdutosTotais
       } else {
         const listaFiltrada = this.listaProdutos.filter(function (a) {
@@ -222,7 +228,7 @@ export class PaginaPrincipalComponent implements OnInit {
         }
 
         let listaTemp = []
-        console.log(data2)
+
         data2.forEach(function (b) {
           self.listaProdutos.forEach(function (e) {
             if (e.CODIGO == b.CODIGO) {
@@ -230,7 +236,6 @@ export class PaginaPrincipalComponent implements OnInit {
             }
           })
         })
-        console.log(listaTemp)
         self.listaProdutos = listaTemp;
       })
     })

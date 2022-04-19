@@ -15,6 +15,9 @@ export class NavbarComponent implements OnInit {
   pesquisa = "";
 
   ngOnInit() {
+    if(localStorage.getItem('pesquisa') && localStorage.getItem('pesquisa') != '') {
+      this.pesquisa = localStorage.getItem('pesquisa');
+    }
   }
 
   usuario = localStorage.getItem('nome')

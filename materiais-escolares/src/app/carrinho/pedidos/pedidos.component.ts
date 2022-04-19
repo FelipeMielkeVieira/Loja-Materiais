@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-pedidos',
@@ -7,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PedidosComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
   }
 
+  filtroPesquisa(valor) {
+    localStorage.setItem('pesquisa', valor);
+    this.router.navigate([''])
+  }
 }

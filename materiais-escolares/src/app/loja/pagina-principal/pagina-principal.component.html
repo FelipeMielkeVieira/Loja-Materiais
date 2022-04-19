@@ -155,7 +155,7 @@
                             </div>
                         </div>
                         <div *ngIf="layout != 1" class="linha">
-                            <div *ngFor="let produto of listaProdutos" style="display: flex; justify-content: center;">
+                            <div *ngFor="let produto of listaProdutos" style="display: flex; justify-content: center; width: 50%;">
                                 <div class="divProduto" (click)="redirecionarProduto(produto.CODIGO)">
                                     <img class="imagensProduto" src="{{produto.IMAGEM_NOME}}">
                                     <div class="divNome">
