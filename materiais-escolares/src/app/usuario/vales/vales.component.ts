@@ -42,14 +42,12 @@ export class ValesComponent implements OnInit {
                 }
               ),
               headers: { "Content-Type": "application/json" }
-            }).then(function () {
-              alert('Vale Resgatado!')
+            })
               if (localStorage.getItem('desconto')) {
                 localStorage.setItem('desconto', ((localStorage.getItem('desconto') + element.DESCONTO).toString()))
               } else {
                 localStorage.setItem('desconto', (element.DESCONTO).toString())
               }
-            })
           } else {
             alert("Código Inválido!")
           }

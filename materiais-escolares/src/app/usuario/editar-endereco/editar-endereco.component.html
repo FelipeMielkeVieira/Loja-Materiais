@@ -4,10 +4,12 @@
   <div class="divPrincipal">
     <div class="modalEndereco">
       <select class="selectPais" #f (change)="selectEstado(f.value)">
-        <option [value]="0" selected>Selecionar País</option>
+        <option *ngIf="pais == 0" [value]="0" selected>Selecionar País</option>
+        <option *ngIf="pais != 0" [value]="pais" selected>{{paisNome}}</option>
       </select>
       <select class="selectEstado" #t (change)="estadoSelecionado(t.value)">
-        <option value="0" selected>Selecionar Estado</option>
+        <option *ngIf="estado == 0" value="0" selected>Selecionar Estado</option>
+        <option *ngIf="estado != 0" [value]="estado" selected>{{estadoNome}}</option>
       </select>
       <input placeholder="Cidade" style="padding: 7px;" [(ngModel)]="cidade">
       <input placeholder="Bairro" style="width: 31%; margin-top: 15px; padding: 7px;" [(ngModel)]="bairro">

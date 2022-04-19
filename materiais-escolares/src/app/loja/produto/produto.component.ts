@@ -36,7 +36,7 @@ export class ProdutoComponent implements OnInit {
   listaProdutos;
   possuiNoCarrinho = false;
 
-  constructor(private Router: Router, private route: ActivatedRoute, private enderecoService: EnderecoService) {
+  constructor(private router: Router, private route: ActivatedRoute, private enderecoService: EnderecoService) {
     this.codigoProduto = route.snapshot.paramMap.get('codigo')
   }
 
@@ -104,7 +104,7 @@ export class ProdutoComponent implements OnInit {
   }
 
   inicio() {
-    this.Router.navigate([''])
+    this.router.navigate([''])
   }
 
   guardarEndereco(result) {
@@ -152,15 +152,24 @@ export class ProdutoComponent implements OnInit {
       this.produto.quantidade = this.quantidade;
       carrinhoAtual.push(this.produto)
       localStorage.setItem('carrinho', JSON.stringify(carrinhoAtual));
-      this.Router.navigate(['/carrinho'])
+      this.router.navigate(['/carrinho'])
 
     } else {
-      this.Router.navigate(['/usuario/login'])
+      this.router.navigate(['/usuario/login'])
     }
   }
 
   getPreco(valor) {
     return valor.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' });
+  }
+
+  produtoRota(codigo) {
+    var self = this;
+    console.log(codigo)
+    this.router.navigate([('/produtos/' + codigo)])
+    this.codigoProduto = codigo
+    this.ngOnInit();
+    window.scrollTo(0, 0);
   }
 
 }

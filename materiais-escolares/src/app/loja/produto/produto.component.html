@@ -27,12 +27,14 @@
                     </div>
                     <span *ngIf="pais" style="color: #66b9bf;">Receba em até {{diasEntrega}} dias úteis -
                         {{frete}}</span>
-                    <div style="display: flex; align-items: center; width: 100%; justify-content: space-between; margin-top: 10px;">
+                    <div
+                        style="display: flex; align-items: center; width: 100%; justify-content: space-between; margin-top: 10px;">
                         <div style="display: flex; width: 50%;">
                             <span style="margin-right: 5px; color: #07889b;">Quantidade: </span>
                             <input class="inputQtd" [(ngModel)]="quantidade" type="number" min="1">
                         </div>
-                        <button *ngIf="!possuiNoCarrinho" class="botaoQtd" (click)="adicionarCarrinho()">Adicionar ao Carrinho</button>
+                        <button *ngIf="!possuiNoCarrinho" class="botaoQtd" (click)="adicionarCarrinho()">Adicionar ao
+                            Carrinho</button>
                         <button *ngIf="possuiNoCarrinho" class="botaoQtd">No Carrinho</button>
                     </div>
                 </div>
@@ -47,11 +49,12 @@
                 </li>
             </ul>
         </div>
-        <div style="width: 100%; border-bottom: 1px solid #4abdac; color: #4abdac; font-size: 24px; margin-bottom: 35px;">
+        <div
+            style="width: 100%; border-bottom: 1px solid #4abdac; color: #4abdac; font-size: 24px; margin-bottom: 35px;">
             Recomendados
         </div>
         <div class="recomendacoes" style="display: flex; justify-content: space-evenly; margin-bottom: 60px;">
-            <div *ngFor="let prod of listaProdutos" class="divProduto3">
+            <div *ngFor="let prod of listaProdutos" class="divProduto3" (click)="produtoRota(prod.CODIGO)">
                 <img class="imagensProduto" src='{{prod.IMAGEM_NOME}}'>
                 <div style="display: flex; flex-direction: column;">
                     <span style="margin-bottom: 12px;">{{prod.NOME}}</span>
@@ -60,7 +63,8 @@
                 </div>
             </div>
         </div>
-        <div style="width: 100%; border-bottom: 1px solid #4abdac; color: #4abdac; font-size: 24px; margin-bottom: 35px;">
+        <div
+            style="width: 100%; border-bottom: 1px solid #4abdac; color: #4abdac; font-size: 24px; margin-bottom: 35px;">
             Avaliações
         </div>
     </div>

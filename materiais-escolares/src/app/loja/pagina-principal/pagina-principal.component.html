@@ -1,4 +1,4 @@
-<app-navbar style="width: 98.8vw;" (clickPesquisa)="filtrar(1, $event)"></app-navbar>
+<app-navbar style="width: 98.8vw;" (clickPesquisa)="filtroPesquisa($event)"></app-navbar>
 <div>
 
     <body style="display: flex; flex-direction: column; align-items: center;">
@@ -45,9 +45,9 @@
                 <div style="display: flex; width: 40%; float: left; align-items: center;">
                     <span style="margin-right:6px">Ordenar Por: </span>
                     <div class="form-group">
-                        <select class="form-control" id="sel1" #z (change)="ordenar(z.value)"
+                        <select class="form-control" id="sel1" [(ngModel)]="ordenacao" (change)="ordenar()"
                             style="background-color: #eeaa7b; height:30px; padding: 0px 7px; display: flex; justify-content: center; float: left">
-                            <option value="1">Relevância</option>
+                            <option value="1" selected>Relevância</option>
                             <option value="2">Avaliações</option>
                             <option value="3">Maior Preço</option>
                             <option value="4">Menor Preço</option>
@@ -141,7 +141,32 @@
                     </div>
                 </div>
                 <div class="divDireita">
-
+                    <div class="divProdutos" id="divProdutos">
+                        <div *ngIf="layout == 1" class="linha2">
+                            <div *ngFor="let produto of listaProdutos" style="display: flex; justify-content: center;">
+                                <div class="divProduto2" style="margin-bottom: 10px;" (click)="redirecionarProduto(produto.CODIGO)">
+                                    <img class="imagensProduto2" src="{{produto.IMAGEM_NOME}}">
+                                    <div class="divNome">
+                                        <div class="nomeProduto" style="margin-bottom: 5px;">{{produto.NOME}}</div>
+                                        <div style="width: 100%; color: gray;">{{produto.MARCA}}</div>
+                                    </div>
+                                    <div class="precoProduto" style="font-size: 22px;">{{getPreco(produto.VALOR)}}</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div *ngIf="layout != 1" class="linha">
+                            <div *ngFor="let produto of listaProdutos" style="display: flex; justify-content: center;">
+                                <div class="divProduto" (click)="redirecionarProduto(produto.CODIGO)">
+                                    <img class="imagensProduto" src="{{produto.IMAGEM_NOME}}">
+                                    <div class="divNome">
+                                        <div class="nomeProduto" style="margin-bottom: 12px;">{{produto.NOME}}</div>
+                                        <div style="width: 100%; color: gray;">{{produto.MARCA}}</div>
+                                    </div>
+                                    <div class="precoProduto" style="font-size: 22px; width: 100%;">{{getPreco(produto.VALOR)}}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
