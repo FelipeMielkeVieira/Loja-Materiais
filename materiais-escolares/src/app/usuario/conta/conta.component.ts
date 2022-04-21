@@ -32,4 +32,9 @@ export class ContaComponent implements OnInit {
   vales() {
     this.router.navigate(['usuario/vales'])
   }
+
+  filtroPesquisa(valor) {
+    localStorage.setItem('pesquisa', valor);
+    this.router.navigate([''])
+  }
 }

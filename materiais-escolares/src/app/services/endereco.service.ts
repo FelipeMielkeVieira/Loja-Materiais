@@ -49,6 +49,42 @@ export class EnderecoService {
     })
   }
 
+  buscarEndereco2(codigo) {
+
+    return new Promise((resolvido, rejeitado) => {
+
+      fetch('/api/buscar_endereco', {
+        method: 'POST',
+        body: JSON.stringify(
+          {
+            codigo: codigo
+          }
+        ),
+        headers: { "Content-Type": "application/json" }
+      }).then(resultado => resultado.json())
+        .then(resolvido)
+        .catch(rejeitado);
+    })
+  }
+
+  buscarEnderecoUser(codigo) {
+
+    return new Promise((resolvido, rejeitado) => {
+
+      fetch('/api/buscar_endereco_user', {
+        method: 'POST',
+        body: JSON.stringify(
+          {
+            codigo: codigo
+          }
+        ),
+        headers: { "Content-Type": "application/json" }
+      }).then(resultado => resultado.json())
+        .then(resolvido)
+        .catch(rejeitado);
+    })
+  }
+
   buscarEnderecoCompleto(codigo) {
 
     return new Promise((resolvido, rejeitado) => {

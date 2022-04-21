@@ -76,4 +76,9 @@ export class InfoComponent implements OnInit {
     this.router.navigate(['/usuario/login'])
   }
 
+  filtroPesquisa(valor) {
+    localStorage.setItem('pesquisa', valor);
+    this.router.navigate([''])
+  }
+
 }

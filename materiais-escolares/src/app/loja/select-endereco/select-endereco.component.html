@@ -1,0 +1,28 @@
+<app-navbar (clickPesquisa)="filtroPesquisa($event)"></app-navbar>
+<div>
+  <div class="cancelar" (click)="voltar()">Cancelar</div>
+  <div class="divPrincipal">
+    <h4 style="margin: 20px; color: #66b9bf;">Selecionar Endereço</h4>
+    <div class="enderecos" *ngFor="let endereco of listaEnderecos">
+      <div class="endereco">
+        <div>
+          Cidade: {{endereco.CIDADE}}
+        </div>
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+          <div style="display: flex; width: 60%;">
+            <div style="width: fit-content; margin-right: 15%;">
+              Bairro: {{endereco.BAIRRO}}
+            </div>
+            <div style="width: fit-content; margin-right: 15%;">
+              Rua: {{endereco.RUA}}
+            </div>
+            <div style="width: fit-content;">
+              Número: {{endereco.NUMERO}}
+            </div>
+          </div>
+          <button class="botaoSelecionar" (click)="selecionar(endereco.CODIGO)">Selecionar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,4 +1,4 @@
-<app-navbar style="width: 98.8vw;"></app-navbar>
+<app-navbar style="width: 98.8vw;" (clickPesquisa)="filtroPesquisa($event)"></app-navbar>
 
 <body>
     <div class="divCentral">
@@ -16,7 +16,7 @@
                     <h4 style="color: #07889b; padding: 4px; border-bottom: 0.5px solid #4abdac; margin-bottom: 15px;">
                         {{valorProduto}}</h4>
                     <span *ngIf="codigoUser && codigoUser != ''" style="color: #66b9bf"
-                        class="selecionaEndereco">Selecionar Endereço</span>
+                        class="selecionaEndereco" (click)="selecionaEndereco()">Selecionar Endereço</span>
                     <div *ngIf="pais" style="margin-top: 5px; margin-bottom: 10px;" class="endereco">
                         <span style="color: #66b9bf;">{{pais}}</span>
                         <div class="linhaEnderecos">

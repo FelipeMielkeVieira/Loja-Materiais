@@ -1,5 +1,5 @@
 <div style="display: flex; flex-direction: column; align-items: center;">
-  <app-navbar style="width: 100vw;"></app-navbar>
+  <app-navbar style="width: 100vw;" (clickPesquisa)="filtroPesquisa($event)"></app-navbar>
   <div class='divConta'>
     <span class="spanCima" (click)="conta()">Conta</span>
     <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="10" height="30" viewBox="0 0 172 172"

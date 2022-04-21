@@ -47,4 +47,9 @@ export class EditarComponent implements OnInit {
     }
   }
 
+  filtroPesquisa(valor) {
+    localStorage.setItem('pesquisa', valor);
+    this.router.navigate([''])
+  }
+
 }

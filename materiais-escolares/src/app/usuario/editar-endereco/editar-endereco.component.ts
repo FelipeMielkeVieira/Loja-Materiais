@@ -14,6 +14,8 @@ export class EditarEnderecoComponent implements OnInit {
   pais = 0;
   paisNome = "";
   estadoNome = "";
+  selecionaPrimeiro = 0;
+  selecionaPrimeiroEstado = 0;
 
   cidade: String
   bairro: String
@@ -79,6 +81,7 @@ export class EditarEnderecoComponent implements OnInit {
         ),
         headers: { "Content-Type": "application/json" }}).then(function (c) {
           c.json().then(function (b) {
+            console.log("B: " +b)
             self.estado = b[0].CODIGO
             self.selectEstado(self.pais);
           })
@@ -130,7 +133,9 @@ export class EditarEnderecoComponent implements OnInit {
   }
 
   selectEstado(valor) {
-    console.log(valor)
+    if(this.codigoEndereco == 0) {
+      this.selecionaPrimeiro = 1;
+    }
     this.pais = valor
     if (valor != 0) {
       this.enderecoService.buscarEstados(valor).then(function (result: any) {
@@ -148,10 +153,16 @@ export class EditarEnderecoComponent implements OnInit {
   }
 
   estadoSelecionado(valor) {
+    this.selecionaPrimeiroEstado = 1;
     this.estado = valor
   }
 
   voltar() {
     this.router.navigate(['/usuario/enderecos'])
+  }
+
+  filtroPesquisa(valor) {
+    localStorage.setItem('pesquisa', valor);
+    this.router.navigate([''])
   }
 }

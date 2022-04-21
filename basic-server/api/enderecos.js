@@ -160,6 +160,20 @@ inserirRota('/buscar_endereco', function (dados, resposta) {
     return resposta;
 })
 
+inserirRota('/buscar_endereco_user', function (dados, resposta) {
+
+    database(`SELECT * FROM ENDERECO WHERE USER_CODIGO = ${dados.codigo}`)
+        .then(result => {
+            console.log('Usuário inserido com sucesso!')
+            resposta(result)
+        }).catch(erro => {
+            console.log('Erro ao inserir usuário!')
+            resposta(result)
+        });
+
+    return resposta;
+})
+
 inserirRota('/buscar_enderecos_completo', function (dados, resposta) {
 
     database(`SELECT ENDERECO.CODIGO, ENDERECO.CIDADE, ENDERECO.BAIRRO, ENDERECO.RUA, ENDERECO.NUMERO, ENDERECO.COMPLEMENTO, ESTADO.NOME AS ESTADO, PAIS.NOME AS PAIS FROM ENDERECO 
@@ -178,7 +192,7 @@ inserirRota('/buscar_enderecos_completo', function (dados, resposta) {
 
 inserirRota('/buscar_endereco_completo', function (dados, resposta) {
 
-    database(`SELECT ENDERECO.CODIGO, ENDERECO.CIDADE, ENDERECO.BAIRRO, ENDERECO.RUA, ENDERECO.NUMERO, ENDERECO.COMPLEMENTO, ESTADO.NOME AS ESTADO, PAIS.NOME AS PAIS FROM ENDERECO 
+    database(`SELECT ENDERECO.CODIGO, ENDERECO.CIDADE, ENDERECO.BAIRRO, ENDERECO.RUA, ENDERECO.NUMERO, ENDERECO.COMPLEMENTO, ESTADO.SIGLA AS ESTADO, PAIS.NOME AS PAIS FROM ENDERECO 
     INNER JOIN ESTADO ON ENDERECO.ESTADO_CODIGO = ESTADO.CODIGO AND ENDERECO.CODIGO = ${dados.codigo}
     INNER JOIN PAIS ON ESTADO.PAIS_CODIGO = PAIS.CODIGO`)
         .then(result => {
@@ -239,7 +253,7 @@ inserirRota('/buscar_pais_especifico', function (dados, resposta) {
 
 inserirRota('/buscar_estado_especifico', function (dados, resposta) {
 
-    database(`SELECT * FROM ESTADO WHERE NOME = '${dados.nome}'`)
+    database(`SELECT * FROM ESTADO WHERE SIGLA = '${dados.nome}'`)
         .then(result => {
             console.log('Usuário inserido com sucesso!')
             resposta(result)

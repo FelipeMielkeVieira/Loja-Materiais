@@ -27,6 +27,7 @@ export class ProdutoComponent implements OnInit {
   }
   enderecos;
   primeiroEndereco;
+  enderecoCodigo;
   pais;
   estado;
   diasEntrega;
@@ -41,6 +42,13 @@ export class ProdutoComponent implements OnInit {
   }
 
   ngOnInit() {
+
+    if(! localStorage.getItem('enderecoAtual')) {
+      localStorage.setItem('endereco', '1')
+    } else {
+      this.enderecoCodigo = localStorage.getItem('enderecoAtual')
+    }
+
     localStorage.setItem('path', location.pathname)
     this.codigoUser = localStorage.getItem('codigo')
     var self = this;
@@ -76,10 +84,14 @@ export class ProdutoComponent implements OnInit {
     })
 
     if (localStorage.getItem('codigo') && localStorage.getItem('codigo') != '') {
-      this.enderecoService.buscarEndereco(localStorage.getItem('codigo')).then(function (result: any) {
+      this.enderecoService.buscarEnderecoUser(localStorage.getItem('codigo')).then(function (result: any) {
         if (result.length > 0) {
-          self.enderecos = result;
-          self.guardarEndereco(result);
+          if(!self.enderecoCodigo) {
+            self.enderecos = result;
+            self.guardarEndereco(result);
+          } else {
+            self.pegarEndereco();
+          }
         }
       })
     }
@@ -117,6 +129,15 @@ export class ProdutoComponent implements OnInit {
       }
     });
     this.buscarPais();
+  }
+
+  pegarEndereco() {
+    var self = this;
+    this.enderecoService.buscarEndereco2(this.enderecoCodigo).then(function (result: any) {
+      console.log(result);
+      self.enderecos = result;
+      self.guardarEndereco(result);
+    })
   }
 
   buscarPais() {
@@ -170,6 +191,15 @@ export class ProdutoComponent implements OnInit {
     this.codigoProduto = codigo
     this.ngOnInit();
     window.scrollTo(0, 0);
+  }
+
+  selecionaEndereco() {
+    this.router.navigate(['/produtos/endereco'])
+  }
+
+  filtroPesquisa(valor) {
+    localStorage.setItem('pesquisa', valor);
+    this.router.navigate([''])
   }
 
 }

@@ -154,8 +154,8 @@
                                 </div>
                             </div>
                         </div>
-                        <div *ngIf="layout != 1" class="linha">
-                            <div *ngFor="let produto of listaProdutos" style="display: flex; justify-content: center; width: 50%;">
+                        <div *ngIf="layout != 1" class="linha" style='display: flex; flex-wrap: wrap;'>
+                            <div *ngFor="let produto of listaProdutos" style="display: flex; justify-content: center; width: 45%">
                                 <div class="divProduto" (click)="redirecionarProduto(produto.CODIGO)">
                                     <img class="imagensProduto" src="{{produto.IMAGEM_NOME}}">
                                     <div class="divNome">
@@ -165,6 +165,7 @@
                                     <div class="precoProduto" style="font-size: 22px; width: 100%;">{{getPreco(produto.VALOR)}}</div>
                                 </div>
                             </div>
+                            <div class="divProduto3"></div>
                         </div>
                     </div>
                 </div>

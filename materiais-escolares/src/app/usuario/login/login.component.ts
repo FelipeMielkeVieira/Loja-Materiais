@@ -1,4 +1,5 @@
 import { AnimationGroupPlayer } from '@angular/animations/src/players/animation_group_player';
+import { analyzeFileForInjectables } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UsuarioService } from '../../services/usuario.service'
@@ -44,9 +45,6 @@ export class LoginComponent implements OnInit {
 
       e.json().then(function (data) {
 
-        console.log("teste2: ", data)
-        console.log(data.user.NOME)
-
         if (data.user) {
 
           localStorage.setItem('nome', data.user.NOME)
@@ -55,8 +53,30 @@ export class LoginComponent implements OnInit {
 
           let caminho = localStorage.getItem('path')
           self.router.navigate([caminho])
+        } else {
+          self.alerta("Usuário Inválido!")
         }
       })
     })
+  }
+
+  alerta(texto) {
+
+    let alertAtual = document.querySelector('.alert')
+    if (alertAtual) {
+      alertAtual.remove()
+    }
+
+    let alert = document.createElement('div')
+    alert.className = 'alert'
+
+    alert.innerText = texto
+
+    let principal = document.querySelector('divPrincipal');
+    document.body.appendChild(alert)
+
+    setTimeout(function () {
+      document.body.removeChild(alert)
+    }, 3000)
   }
 }

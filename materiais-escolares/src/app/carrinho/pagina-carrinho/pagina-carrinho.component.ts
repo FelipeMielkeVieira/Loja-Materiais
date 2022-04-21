@@ -38,4 +38,9 @@ export class PaginaCarrinhoComponent implements OnInit {
     this.valor = this.valor - valor
   }
 
+  filtroPesquisa(valor) {
+    localStorage.setItem('pesquisa', valor);
+    this.router.navigate([''])
+  }
+
 }

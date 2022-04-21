@@ -43,4 +43,9 @@ export class EnderecosComponent implements OnInit {
     this.router.navigate(['/usuario/'])
   }
 
+  filtroPesquisa(valor) {
+    localStorage.setItem('pesquisa', valor);
+    this.router.navigate([''])
+  }
+
 }

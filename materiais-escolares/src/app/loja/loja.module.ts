@@ -22,11 +22,13 @@ import { UtilitariosModule } from '../utilitarios/utilitarios.module';
 import { EditarComponent } from '../usuario/editar/editar.component';
 import { EditarEnderecoComponent } from '../usuario/editar-endereco/editar-endereco.component';
 import { FormsModule } from '@angular/forms';
+import { SelectEnderecoComponent } from './select-endereco/select-endereco.component';
 
 const routes: Routes = [
   {
     path: 'produtos', children: [
       { path: '', component: PaginaPrincipalComponent },
+      { path: 'endereco', canActivate: [CheckLogged], component: SelectEnderecoComponent},
       { path: ':codigo', component: ProdutoComponent }
     ]
   },
@@ -63,8 +65,8 @@ const routes: Routes = [
     UtilitariosModule,
     FormsModule
   ],
-  declarations: [PaginaPrincipalComponent, ProdutoComponent],
-  exports: [PaginaPrincipalComponent, ProdutoComponent],
+  declarations: [PaginaPrincipalComponent, ProdutoComponent, SelectEnderecoComponent],
+  exports: [PaginaPrincipalComponent, ProdutoComponent, SelectEnderecoComponent],
   providers: [CheckLogged]
 })
 export class LojaModule { }

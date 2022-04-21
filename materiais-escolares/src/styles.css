@@ -65,6 +65,10 @@
     cursor: pointer;
 }
 
+.divProduto3 {
+    width: 45%;
+}
+
 .imagensProduto {
     width: 60%;
     margin-bottom: 10px;
