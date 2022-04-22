@@ -1,6 +1,6 @@
 inserirRota('/buscar_pagamentos', function(dados, resposta) {
 
-    database(`SELECT * FROM PAGAMENTO`).then(result => {
+    database(`SELECT * FROM PAGAMENTO WHERE USER_CODIGO = ${dados.codigo}`).then(result => {
         resposta(result)
     }).catch(erro => {
         console.log('Erro ao buscar pagamentos!')

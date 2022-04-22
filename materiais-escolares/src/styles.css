@@ -18,6 +18,19 @@
     padding: 3px;
 }
 
+.alert2 {
+    position: absolute;
+    top: 20%;
+    left: 40vw;
+    width: 20vw;
+    text-align: center;
+    border: 1px black solid;
+    padding: 0;
+    background-color: #66b9bf;
+    color: white;
+    padding: 3px;
+}
+
 .botaoCategoria {
     width: 9.3%;
     padding: 0.5%;
@@ -81,6 +94,10 @@
 
 .imagensProduto3 {
     width: 15%;
+}
+
+.imagensProduto4 {
+    width: 8%;
 }
 
 .divNome {

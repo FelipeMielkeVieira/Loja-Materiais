@@ -15,7 +15,7 @@ export class PagamentosComponent implements OnInit {
 
   ngOnInit() {
     var self = this;
-    fetch('/api/buscar_pagamentos', { method: 'POST' }).then(function (e) {
+    fetch('/api/buscar_pagamentos', { method: 'POST', body: JSON.stringify({ codigo: localStorage.getItem('codigo') }), headers: { "Content-Type": "application/json" } }).then(function (e) {
       e.json().then(function (data) {
         self.listaPagamentos = data
       })

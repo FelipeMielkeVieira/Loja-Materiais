@@ -31,6 +31,9 @@ export class ValesComponent implements OnInit {
       headers: { "Content-Type": "application/json" }
     }).then(function (e) {
       e.json().then(function (data) {
+        if(data.length == 0) {
+          self.alerta("Código Inválido!")
+        }
         data.forEach(element => {
           console.log(element)
           if (element.USADO == 0) {
@@ -48,8 +51,9 @@ export class ValesComponent implements OnInit {
               } else {
                 localStorage.setItem('desconto', (element.DESCONTO).toString())
               }
+              self.alerta2("Vale Resgatado com Sucesso!")
           } else {
-            alert("Código Inválido!")
+            self.alerta("Código Inválido!")
           }
         });
       })
@@ -63,5 +67,46 @@ export class ValesComponent implements OnInit {
   filtroPesquisa(valor) {
     localStorage.setItem('pesquisa', valor);
     this.router.navigate([''])
+  }
+
+  alerta(texto) {
+
+    let alertAtual = document.querySelector('.alert2')
+    if (alertAtual) {
+      alertAtual.remove()
+    }
+
+    let alert = document.createElement('div')
+    alert.className = 'alert2'
+    alert.style.backgroundColor = 'rgb(235, 49, 49)'
+
+    alert.innerText = texto
+
+    let principal = document.querySelector('divPrincipal');
+    document.body.appendChild(alert)
+
+    setTimeout(function () {
+      document.body.removeChild(alert)
+    }, 3000)
+  }
+
+  alerta2(texto) {
+
+    let alertAtual = document.querySelector('.alert2')
+    if (alertAtual) {
+      alertAtual.remove()
+    }
+
+    let alert = document.createElement('div')
+    alert.className = 'alert2'
+
+    alert.innerText = texto
+
+    let principal = document.querySelector('divPrincipal');
+    document.body.appendChild(alert)
+
+    setTimeout(function () {
+      document.body.removeChild(alert)
+    }, 3000)
   }
 }

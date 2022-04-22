@@ -1,3 +1,53 @@
-<p>
-  pedido works!
-</p>
+<app-navbar style="width: 100%;" (clickPesquisa)="filtroPesquisa($event)"></app-navbar>
+<div style="width: 100%; display: flex; flex-direction: column; align-items: center;">
+  <h3 style="margin-top: 40px; margin-bottom: 20px;">Finalizar Pedido</h3>
+  <div class="produto" *ngFor="let produto of carrinho; let i=index">
+    <img class="imagensProduto4" src="{{produto.IMAGEM_NOME}}">
+    <div class="info">
+      <div class="nomeMarca">
+        <span style="margin-bottom: 10px; font-size:18px">{{produto.NOME}}</span>
+        <span style="color:gray">{{produto.MARCA}}</span>
+      </div>
+      <span class="qtd">{{produto.quantidade}}</span>
+    </div>
+    <div class="valorExcluir">
+      <span style="color: #07889b; font-size: 20px">{{getPreco(produto.VALOR)}}</span>
+    </div>
+  </div>
+  <div class="pagamentoEndereco">
+    <div class="endereco">
+      <div class="divPais">{{endereco.PAIS}}</div>
+      <div class="divEstadoCidade">
+        <div class="estado">{{endereco.ESTADO}}</div>
+        <div class="cidade">{{endereco.CIDADE}}</div>
+      </div>
+      <div class="divOutros">
+        <div class="rua" style="margin-right: 20%;">{{endereco.RUA}}</div>
+        <div class="bairro" style="margin-right: 20%;">{{endereco.BAIRRO}}</div>
+        <div class="numero">{{endereco.NUMERO}}</div>
+      </div>
+      <div class="divBotoes">
+        <div class="complemento">{{endereco.COMPLEMENTO}}</div>
+        <div class="botoes">
+          <button class="botaoSelecao" (click)="selecao()">Selecionar Endereço</button>
+        </div>
+      </div>
+    </div>
+    <div class="endereco" style="justify-content: space-between;">
+      <div>
+        <div style="font-size: 20px; color: #07889b;">Titular: {{pagamento.TITULAR}}</div>
+        <div style="margin-top: 15px; font-size: 16px; color: #66b9bf; margin-bottom: 20px;">{{editarNumero(pagamento.NUMERO)}}</div>
+      </div>
+      <button class="botaoSelecao" style="width: fit-content;" (click)="selecaoPagamento()">Selecionar Pagamento</button>
+    </div>
+  </div>
+  <div *ngIf="desconto != 0" style="font-size: 16px; color: #07889b; text-align: right; width: 80%;">
+    Desconto: {{getPreco(desconto)}}
+  </div>
+  <div style="font-size: 20px; color: #07889b; text-align: right; width: 80%;">
+    Valor Total: {{getPreco(valor)}}
+  </div>
+  <div style="display: flex; justify-content: center;">
+    <button class="botaoSelecao" style="padding: 10px; font-size: 20px; margin-bottom: 20px;" (click)="fazerPedido()">Finalizar Pedido</button>
+  </div>
+</div>

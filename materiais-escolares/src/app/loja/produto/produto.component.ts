@@ -12,6 +12,7 @@ export class ProdutoComponent implements OnInit {
   codigoUser;
   codigoProduto = "";
   valorProduto = "";
+  avaliacoes = [];
   produto = {
     CODIGO: 0,
     NOME: "",
@@ -43,8 +44,8 @@ export class ProdutoComponent implements OnInit {
 
   ngOnInit() {
 
-    if(! localStorage.getItem('enderecoAtual')) {
-      localStorage.setItem('endereco', '1')
+    if (!localStorage.getItem('enderecoAtual')) {
+      localStorage.setItem('enderecoAtual', '1')
     } else {
       this.enderecoCodigo = localStorage.getItem('enderecoAtual')
     }
@@ -81,12 +82,26 @@ export class ProdutoComponent implements OnInit {
           });
         });
       })
+
+      fetch('/api/buscar_avaliacoes', {
+        method: 'POST', body: JSON.stringify(
+          {
+            nome: localStorage.getItem('nome')
+          }
+        ),
+        headers: { "Content-Type": "application/json" }
+      }).then(function (result) {
+        result.json().then(function (data) {
+          self.avaliacoes = data;
+          console.log(data)
+        })
+      })
     })
 
     if (localStorage.getItem('codigo') && localStorage.getItem('codigo') != '') {
       this.enderecoService.buscarEnderecoUser(localStorage.getItem('codigo')).then(function (result: any) {
         if (result.length > 0) {
-          if(!self.enderecoCodigo) {
+          if (!self.enderecoCodigo) {
             self.enderecos = result;
             self.guardarEndereco(result);
           } else {

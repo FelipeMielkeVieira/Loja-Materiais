@@ -43,4 +43,8 @@ export class PaginaCarrinhoComponent implements OnInit {
     this.router.navigate([''])
   }
 
+  fazerPedido() {
+    this.router.navigate(['/carrinho/pedido'])
+  }
+
 }

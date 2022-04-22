@@ -1,0 +1,14 @@
+<app-navbar></app-navbar>
+<div>
+  <div class="cancelar" (click)="voltar()">Cancelar</div>
+  <div class="divPrincipal">
+    <h4 style="margin: 20px; color: #66b9bf;">Selecionar Pagamento</h4>
+    <div *ngFor="let pagamento of listaPagamentos; let i = index" style="display: flex; justify-content: center">
+      <div class=" divPagamento ">
+          <div class="titular2">{{pagamento.TITULAR}}</div>
+          <div class="numero">{{editarNumero(pagamento.NUMERO)}}</div>
+          <button class="excluirPagamento" (click)="selecionar(pagamento.CODIGO)">Selecionar</button>
+      </div>
+  </div>
+  </div>
+</div>

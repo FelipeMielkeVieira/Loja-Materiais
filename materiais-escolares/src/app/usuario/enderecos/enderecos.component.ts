@@ -15,7 +15,7 @@ export class EnderecosComponent implements OnInit {
 
   ngOnInit() {
     var self = this;
-
+    localStorage.setItem('path', window.location.pathname)
     this.enderecoService.buscarEnderecoCompleto(localStorage.getItem('codigo')).then(function (result) {
       self.listaEnderecos = result
     })

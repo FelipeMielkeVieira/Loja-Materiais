@@ -129,7 +129,7 @@ export class EditarEnderecoComponent implements OnInit {
         headers: { "Content-Type": "application/json" }
       })
     }
-    this.router.navigate(['/usuario/enderecos'])
+    this.router.navigate([localStorage.getItem('path')])
   }
 
   selectEstado(valor) {
@@ -158,7 +158,7 @@ export class EditarEnderecoComponent implements OnInit {
   }
 
   voltar() {
-    this.router.navigate(['/usuario/enderecos'])
+    this.router.navigate([localStorage.getItem('path')])
   }
 
   filtroPesquisa(valor) {

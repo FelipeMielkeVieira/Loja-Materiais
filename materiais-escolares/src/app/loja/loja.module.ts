@@ -23,6 +23,7 @@ import { EditarComponent } from '../usuario/editar/editar.component';
 import { EditarEnderecoComponent } from '../usuario/editar-endereco/editar-endereco.component';
 import { FormsModule } from '@angular/forms';
 import { SelectEnderecoComponent } from './select-endereco/select-endereco.component';
+import { SelectPagamentoComponent } from '../carrinho/select-pagamento/select-pagamento.component';
 
 const routes: Routes = [
   {
@@ -53,7 +54,8 @@ const routes: Routes = [
     path: 'carrinho', canActivate: [CheckLogged], children: [
       { path: '', component: PaginaCarrinhoComponent },
       { path: 'pedidos', component: PedidosComponent },
-      { path: 'pedido', component: PedidoComponent }
+      { path: 'pedido', component: PedidoComponent },
+      { path: 'pagamento', component: SelectPagamentoComponent}
     ]
   }
 ]
