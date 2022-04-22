@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { e } from '@angular/core/src/render3';
 import { Router } from '@angular/router';
 
 @Component({
@@ -22,16 +23,18 @@ export class PedidoComponent implements OnInit {
     ESTADO: ""
   };
   valor = 0.00;
-  pagamento  = {
+  pagamento = {
     TITULAR: "",
     NUMERO: 0
   };
+  contagemPedidos = 0;
 
   ngOnInit() {
     var self = this;
     this.codigoEndereco = localStorage.getItem('enderecoAtual');
     console.log(this.codigoEndereco)
 
+    this.contarPedidos();
     this.desconto = parseInt(localStorage.getItem('desconto'))
 
     fetch('/api/buscar_endereco_completo', {
@@ -57,14 +60,14 @@ export class PedidoComponent implements OnInit {
     })
     self.valor -= this.desconto;
 
-    if(!localStorage.getItem('pagamento')) {
-      localStorage.setItem('pagamento', '1') 
+    if (!localStorage.getItem('pagamento')) {
+      localStorage.setItem('pagamento', '1')
     }
 
     fetch('/api/buscar_pagamentos', { method: 'POST', body: JSON.stringify({ codigo: localStorage.getItem('codigo') }), headers: { "Content-Type": "application/json" } }).then(function (e) {
       e.json().then(function (data) {
         data.forEach(function (e) {
-          if(e.CODIGO == localStorage.getItem('pagamento')) {
+          if (e.CODIGO == localStorage.getItem('pagamento')) {
             self.pagamento = e;
           }
         })
@@ -108,8 +111,63 @@ export class PedidoComponent implements OnInit {
     this.router.navigate(['/carrinho/pagamento'])
   }
 
+  contarPedidos() {
+    var self = this;
+    fetch('/api/buscar_todos_pedidos', { method: 'POST', headers: { "Content-Type": "application/json" }}).then(function (data) {
+      data.json().then(function (result) {
+        result.forEach(function (e) {
+          self.contagemPedidos++;
+        })
+      })
+    })
+  }
+
   fazerPedido() {
-    
+    var self = this;
+    fetch('/api/adicionar_pedido', {
+      method: 'POST', body: JSON.stringify(
+        {
+          data: new Date(),
+          valor: self.valor,
+          user: localStorage.getItem('codigo')
+        }
+      ), headers: { "Content-Type": "application/json" }
+    }).then(function () {
+      self.carrinho.forEach(function (a) {
+        fetch('/api/adicionar_venda', {
+          method: 'POST', body: JSON.stringify(
+            {
+              pedido: self.contagemPedidos + 1,
+              produto: a.CODIGO,
+              quantidade: a.quantidade
+            }
+          ), headers: { "Content-Type": "application/json" }
+        })
+      })
+      self.alerta("Compra Efetuada!")
+    })
+  }
+
+  alerta(texto) {
+
+    var self = this;
+    let alertAtual = document.querySelector('.alert')
+    if (alertAtual) {
+      alertAtual.remove()
+    }
+
+    let alert = document.createElement('div')
+    alert.className = 'alert2'
+
+    alert.innerText = texto
+
+    document.body.appendChild(alert)
+
+    setTimeout(function () {
+      document.body.removeChild(alert)
+      self.router.navigate(['/'])
+      localStorage.setItem('carrinho', JSON.stringify([]));
+    }, 3000)
   }
 
 }

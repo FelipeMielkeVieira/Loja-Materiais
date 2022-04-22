@@ -38,7 +38,10 @@ export class NavbarComponent implements OnInit {
     localStorage.setItem('nome', '')
     localStorage.setItem('senha', '')
     localStorage.setItem('codigo', '')
-    window.location.reload()
+    localStorage.setItem('enderecoAtual', '1')
+    localStorage.setItem('pagamento', '1')
+    localStorage.setItem('carrinho', JSON.stringify([]));
+    this.router.navigate(['/'])
   }
 
   conta() {

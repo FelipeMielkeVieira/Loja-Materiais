@@ -33,4 +33,8 @@ export class SelectEnderecoComponent implements OnInit {
     localStorage.setItem('enderecoAtual', codigo)
     this.router.navigate([localStorage.getItem('path')])
   }
+
+  novo() {
+    this.router.navigate(['/usuario/enderecos/' + 0])
+  }
 }

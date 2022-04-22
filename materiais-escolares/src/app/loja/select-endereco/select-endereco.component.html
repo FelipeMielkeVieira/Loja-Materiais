@@ -9,7 +9,7 @@
           Cidade: {{endereco.CIDADE}}
         </div>
         <div style="display: flex; justify-content: space-between; align-items: center;">
-          <div style="display: flex; width: 60%;">
+          <div style="display: flex; width: 80%;">
             <div style="width: fit-content; margin-right: 15%;">
               Bairro: {{endereco.BAIRRO}}
             </div>
@@ -23,6 +23,9 @@
           <button class="botaoSelecionar" (click)="selecionar(endereco.CODIGO)">Selecionar</button>
         </div>
       </div>
+    </div>
+    <div>
+      <button class="botaoSelecionar" (click)="novo()">Novo Endereço</button>
     </div>
   </div>
 </div>

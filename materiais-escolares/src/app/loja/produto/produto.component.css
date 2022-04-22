@@ -109,6 +109,7 @@ body {
 .avaliacoes {
     width: 90%;
     border: 1px solid black;
+    border-radius: 6px;
     margin-bottom: 10px;
     padding: 15px;
     display: flex;
@@ -116,3 +117,44 @@ body {
     align-items: center;
 }
 
+.inputNota {
+    padding: 3px;
+    color: #f7b733;
+    border: 1px solid #f7b733;
+    border-radius: 4px;
+}
+
+.inputAvaliacao {
+    width: 100%;
+    border: 1px solid black;
+    border-radius: 6px;
+    padding: 10px;
+}
+
+.enviarAvaliacao {
+    padding: 5px 15px;
+    border: 1px solid black;
+    border-radius: 6px;
+    background-color: #66b9bf;
+    color: white;
+    margin-top: 5px;
+}
+
+.textoAvaliacao {
+    width: 100%;
+    border: 1px black solid;
+    border-radius: 6px;
+    padding: 10px;
+}
+
+.data {
+    color: gray;
+}
+
+.excluirAvaliacao {
+    padding: 5px 15px;
+    border: 1px solid black;
+    border-radius: 6px;
+    background-color: #f7b733;
+    margin-top: 5px;
+}

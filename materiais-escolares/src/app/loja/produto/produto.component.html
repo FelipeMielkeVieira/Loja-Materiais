@@ -15,8 +15,8 @@
                 <div class="divCompra">
                     <h4 style="color: #07889b; padding: 4px; border-bottom: 0.5px solid #4abdac; margin-bottom: 15px;">
                         {{valorProduto}}</h4>
-                    <span *ngIf="codigoUser && codigoUser != ''" style="color: #66b9bf"
-                        class="selecionaEndereco" (click)="selecionaEndereco()">Selecionar Endereço</span>
+                    <span *ngIf="codigoUser && codigoUser != ''" style="color: #66b9bf" class="selecionaEndereco"
+                        (click)="selecionaEndereco()">Selecionar Endereço</span>
                     <div *ngIf="pais" style="margin-top: 5px; margin-bottom: 10px;" class="endereco">
                         <span style="color: #66b9bf;">{{pais}}</span>
                         <div class="linhaEnderecos">
@@ -68,12 +68,33 @@
             Avaliações
         </div>
         <div style="display: flex; flex-direction: column; align-items: center;">
-            <div class="avaliacoes" *ngFor="let avaliacao of avaliacoes">
-                Oi
+            <div class="avaliacoes" *ngFor="let avaliacao of avaliacoes; let i = index">
+                <div style="width: 100%; display: flex; justify-content: space-between;">
+                    <div style="color: #07889b; font-size: 20px; text-align: left;">{{avaliacao.USER_NOME}}</div>
+                    <div class="data">{{avaliacao.DATA | date : 'dd/MM/yyyy'}}</div>
+                </div>
+                <div style="width: 100%; display: flex; margin-top: 10px; margin-bottom: 15px;">
+                    <div style="margin-right: 5px; color: #f7b733;">Nota: {{avaliacao.NOTA}} de 5</div>
+                </div>
+                <div class="textoAvaliacao">
+                    {{avaliacao.AVALIACAO}}
+                </div>
+                <div *ngIf="avaliacao.USER_NOME == nomeUser" style="display: flex; justify-content: right; width: 100%;">
+                    <button class="excluirAvaliacao" (click)="excluirAvaliacao(i, avaliacao.CODIGO)">Excluir</button>
+                </div>
             </div>
             <div class="avaliacoes" style="margin-top: 20px;">
                 <div style="color: #07889b; font-size: 20px; text-align: left;  width: 100%;">Escrever Avaliação</div>
-                <input type="number">
+                <div style="width: 100%; display: flex; margin-top: 10px; margin-bottom: 15px;">
+                    <div style="margin-right: 5px;">Nota: </div>
+                    <input class="inputNota" type="number" min="1" max="5" [(ngModel)]="nota">
+                </div>
+                <textarea [(ngModel)]="textoAvaliacao" name="text" rows="4" wrap="soft" maxlength="500"
+                    class="inputAvaliacao" placeholder="Escrever Avaliação">
+                </textarea>
+                <div style="display: flex; justify-content: right; width: 100%;">
+                    <button class="enviarAvaliacao" (click)="adicionarAvaliacao()">Enviar</button>
+                </div>
             </div>
         </div>
     </div>

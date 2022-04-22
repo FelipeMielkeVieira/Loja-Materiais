@@ -99,6 +99,7 @@ export class PagamentosComponent implements OnInit {
 
   cadastrar() {
 
+    var self = this;
     const numeroDiv = document.querySelector('#numeroCartao') as HTMLInputElement
     let codigoDiv = document.querySelector('#codigoSeguranca') as HTMLInputElement
     let validadeDiv = document.querySelector('#validade') as HTMLInputElement
@@ -109,16 +110,17 @@ export class PagamentosComponent implements OnInit {
     let validade = validadeDiv.value
     let titular = titularDiv.value
 
-    fetch('/api/adicionar_pagamento', { method: 'POST', body: JSON.stringify({ metodo: 'Cartão', titular: titular, numero: numero, validade: validade, chave_seguranca: codigo, user_codigo: localStorage.getItem('codigo') }), headers: { "Content-Type": "application/json" } })
+    fetch('/api/adicionar_pagamento', { method: 'POST', body: JSON.stringify({ metodo: 'Cartão', titular: titular, numero: numero, validade: validade, chave_seguranca: codigo, user_codigo: localStorage.getItem('codigo') }), headers: { "Content-Type": "application/json" } }).then(function () {
+      self.colocarPagamentos();
+    })
     let modal = document.querySelector('#modal')
     modal.remove();
-    this.colocarPagamentos();
   }
 
   colocarPagamentos() {
 
     var self = this;
-    fetch('/api/buscar_pagamentos', { method: 'POST' }).then(function (result) {
+    fetch('/api/buscar_pagamentos', { method: 'POST', body: JSON.stringify({ codigo: localStorage.getItem('codigo') }), headers: { "Content-Type": "application/json" } }).then(function (result) {
       result.json().then(function (e) {
         self.listaPagamentos = e;
       })

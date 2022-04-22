@@ -25,6 +25,8 @@ import { FormsModule } from '@angular/forms';
 import { SelectEnderecoComponent } from './select-endereco/select-endereco.component';
 import { SelectPagamentoComponent } from '../carrinho/select-pagamento/select-pagamento.component';
 
+import {TextFieldModule} from '@angular/cdk/text-field';
+
 const routes: Routes = [
   {
     path: 'produtos', children: [

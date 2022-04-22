@@ -27,6 +27,10 @@ export class PaginaPrincipalComponent implements OnInit {
 
     var self = this;
 
+    if(!localStorage.getItem('desconto')) {
+      localStorage.setItem('desconto', '0')
+    }
+
     fetch('/api/buscar_paises', { method: 'POST' }).then(function (result) {
 
       result.json().then(function (data) {

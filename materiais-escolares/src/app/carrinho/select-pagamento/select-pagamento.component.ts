@@ -45,4 +45,12 @@ export class SelectPagamentoComponent implements OnInit {
     this.router.navigate([localStorage.getItem('path')])
   }
 
+  voltar() {
+    this.router.navigate([localStorage.getItem('path')])
+  }
+
+  novo() {
+    this.router.navigate(['/usuario/pagamentos'])
+  }
+
 }

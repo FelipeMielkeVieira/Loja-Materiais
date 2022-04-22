@@ -1,4 +1,13 @@
 <app-navbar (clickPesquisa)="filtroPesquisa($event)"></app-navbar>
-<div class="body">
-
+<div class="body" style="width: 100%; display: flex; justify-content: center;">
+    <div style="width: 80%; display: flex; flex-direction: column; margin-top: 30px;">
+        <h4 style="color: #07889b; margin-bottom: 25px;">Meus Pedidos</h4>
+        <div *ngFor="let pedido of pedidos">
+            Pedido: {{pedido.CODIGO}}
+            <div *ngFor="let venda of pedido.produtos">
+                Venda: {{venda.CODIGO}}
+            </div>
+        </div>
+    </div>
 </div>
+<button (click)="vendas()">V</button>
