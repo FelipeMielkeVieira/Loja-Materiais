@@ -13,6 +13,9 @@ export class PedidoComponent implements OnInit {
 
   carrinho = [];
   codigoEndereco;
+  frete = 0;
+  freteDias = 0;
+  data_entrega
   desconto = 0;
   endereco = {
     BAIRRO: "",
@@ -57,8 +60,12 @@ export class PedidoComponent implements OnInit {
 
     this.carrinho.forEach(function (e) {
       self.valor += e.VALOR
+      self.freteDias += e.frete
+      self.frete += e.frete * 1.38
     })
     self.valor -= this.desconto;
+    self.valor += this.frete;
+    this.calcularData();
 
     if (!localStorage.getItem('pagamento')) {
       localStorage.setItem('pagamento', '1')
@@ -128,6 +135,7 @@ export class PedidoComponent implements OnInit {
       method: 'POST', body: JSON.stringify(
         {
           data: new Date(),
+          data_entrega: this.data_entrega,
           valor: self.valor,
           user: localStorage.getItem('codigo')
         }
@@ -168,6 +176,28 @@ export class PedidoComponent implements OnInit {
       self.router.navigate(['/'])
       localStorage.setItem('carrinho', JSON.stringify([]));
     }, 3000)
+  }
+
+  calcularData() {
+    let dataAtual = new Date();
+
+    let diaAtual = dataAtual.getDate();
+    let mesAtual = dataAtual.getMonth() + 1;
+    let anoAtual = dataAtual.getFullYear();
+
+    let dia = diaAtual + this.freteDias;
+    let mes = mesAtual;
+    let ano = anoAtual;
+    if(dia > 30) {
+      dia = dia - 30;
+      mes++;
+    }
+    if(mes > 12) {
+      mes = mes - 12;
+      ano++;
+    }
+
+    this.data_entrega = new Date(ano + '-' + mes + '-' + dia)
   }
 
 }

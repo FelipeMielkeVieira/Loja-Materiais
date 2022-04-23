@@ -1,0 +1,57 @@
+.info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 75%;
+}
+
+.nomeMarca {
+    display: flex;
+    flex-direction: column;
+}
+
+.qtd {
+    border: 0.5px solid black;
+    border-radius: 6px;
+    width: 50px;
+    display: flex;
+    justify-content: center;
+}
+
+.valorExcluir {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.excluir {
+    color: gray;
+}
+
+.excluir:hover {
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.produto {
+    width: 100%;
+    padding: 15px;
+    display: flex;
+}
+
+.pedido {
+    border: 1px solid black;
+    border-radius: 6px;
+    margin-bottom: 15px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.cancelar {
+    border: 1px solid black;
+    border-radius: 6px;
+    background-color: #f7b733;
+    padding: 5px;
+}

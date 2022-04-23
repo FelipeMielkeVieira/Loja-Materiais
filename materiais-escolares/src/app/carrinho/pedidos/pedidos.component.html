@@ -2,12 +2,31 @@
 <div class="body" style="width: 100%; display: flex; justify-content: center;">
     <div style="width: 80%; display: flex; flex-direction: column; margin-top: 30px;">
         <h4 style="color: #07889b; margin-bottom: 25px;">Meus Pedidos</h4>
-        <div *ngFor="let pedido of pedidos">
-            Pedido: {{pedido.CODIGO}}
-            <div *ngFor="let venda of pedido.produtos">
-                Venda: {{venda.CODIGO}}
+        <div *ngFor="let pedido of pedidos; let i = index" class="pedido">
+            <div style="display: flex; justify-content: space-evenly; padding: 5px; border-bottom: 1px solid gray; width: 80%;">
+                <div style="font-size: 18px; color: #66b9b7;">Realizado em: {{pedido.DATA | date : 'dd/MM/yyyy'}}</div>
+                <div style="font-size: 18px; color: #66b9b7;">Total: {{getPreco(pedido.VALOR)}}</div>
             </div>
+            <div *ngFor="let venda of pedido.produtos" class="produto">
+                <img class="imagensProduto4" src="{{material(venda.CODIGO_PRODUTO).IMAGEM_NOME}}">
+                <div class="info">
+                    <div class="nomeMarca">
+                        <div style="margin-bottom: 10px; font-size:18px">{{material(venda.CODIGO_PRODUTO).NOME}}</div>
+                        <span style="color:gray">{{material(venda.CODIGO_PRODUTO).MARCA}}</span>
+                    </div>
+                    <span class="qtd">{{venda.QUANTIDADE}}</span>
+                </div>
+                <div class="valorExcluir">
+                    <span style="color: #07889b; font-size: 20px">{{getPreco(material(venda.CODIGO_PRODUTO).VALOR)}}</span>
+                </div>
+            </div>
+            <div style="display: flex; padding: 5px; width: 80%; justify-content: space-between;">
+                <div style="font-size: 18px; color: #66b9b7;">Data de Entrega: {{pedido.DATA_ENTREGA | date : 'dd/MM/yyyy'}}</div>
+                <button *ngIf="calcularData(pedido.DATA_ENTREGA) >= diasAtuais" class="cancelar" (click)="cancelar(pedido.CODIGO, i)">Cancelar Pedido</button>
+            </div>
+        </div>
+        <div *ngIf="pedidos.length == 0" class="pedido">
+            <h4 style="color: #66b9b7; width: 100%; text-align: left; padding: 15px;">Nenhum Pedido Realizado</h4>
         </div>
     </div>
 </div>
-<button (click)="vendas()">V</button>

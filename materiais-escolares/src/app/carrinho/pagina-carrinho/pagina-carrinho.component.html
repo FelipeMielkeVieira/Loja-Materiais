@@ -23,7 +23,7 @@
                         <span class="qtd">{{produto.quantidade}}</span>
                     </div>
                     <div class="valorExcluir">
-                        <span style="color: #07889b; font-size: 20px">{{getPreco(produto.VALOR)}}</span>
+                        <span style="color: #07889b; font-size: 20px">{{getPreco(produto.VALOR * produto.quantidade)}}</span>
                         <span class="excluir" (click)="excluir(i, produto.VALOR)">Excluir</span>
                     </div>
                 </div>

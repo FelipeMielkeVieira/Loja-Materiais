@@ -61,7 +61,7 @@ export class ProdutoComponent implements OnInit {
     this.codigoUser = localStorage.getItem('codigo')
     var self = this;
     this.diasEntrega = this.getRandomIntInclusive(1, 30);
-    this.frete = ((this.diasEntrega * 2.38).toFixed(2)).toString();
+    this.frete = ((this.diasEntrega * 1.38).toFixed(2)).toString();
     let freteNovo = this.frete.replace('.', ',')
     this.frete = "R$ " + freteNovo;
 

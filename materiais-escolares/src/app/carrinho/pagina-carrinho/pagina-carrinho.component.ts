@@ -20,7 +20,7 @@ export class PaginaCarrinhoComponent implements OnInit {
     console.log(this.carrinho)
 
     this.carrinho.forEach(function (e) {
-      self.valor += e.VALOR
+      self.valor += e.VALOR * e.quantidade
     })
   }
 

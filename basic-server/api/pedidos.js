@@ -45,7 +45,21 @@ inserirRota('/buscar_vendas', function (dados, resposta) {
 inserirRota('/adicionar_pedido', function (dados, resposta) {
     console.log(dados)
 
-    database(`INSERT INTO PEDIDO VALUES (NULL, "${dados.data}", ${dados.valor}, ${dados.user})
+    database(`INSERT INTO PEDIDO VALUES (NULL, "${dados.data}", "${dados.data_entrega}", ${dados.valor}, ${dados.user})
+        `)
+        .then(result => {
+            console.log('Pedido inserido com sucesso!')
+            resposta({ message: 'Pedido inserido com sucesso!' })
+        }).catch(erro => {
+            console.log('Erro ao inserir pedido!')
+            resposta({ erro: 'Erro ao inserir usuário!' })
+        });
+})
+
+inserirRota('/excluir_pedido', function (dados, resposta) {
+    console.log(dados)
+
+    database(`DELETE FROM PEDIDO WHERE CODIGO = ${dados.codigo}
         `)
         .then(result => {
             console.log('Pedido inserido com sucesso!')
