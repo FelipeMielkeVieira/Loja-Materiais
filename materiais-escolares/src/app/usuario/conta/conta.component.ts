@@ -11,6 +11,7 @@ export class ContaComponent implements OnInit {
   constructor(private router: Router) { }
 
   ngOnInit() {
+    localStorage.setItem('emCompra', undefined)
   }
 
   pedidos() {

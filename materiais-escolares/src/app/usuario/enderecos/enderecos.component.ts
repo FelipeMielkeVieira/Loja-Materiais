@@ -18,6 +18,9 @@ export class EnderecosComponent implements OnInit {
     localStorage.setItem('path', window.location.pathname)
     this.enderecoService.buscarEnderecoCompleto(localStorage.getItem('codigo')).then(function (result) {
       self.listaEnderecos = result
+      if(!localStorage.getItem('enderecoAtual')) {
+        localStorage.setItem('enderecoAtual', result[0].CODIGO);
+      }
     })
   }
 
@@ -40,7 +43,11 @@ export class EnderecosComponent implements OnInit {
   }
 
   voltar() {
-    this.router.navigate(['/usuario/'])
+    if(localStorage.getItem('emCompra')) {
+      this.router.navigate(['/carrinho/pedido']);
+    } else {
+      this.router.navigate(['/usuario/'])
+    }
   }
 
   filtroPesquisa(valor) {

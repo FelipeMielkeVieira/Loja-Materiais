@@ -15,7 +15,7 @@
     </div>
   </div>
   <div class="pagamentoEndereco">
-    <div class="endereco">
+    <div class="endereco" *ngIf="codigoEndereco != 0">
       <div class="divPais">{{endereco.PAIS}}</div>
       <div class="divEstadoCidade">
         <div class="estado">{{endereco.ESTADO}}</div>
@@ -33,12 +33,20 @@
         </div>
       </div>
     </div>
-    <div class="endereco" style="justify-content: space-between;">
+    <div class="endereco" *ngIf="codigoEndereco == 0">
+      <h4 style="color: #07889b; margin-bottom: 20px;">Você não possui endereços cadastrados!</h4>
+      <button class="botaoSelecao" (click)="enderecosDirecionar()" style="width: 30%;">Ir para Endereços</button>
+    </div>
+    <div *ngIf="pagamento != null" class="endereco" style="justify-content: space-between;">
       <div>
         <div style="font-size: 20px; color: #07889b;">Titular: {{pagamento.TITULAR}}</div>
         <div style="margin-top: 15px; font-size: 16px; color: #66b9bf; margin-bottom: 20px;">{{editarNumero(pagamento.NUMERO)}}</div>
       </div>
       <button class="botaoSelecao" style="width: fit-content;" (click)="selecaoPagamento()">Selecionar Pagamento</button>
+    </div>
+    <div *ngIf="pagamento == null" class="endereco" style="justify-content: space-between;">
+      <h4 style="color: #07889b; margin-bottom: 20px;">Você não possui pagamentos cadastrados!</h4>
+      <button class="botaoSelecao" (click)="pagamentosDirecionar()" style="width: 30%;">Ir para Pagamentos</button>
     </div>
   </div>
   <div *ngIf="desconto != 0" style="font-size: 16px; color: #07889b; text-align: right; width: 80%;">
@@ -51,6 +59,6 @@
     Valor Total: {{getPreco(valor)}}
   </div>
   <div style="display: flex; justify-content: center;">
-    <button class="botaoSelecao" style="padding: 10px; font-size: 20px; margin-bottom: 20px;" (click)="fazerPedido()">Finalizar Pedido</button>
+    <button *ngIf="codigoEndereco != 0 && pagamento != null" class="botaoSelecao" style="padding: 10px; font-size: 20px; margin-bottom: 20px;" (click)="fazerPedido()">Finalizar Pedido</button>
   </div>
 </div>

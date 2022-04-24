@@ -30,17 +30,17 @@ export class PaginaPrincipalComponent implements OnInit {
     bic: false,
     faberCastell: false,
     tilibra: false,
-    spiral: false,
-    acrilex: false,
-    adelbras: false,
-    mundial: false
+    brief: false,
+    pritt: false,
+    chamex: false,
+    oval: false
   }
 
   precos = {
-    a50: false,
-    a150: false,
-    a300: false,
-    a500: false
+    a10: false,
+    a20: false,
+    a30: false,
+    a50: false
   }
 
   avaliacoes = {
@@ -158,7 +158,7 @@ export class PaginaPrincipalComponent implements OnInit {
 
   categorias(valor) {
 
-    let botao = document.getElementById(valor);
+    let botao = document.getElementById(valor) as HTMLButtonElement;
 
     if (botao.style.backgroundColor == 'rgb(7, 136, 155)') {
       botao.style.backgroundColor = '#66b9bf'
@@ -167,7 +167,7 @@ export class PaginaPrincipalComponent implements OnInit {
       this.filtroCategorias(2);
       //desseleciona
     } else {
-      for (let i = 1; i < 12; i++) {
+      for (let i = 1; i < 10; i++) {
         let botaoSelecionado = document.getElementById(i.toString())
         botaoSelecionado.style.backgroundColor = '#66b9bf'
         botaoSelecionado.style.color = 'black'
@@ -285,22 +285,21 @@ export class PaginaPrincipalComponent implements OnInit {
     if (marca != 'Tilibra') {
       this.marcas.tilibra = false;
     }
-    if (marca != 'Spiral') {
-      this.marcas.spiral = false;
+    if (marca != 'Brief') {
+      this.marcas.brief = false;
     }
-    if (marca != 'Acrílex') {
-      this.marcas.acrilex = false;
+    if (marca != 'Pritt') {
+      this.marcas.pritt = false;
     }
-    if (marca != 'Adelbrás') {
-      this.marcas.adelbras = false;
+    if (marca != 'Chamex') {
+      this.marcas.chamex = false;
     }
-    if (marca != 'Mundial') {
-      this.marcas.mundial = false;
+    if (marca != 'Oval') {
+      this.marcas.oval = false;
     }
-    console.log(this.marcas)
 
     this.marcaAtiva = marca;
-    if (this.marcas.bic == false && this.marcas.acrilex == false && this.marcas.adelbras == false && this.marcas.faberCastell == false && this.marcas.mundial == false && this.marcas.spiral == false && this.marcas.tilibra == false) {
+    if (this.marcas.bic == false && this.marcas.pritt == false && this.marcas.chamex == false && this.marcas.faberCastell == false && this.marcas.oval == false && this.marcas.brief == false && this.marcas.tilibra == false) {
       this.marcaAtiva = undefined;
     }
 
@@ -318,21 +317,21 @@ export class PaginaPrincipalComponent implements OnInit {
 
   filtroPreco(preco) {
     var self = this;
+    if (preco != 10) {
+      this.precos.a10 = false;
+    }
+    if (preco != 20) {
+      this.precos.a20 = false;
+    }
+    if (preco != 30) {
+      this.precos.a30 = false;
+    }
     if (preco != 50) {
       this.precos.a50 = false;
     }
-    if (preco != 150) {
-      this.precos.a150 = false;
-    }
-    if (preco != 300) {
-      this.precos.a300 = false;
-    }
-    if (preco != 500) {
-      this.precos.a500 = false;
-    }
 
     this.precoAtivo = preco;
-    if (this.precos.a50 == false && this.precos.a150 == false && this.precos.a300 == false && this.precos.a500 == false) {
+    if (this.precos.a50 == false && this.precos.a10 == false && this.precos.a20 == false && this.precos.a30 == false) {
       this.precoAtivo = undefined;
     }
 

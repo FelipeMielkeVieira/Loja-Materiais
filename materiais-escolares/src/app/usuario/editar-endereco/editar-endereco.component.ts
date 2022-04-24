@@ -71,7 +71,6 @@ export class EditarEnderecoComponent implements OnInit {
     ),
     headers: { "Content-Type": "application/json" }}).then(function (e) {
       e.json().then(function (a) {
-        console.log(a)
         self.pais = a[0].CODIGO
 
         fetch('/api/buscar_estado_especifico', {method: 'POST', body: JSON.stringify(
@@ -81,7 +80,6 @@ export class EditarEnderecoComponent implements OnInit {
         ),
         headers: { "Content-Type": "application/json" }}).then(function (c) {
           c.json().then(function (b) {
-            console.log("B: " +b)
             self.estado = b[0].CODIGO
             self.selectEstado(self.pais);
           })
@@ -113,7 +111,6 @@ export class EditarEnderecoComponent implements OnInit {
     if (this.codigoEndereco == 0) {
       this.enderecoService.criarEndereco(this.cidade, this.bairro, this.rua, this.numero, this.complemento, this.estado, localStorage.getItem('codigo'))
     } else {
-      console.log("Estado:",this.estado)
       fetch('/api/editar_endereco', {
         method: 'POST', body: JSON.stringify(
           {
@@ -139,7 +136,6 @@ export class EditarEnderecoComponent implements OnInit {
     this.pais = valor
     if (valor != 0) {
       this.enderecoService.buscarEstados(valor).then(function (result: any) {
-        console.log(result);
         result.forEach(function (e) {
           let selectEstado = document.querySelector('.selectEstado')
           let opcao = document.createElement('option')

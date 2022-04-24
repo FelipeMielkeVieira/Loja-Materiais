@@ -71,8 +71,6 @@ export class LoginComponent implements OnInit {
     alert.className = 'alert'
 
     alert.innerText = texto
-
-    let principal = document.querySelector('divPrincipal');
     document.body.appendChild(alert)
 
     setTimeout(function () {

@@ -35,7 +35,6 @@ export class ValesComponent implements OnInit {
           self.alerta("Código Inválido!")
         }
         data.forEach(element => {
-          console.log(element)
           if (element.USADO == 0) {
             fetch('/api/resgatar_vale', {
               method: 'POST',
@@ -81,8 +80,6 @@ export class ValesComponent implements OnInit {
     alert.style.backgroundColor = 'rgb(235, 49, 49)'
 
     alert.innerText = texto
-
-    let principal = document.querySelector('divPrincipal');
     document.body.appendChild(alert)
 
     setTimeout(function () {
@@ -101,8 +98,6 @@ export class ValesComponent implements OnInit {
     alert.className = 'alert2'
 
     alert.innerText = texto
-
-    let principal = document.querySelector('divPrincipal');
     document.body.appendChild(alert)
 
     setTimeout(function () {

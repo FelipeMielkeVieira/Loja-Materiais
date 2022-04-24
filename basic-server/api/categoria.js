@@ -21,9 +21,7 @@ inserirRota('/adicionar_categorias', function (dados, resposta) {
     (NULL, 'Cola', 'Adesivo é qualquer substância aplicada na superfície, ou em ambas as superfícies, de dois objetos separados que os une e oferece resistência à sua separação. Dependendo do contexto, há vários termos usados com o mesmo significado, como cola ou cimento.'),
     (NULL, 'Papel', 'Substância de origem vegetal e consistência pastosa que, seca sob a forma de folha, pode ser usada de várias maneiras: lenço de papel; papel de parede.'),
     (NULL, 'Estojo', 'Chama-se estojo escolar ao estojo (como uma bolsinha ou uma caixa) usado por crianças e jovens para armazenar lápis, canetas, canetinhas, borracha e outros materiais escolares.'),
-    (NULL, 'Mochila', 'Uma mochila é, em sua forma mais simples, um saco de lona ou tecido sintético resistente que é carregado nas costas de uma pessoa, e apoiada através de quatro alças que passam por cima dos ombros.'),
-    (NULL, 'Lancheira', 'Lancheira ou merendeira é uma maleta de mão de tamanho reduzido para transportar refeições e bebidas. Seu uso é feito sobretudo por escolares e operários fabris e da construção civil.'),
-    (NULL, 'Kit Escolar', 'O kit é gratuito e inclui materiais como mochila, estojo ecológico, lápis, borracha, régua, canetas, cadernos e esqueeze para a realização diária das atividades pedagógicas.')
+    (NULL, 'Mochila', 'Uma mochila é, em sua forma mais simples, um saco de lona ou tecido sintético resistente que é carregado nas costas de uma pessoa, e apoiada através de quatro alças que passam por cima dos ombros.');
     `).then(result => {
         console.log('Adicionado às categorias!')
     }).catch(erro => {

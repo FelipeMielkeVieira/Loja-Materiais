@@ -29,11 +29,9 @@ export class PedidosComponent implements OnInit {
     }).then((e: any) => {
       e.json().then(dados => {
 
-        console.log(dados)
         self.pedidos = dados;
 
         self.pedidos.forEach(function (pedido) {
-          console.log('entrou pedidos: ' + pedido.CODIGO)
           let listaTemp = [];
           fetch('/api/buscar_vendas', {
             method: 'POST', body: JSON.stringify(
@@ -43,13 +41,10 @@ export class PedidosComponent implements OnInit {
             ), headers: { "Content-Type": "application/json" }
           }).then(function (a) {
             a.json().then(function (vendas) {
-              console.log("Vendas: " + vendas)
               vendas.forEach(function (venda) {
                 listaTemp.push(venda);
               })
-              console.log("ListaTemp: " + listaTemp)
               pedido.produtos = listaTemp;
-              console.log(pedido)
             })
           })
         })

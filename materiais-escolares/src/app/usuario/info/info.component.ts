@@ -13,9 +13,6 @@ export class InfoComponent implements OnInit {
 
   ngOnInit() {
     this.usuarioService.usuarioEspecifico(localStorage.getItem('nome')).then((dados: any) => {
-      console.log(dados)
-
-      console.log(dados[0].EMAIL)
 
       if(dados[0].EMAIL != 'null') {
         this.email = dados[0].EMAIL;

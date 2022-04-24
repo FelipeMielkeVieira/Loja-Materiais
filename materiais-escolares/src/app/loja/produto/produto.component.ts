@@ -1,4 +1,3 @@
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { EnderecoService } from 'src/app/services/endereco.service';
@@ -51,7 +50,9 @@ export class ProdutoComponent implements OnInit {
   ngOnInit() {
 
     if (!localStorage.getItem('enderecoAtual')) {
-      localStorage.setItem('enderecoAtual', '1')
+      this.enderecoService.buscarEnderecoCompleto(localStorage.getItem('codigo')).then(function (result) {
+        localStorage.setItem('enderecoAtual', result[0].CODIGO);
+      })
     } else {
       this.enderecoCodigo = localStorage.getItem('enderecoAtual')
     }
@@ -100,7 +101,6 @@ export class ProdutoComponent implements OnInit {
       }).then(function (result) {
         result.json().then(function (data) {
           self.avaliacoes = data;
-          console.log(data)
         })
       })
     })
@@ -156,7 +156,6 @@ export class ProdutoComponent implements OnInit {
   pegarEndereco() {
     var self = this;
     this.enderecoService.buscarEndereco2(this.enderecoCodigo).then(function (result: any) {
-      console.log(result);
       self.enderecos = result;
       self.guardarEndereco(result);
     })
@@ -207,7 +206,6 @@ export class ProdutoComponent implements OnInit {
   }
 
   produtoRota(codigo) {
-    console.log(codigo)
     this.router.navigate([('/produtos/' + codigo)])
     this.codigoProduto = codigo
     this.ngOnInit();
@@ -248,13 +246,12 @@ export class ProdutoComponent implements OnInit {
       }).then(function (result) {
         result.json().then(function (data) {
           self.avaliacoes = data;
-          console.log(self.avaliacoes)
         })
       })
     })
 
     let notaFinal;
-    if(this.produto.ESTRELAS == 0) {
+    if (this.produto.ESTRELAS == 0) {
       notaFinal = this.nota;
     } else {
       notaFinal = (this.produto.ESTRELAS + this.nota) / 2;

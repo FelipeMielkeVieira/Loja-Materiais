@@ -31,14 +31,6 @@
     padding: 3px;
 }
 
-.botaoCategoria {
-    width: 9.3%;
-    padding: 0.5%;
-    border: 1px solid black;
-    background-color: #66b9bf;
-    font-weight: bold;
-}
-
 .linha {
     display: flex;
     justify-content: space-evenly;
@@ -79,7 +71,7 @@
 }
 
 .divProduto3 {
-    width: 45%;
+    width: 30%;
 }
 
 .imagensProduto {

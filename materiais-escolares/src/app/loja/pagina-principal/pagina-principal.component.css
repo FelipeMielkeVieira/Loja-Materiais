@@ -17,9 +17,8 @@
     margin-bottom: 40px;
 }
 
-.imgCarrosel {
+.imagensCarrosel {
     width: 100%;
-    height: 100%;
 }
 
 .preferencias {
@@ -51,7 +50,8 @@
 
 .divEsquerda {
     padding: 10px;
-    width: 35%;
+    width: 25%;
+    height: min-content;
     border-radius: 2px;
     background-color: #dfdce3;
     display: flex;
@@ -59,7 +59,15 @@
 }
 
 .divDireita {
-    width: 65%;
+    width: 75%;
     display: flex;
     flex-direction: column;
+}
+
+.botaoCategoria {
+    width: 11.1%;
+    padding: 0.5%;
+    border: 1px solid black;
+    background-color: #66b9bf;
+    font-weight: bold;
 }

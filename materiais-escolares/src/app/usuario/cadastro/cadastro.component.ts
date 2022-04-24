@@ -66,7 +66,6 @@ export class CadastroComponent implements OnInit {
                 let caminho = localStorage.getItem('path')
                 let contagem = 1;
                 this.usuarioService.buscarUsuario().then(function (result: any) {
-                  console.log(result)
                   result.forEach(e => {
                     contagem++;
                   });
@@ -81,7 +80,6 @@ export class CadastroComponent implements OnInit {
                 let caminho = localStorage.getItem('path')
                 let contagem = 1;
                 this.usuarioService.buscarUsuario().then(function (result: any) {
-                  console.log(result)
                   result.forEach(e => {
                     contagem++;
                   });
@@ -142,8 +140,6 @@ export class CadastroComponent implements OnInit {
     alert.className = 'alert'
 
     alert.innerText = texto
-
-    let principal = document.querySelector('divPrincipal');
     document.body.appendChild(alert)
 
     setTimeout(function () {

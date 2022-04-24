@@ -39,9 +39,7 @@ export class EditarComponent implements OnInit {
       if(this.valorEditar == "Nome") {
         localStorage.setItem('nome', this.novoValor)
       }
-
       this.informacoes();
-
     } else {
       alert("")
     }

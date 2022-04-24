@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { EnderecoService } from 'src/app/services/endereco.service';
 
 @Component({
   selector: 'app-pedido',
@@ -8,7 +9,7 @@ import { Router } from '@angular/router';
 })
 export class PedidoComponent implements OnInit {
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private enderecoService: EnderecoService) { }
 
   carrinho = [];
   codigoEndereco;
@@ -33,8 +34,21 @@ export class PedidoComponent implements OnInit {
 
   ngOnInit() {
     var self = this;
+
+    localStorage.setItem('emCompra', '1');
     this.codigoEndereco = localStorage.getItem('enderecoAtual');
-    console.log(this.codigoEndereco)
+
+    let varEndereco = 0;
+    this.enderecoService.buscarEnderecoCompleto(localStorage.getItem('codigo')).then(function (result: any) {
+      result.forEach(function (e) {
+        if(e.CODIGO == parseInt(localStorage.getItem('enderecoAtual'))) {
+          varEndereco++;
+        }
+      })
+      if(varEndereco == 0) {
+        this.codigoEndereco = 0;
+      }
+    })
 
     this.contarPedidos();
     this.desconto = parseInt(localStorage.getItem('desconto'))
@@ -48,14 +62,12 @@ export class PedidoComponent implements OnInit {
       headers: { "Content-Type": "application/json" }
     }).then(function (result) {
       result.json().then(function (data) {
-        console.log(data)
         self.endereco = data[0]
       })
     })
 
     localStorage.setItem('path', location.pathname)
     this.carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
-    console.log(this.carrinho)
 
     this.carrinho.forEach(function (e) {
       self.valor += e.VALOR * e.quantidade
@@ -72,11 +84,15 @@ export class PedidoComponent implements OnInit {
 
     fetch('/api/buscar_pagamentos', { method: 'POST', body: JSON.stringify({ codigo: localStorage.getItem('codigo') }), headers: { "Content-Type": "application/json" } }).then(function (e) {
       e.json().then(function (data) {
-        data.forEach(function (e) {
-          if (e.CODIGO == localStorage.getItem('pagamento')) {
-            self.pagamento = e;
-          }
-        })
+        if(data.length != 0) {
+          data.forEach(function (e) {
+            if (e.CODIGO == localStorage.getItem('pagamento')) {
+              self.pagamento = e;
+            }
+          })
+        } else {
+          self.pagamento = null;
+        }
       })
     })
   }
@@ -126,11 +142,11 @@ export class PedidoComponent implements OnInit {
         })
       })
     })
-    console.log("Pedidos: " + self.contagemPedidos)
   }
 
   fazerPedido() {
     var self = this;
+    localStorage.setItem('emCompra', undefined);
     fetch('/api/adicionar_pedido', {
       method: 'POST', body: JSON.stringify(
         {
@@ -199,7 +215,14 @@ export class PedidoComponent implements OnInit {
 
     mes = mes - 1;
     this.data_entrega = new Date(ano, mes, dia)
-    console.log(this.data_entrega)
+  }
+
+  enderecosDirecionar() {
+    this.router.navigate(['/usuario/enderecos']);
+  }
+
+  pagamentosDirecionar() {
+    this.router.navigate(['/usuario/pagamentos'])
   }
 
 }

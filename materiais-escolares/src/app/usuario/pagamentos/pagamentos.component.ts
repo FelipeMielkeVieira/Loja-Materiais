@@ -18,6 +18,9 @@ export class PagamentosComponent implements OnInit {
     fetch('/api/buscar_pagamentos', { method: 'POST', body: JSON.stringify({ codigo: localStorage.getItem('codigo') }), headers: { "Content-Type": "application/json" } }).then(function (e) {
       e.json().then(function (data) {
         self.listaPagamentos = data
+        if(!localStorage.getItem('pagamento')) {
+          localStorage.setItem('pagamento', data[0].CODIGO)
+        }
       })
     })
   }

@@ -17,7 +17,6 @@ export class PaginaCarrinhoComponent implements OnInit {
     var self = this;
     localStorage.setItem('path', location.pathname)
     this.carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
-    console.log(this.carrinho)
 
     this.carrinho.forEach(function (e) {
       self.valor += e.VALOR * e.quantidade
