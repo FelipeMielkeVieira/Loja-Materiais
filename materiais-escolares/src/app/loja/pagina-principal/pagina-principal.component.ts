@@ -10,7 +10,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 })
 export class PaginaPrincipalComponent implements OnInit {
 
-  constructor(private router: Router, private valesService: ValesService) { }
+  constructor(private router: Router, private valesService: ValesService) {
+  }
 
   layout;
   usuario = localStorage.getItem('nome')
@@ -20,14 +21,40 @@ export class PaginaPrincipalComponent implements OnInit {
   listaCategorias = []
   pesquisaProduto = "";
   categoriaAtiva;
+  marcaAtiva;
+  precoAtivo;
+  avaliacaoAtiva;
   ordenacao = 1;
+
+  marcas = {
+    bic: false,
+    faberCastell: false,
+    tilibra: false,
+    spiral: false,
+    acrilex: false,
+    adelbras: false,
+    mundial: false
+  }
+
+  precos = {
+    a50: false,
+    a150: false,
+    a300: false,
+    a500: false
+  }
+
+  avaliacoes = {
+    a1: false,
+    a2: false,
+    a3: false,
+    a4: false
+  }
 
   ngOnInit() {
     localStorage.setItem('path', location.pathname)
-
     var self = this;
 
-    if(!localStorage.getItem('desconto')) {
+    if (!localStorage.getItem('desconto')) {
       localStorage.setItem('desconto', '0')
     }
 
@@ -70,7 +97,7 @@ export class PaginaPrincipalComponent implements OnInit {
         self.listaProdutos = data2;
         self.layout = 2;
 
-        if(localStorage.getItem('pesquisa') && localStorage.getItem('pesquisa') != '') {
+        if (localStorage.getItem('pesquisa') && localStorage.getItem('pesquisa') != '') {
           self.pesquisaProduto = localStorage.getItem('pesquisa')
           self.filtroPesquisa(self.pesquisaProduto);
           localStorage.setItem('pesquisa', '')
@@ -136,7 +163,7 @@ export class PaginaPrincipalComponent implements OnInit {
     if (botao.style.backgroundColor == 'rgb(7, 136, 155)') {
       botao.style.backgroundColor = '#66b9bf'
       botao.style.color = 'black';
-      this.categoriaAtiva = '';
+      this.categoriaAtiva = undefined;
       this.filtroCategorias(2);
       //desseleciona
     } else {
@@ -173,22 +200,21 @@ export class PaginaPrincipalComponent implements OnInit {
 
   filtroPesquisa(valor) {
 
-    console.log(valor)
+    var self = this;
     if (valor != '' && valor) {
       const listaFiltrada = this.listaProdutos.filter(function (a) {
-        return a.NOME.toLowerCase().indexOf(valor.toLowerCase()) > -1
+        if (self.filtrosEsquerda(a)) {
+          return a.NOME.toLowerCase().indexOf(valor.toLowerCase()) > -1
+        }
       });
       this.listaProdutos = listaFiltrada;
     } else {
-      console.log(this.categoriaAtiva)
-      if(this.categoriaAtiva == '' || this.categoriaAtiva || this.categoriaAtiva == undefined) {
-        this.listaProdutos = this.listaProdutosTotais
-      } else {
-        const listaFiltrada = this.listaProdutos.filter(function (a) {
+      const listaFiltrada = this.listaProdutosTotais.filter(function (a) {
+        if (self.filtrosEsquerda(a)) {
           return a.NOME.toLowerCase().indexOf(valor.toLowerCase()) > -1
-        });
-        this.listaProdutos = listaFiltrada;
-      }
+        }
+      });
+      this.listaProdutos = listaFiltrada;
     }
     this.ordenar();
   }
@@ -200,13 +226,15 @@ export class PaginaPrincipalComponent implements OnInit {
 
     if (opcao == 1) {
       this.listaProdutosTotais.forEach(function (e) {
-        if (e.CATEGORIA == self.categoriaAtiva) {
+        if (self.filtrosEsquerda(e)) {
           listaTemp.push(e);
         }
       })
     } else {
       this.listaProdutosTotais.forEach(function (e) {
-        listaTemp.push(e);
+        if (self.filtrosEsquerda(e)) {
+          listaTemp.push(e);
+        }
       })
     }
 
@@ -243,6 +271,182 @@ export class PaginaPrincipalComponent implements OnInit {
         self.listaProdutos = listaTemp;
       })
     })
+  }
+
+  filtroMarcas(marca) {
+
+    var self = this;
+    if (marca != 'BIC') {
+      this.marcas.bic = false;
+    }
+    if (marca != 'FaberCastell') {
+      this.marcas.faberCastell = false;
+    }
+    if (marca != 'Tilibra') {
+      this.marcas.tilibra = false;
+    }
+    if (marca != 'Spiral') {
+      this.marcas.spiral = false;
+    }
+    if (marca != 'Acrílex') {
+      this.marcas.acrilex = false;
+    }
+    if (marca != 'Adelbrás') {
+      this.marcas.adelbras = false;
+    }
+    if (marca != 'Mundial') {
+      this.marcas.mundial = false;
+    }
+    console.log(this.marcas)
+
+    this.marcaAtiva = marca;
+    if (this.marcas.bic == false && this.marcas.acrilex == false && this.marcas.adelbras == false && this.marcas.faberCastell == false && this.marcas.mundial == false && this.marcas.spiral == false && this.marcas.tilibra == false) {
+      this.marcaAtiva = undefined;
+    }
+
+    let listaTemp = [];
+
+    this.listaProdutosTotais.forEach(function (e) {
+      if (self.filtrosEsquerda(e)) {
+        listaTemp.push(e);
+      }
+    })
+
+    this.listaProdutos = listaTemp;
+    this.ordenar();
+  }
+
+  filtroPreco(preco) {
+    var self = this;
+    if (preco != 50) {
+      this.precos.a50 = false;
+    }
+    if (preco != 150) {
+      this.precos.a150 = false;
+    }
+    if (preco != 300) {
+      this.precos.a300 = false;
+    }
+    if (preco != 500) {
+      this.precos.a500 = false;
+    }
+
+    this.precoAtivo = preco;
+    if (this.precos.a50 == false && this.precos.a150 == false && this.precos.a300 == false && this.precos.a500 == false) {
+      this.precoAtivo = undefined;
+    }
+
+    let listaTemp = [];
+
+    this.listaProdutosTotais.forEach(function (e) {
+      if (self.filtrosEsquerda(e)) {
+        listaTemp.push(e);
+      }
+    })
+
+    this.listaProdutos = listaTemp;
+    this.ordenar();
+  }
+
+  filtroAvaliacao(avaliacao) {
+    var self = this;
+    if (avaliacao != 1) {
+      this.avaliacoes.a1 = false;
+    }
+    if (avaliacao != 2) {
+      this.avaliacoes.a2 = false;
+    }
+    if (avaliacao != 3) {
+      this.avaliacoes.a3 = false;
+    }
+    if (avaliacao != 4) {
+      this.avaliacoes.a4 = false;
+    }
+
+    this.avaliacaoAtiva = avaliacao;
+    let varConfirmacao;
+    if (this.avaliacoes.a1 == false && this.avaliacoes.a2 == false && this.avaliacoes.a3 == false && this.avaliacoes.a4 == false) {
+      varConfirmacao = 1;
+      this.avaliacaoAtiva = undefined;
+    }
+
+    let listaTemp = [];
+
+    this.listaProdutosTotais.forEach(function (e) {
+      if (self.filtrosEsquerda(e)) {
+        listaTemp.push(e);
+      }
+    })
+    this.listaProdutos = listaTemp;
+    this.ordenar();
+  }
+
+  filtrosEsquerda(e) {
+
+    var self = this;
+
+    if (e.CATEGORIA == self.categoriaAtiva) {
+      if (e.MARCA == self.marcaAtiva) {
+        if (e.VALOR < self.precoAtivo) {
+          if (e.ESTRELAS > self.avaliacaoAtiva) {
+            return true;
+          } else if (!self.avaliacaoAtiva) {
+            return true;
+          }
+        } else if (!self.precoAtivo) {
+          if (e.ESTRELAS > self.avaliacaoAtiva) {
+            return true;
+          } else if (!self.avaliacaoAtiva) {
+            return true;
+          }
+        }
+      } else if (!self.marcaAtiva) {
+        if (e.VALOR < self.precoAtivo) {
+          if (e.ESTRELAS > self.avaliacaoAtiva) {
+            return true;
+          } else if (!self.avaliacaoAtiva) {
+            return true;
+          }
+        } else if (!self.precoAtivo) {
+          if (e.ESTRELAS > self.avaliacaoAtiva) {
+            return true;
+          } else if (!self.avaliacaoAtiva) {
+            return true;
+          }
+        }
+      }
+    } else if (!self.categoriaAtiva) {
+      if (e.MARCA == self.marcaAtiva) {
+        if (e.VALOR < self.precoAtivo) {
+          if (e.ESTRELAS > self.avaliacaoAtiva) {
+            return true;
+          } else if (!self.avaliacaoAtiva) {
+            return true;
+          }
+        } else if (!self.precoAtivo) {
+          if (e.ESTRELAS > self.avaliacaoAtiva) {
+            return true;
+          } else if (!self.avaliacaoAtiva) {
+            return true;
+          }
+        }
+      } else if (!self.marcaAtiva) {
+        if (e.VALOR < self.precoAtivo) {
+          if (e.ESTRELAS > self.avaliacaoAtiva) {
+            return true;
+          } else if (!self.avaliacaoAtiva) {
+            return true;
+          }
+        } else if (!self.precoAtivo) {
+          if (e.ESTRELAS > self.avaliacaoAtiva) {
+            return true;
+          } else if (!self.avaliacaoAtiva) {
+            return true;
+          }
+        }
+      }
+    }
+    return false;
   }
 
   getPreco(valor) {

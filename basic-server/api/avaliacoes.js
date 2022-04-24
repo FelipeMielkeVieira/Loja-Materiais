@@ -23,6 +23,19 @@ inserirRota('/adicionar_avaliacao', function (dados, resposta) {
 
 })
 
+inserirRota('/atualizar_avaliacao', function (dados, resposta) {
+
+    database(`UPDATE PRODUTOS SET ESTRELAS = ${dados.nota} WHERE CODIGO = ${dados.codigo}`).then(result => {
+        console.log("Avaliação Adicionada!")
+        resposta({ message: "Avaliação Cadastrada!"})
+    }).catch(erro => {
+        console.log('Erro ao buscar avaliações!')
+        resposta({ message: "Avaliação Com problemas!"})
+    })
+    return resposta;
+
+})
+
 inserirRota('/excluir_avaliacao', function (dados, resposta) {
 
     database(`DELETE FROM AVALIACAO WHERE CODIGO = ${dados.codigo}`)

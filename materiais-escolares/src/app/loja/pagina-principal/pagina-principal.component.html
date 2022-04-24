@@ -72,71 +72,67 @@
                 <div class="divEsquerda">
                     <span style="margin-bottom: 10px">Marca</span>
                     <div style="display: flex; align-items: center; margin-bottom: 5px;">
-                        <input type="checkbox" style="margin-right: 10px;">
+                        <input type="checkbox" style="margin-right: 10px;" [(ngModel)]="marcas.bic" (change)="filtroMarcas('BIC')">
                         <span>BIC</span>
                     </div>
                     <div style="display: flex; align-items: center; margin-bottom: 5px;">
-                        <input type="checkbox" style="margin-right: 10px;">
+                        <input type="checkbox" style="margin-right: 10px;" [(ngModel)]="marcas.faberCastell" (change)="filtroMarcas('FaberCastell')">
                         <span>FaberCastell</span>
                     </div>
                     <div style="display: flex; align-items: center; margin-bottom: 5px;">
-                        <input type="checkbox" style="margin-right: 10px;">
+                        <input type="checkbox" style="margin-right: 10px;" [(ngModel)]="marcas.tilibra" (change)="filtroMarcas('Tilibra')">
                         <span>Tilibra</span>
                     </div>
                     <div style="display: flex; align-items: center; margin-bottom: 5px;">
-                        <input type="checkbox" style="margin-right: 10px;">
+                        <input type="checkbox" style="margin-right: 10px;" [(ngModel)]="marcas.spiral" (change)="filtroMarcas('Spiral')">
                         <span>Spiral</span>
                     </div>
                     <div style="display: flex; align-items: center; margin-bottom: 5px;">
-                        <input type="checkbox" style="margin-right: 10px;">
+                        <input type="checkbox" style="margin-right: 10px;" [(ngModel)]="marcas.acrilex" (change)="filtroMarcas('Acrílex')">
                         <span>Acrilex</span>
                     </div>
                     <div style="display: flex; align-items: center; margin-bottom: 5px;">
-                        <input type="checkbox" style="margin-right: 10px;">
+                        <input type="checkbox" style="margin-right: 10px;" [(ngModel)]="marcas.adelbras" (change)="filtroMarcas('Adelbrás')">
                         <span>Adelbrás</span>
                     </div>
                     <div style="display: flex; align-items: center; margin-bottom: 5px;">
-                        <input type="checkbox" style="margin-right: 10px;">
+                        <input type="checkbox" style="margin-right: 10px;" [(ngModel)]="marcas.mundial" (change)="filtroMarcas('Mundial')">
                         <span>Mundial</span>
                     </div>
 
                     <span style="margin-bottom: 10px; margin-top: 20px;">Preço</span>
                     <div style="display: flex; align-items: center; margin-bottom: 5px;">
-                        <input type="checkbox" style="margin-right: 10px;">
+                        <input type="checkbox" style="margin-right: 10px;" [(ngModel)]="precos.a50" (change)="filtroPreco(50)">
                         <span>Até R$50</span>
                     </div>
                     <div style="display: flex; align-items: center; margin-bottom: 5px;">
-                        <input type="checkbox" style="margin-right: 10px;">
-                        <span>R$50 a R$150</span>
+                        <input type="checkbox" style="margin-right: 10px;" [(ngModel)]="precos.a150" (change)="filtroPreco(150)">
+                        <span>Até R$150</span>
                     </div>
                     <div style="display: flex; align-items: center; margin-bottom: 5px;">
-                        <input type="checkbox" style="margin-right: 10px;">
-                        <span>R$150 a R$300</span>
+                        <input type="checkbox" style="margin-right: 10px;" [(ngModel)]="precos.a300" (change)="filtroPreco(300)">
+                        <span>Até R$300</span>
                     </div>
                     <div style="display: flex; align-items: center; margin-bottom: 5px;">
-                        <input type="checkbox" style="margin-right: 10px;">
-                        <span>R$300 a R$500</span>
-                    </div>
-                    <div style="display: flex; align-items: center; margin-bottom: 5px;">
-                        <input type="checkbox" style="margin-right: 10px;">
-                        <span>Acima de R$500</span>
+                        <input type="checkbox" style="margin-right: 10px;" [(ngModel)]="precos.a500" (change)="filtroPreco(500)">
+                        <span>Até R$500</span>
                     </div>
 
                     <span style="margin-bottom: 10px; margin-top: 20px;">Avaliações</span>
                     <div style="display: flex; align-items: center; margin-bottom: 5px;">
-                        <input type="checkbox" style="margin-right: 10px;">
+                        <input type="checkbox" style="margin-right: 10px;" [(ngModel)]="avaliacoes.a1" (change)="filtroAvaliacao(1)">
                         <span>Acima de 1 estrela</span>
                     </div>
                     <div style="display: flex; align-items: center; margin-bottom: 5px;">
-                        <input type="checkbox" style="margin-right: 10px;">
+                        <input type="checkbox" style="margin-right: 10px;" [(ngModel)]="avaliacoes.a2" (change)="filtroAvaliacao(2)">
                         <span>Acima de 2 estrelas</span>
                     </div>
                     <div style="display: flex; align-items: center; margin-bottom: 5px;">
-                        <input type="checkbox" style="margin-right: 10px;">
+                        <input type="checkbox" style="margin-right: 10px;" [(ngModel)]="avaliacoes.a3" (change)="filtroAvaliacao(3)">
                         <span>Acima de 3 estrelas</span>
                     </div>
                     <div style="display: flex; align-items: center; margin-bottom: 5px;">
-                        <input type="checkbox" style="margin-right: 10px;">
+                        <input type="checkbox" style="margin-right: 10px;" [(ngModel)]="avaliacoes.a4" (change)="filtroAvaliacao(4)">
                         <span>Acima de 4 estrelas</span>
                     </div>
                 </div>
@@ -144,25 +140,30 @@
                     <div class="divProdutos" id="divProdutos">
                         <div *ngIf="layout == 1" class="linha2">
                             <div *ngFor="let produto of listaProdutos" style="display: flex; justify-content: center;">
-                                <div class="divProduto2" style="margin-bottom: 10px;" (click)="redirecionarProduto(produto.CODIGO)">
+                                <div class="divProduto2" style="margin-bottom: 10px;"
+                                    (click)="redirecionarProduto(produto.CODIGO)">
                                     <img class="imagensProduto2" src="{{produto.IMAGEM_NOME}}">
                                     <div class="divNome">
                                         <div class="nomeProduto" style="margin-bottom: 5px;">{{produto.NOME}}</div>
                                         <div style="width: 100%; color: gray;">{{produto.MARCA}}</div>
+                                        <div style="color: #f7b733;">{{produto.ESTRELAS}} de 5</div>
                                     </div>
                                     <div class="precoProduto" style="font-size: 22px;">{{getPreco(produto.VALOR)}}</div>
                                 </div>
                             </div>
                         </div>
                         <div *ngIf="layout != 1" class="linha" style='display: flex; flex-wrap: wrap;'>
-                            <div *ngFor="let produto of listaProdutos" style="display: flex; justify-content: center; width: 45%">
+                            <div *ngFor="let produto of listaProdutos"
+                                style="display: flex; justify-content: center; width: 45%">
                                 <div class="divProduto" (click)="redirecionarProduto(produto.CODIGO)">
                                     <img class="imagensProduto" src="{{produto.IMAGEM_NOME}}">
                                     <div class="divNome">
                                         <div class="nomeProduto" style="margin-bottom: 12px;">{{produto.NOME}}</div>
                                         <div style="width: 100%; color: gray;">{{produto.MARCA}}</div>
+                                        <div style="color: #f7b733;">{{produto.ESTRELAS}} de 5</div>
                                     </div>
-                                    <div class="precoProduto" style="font-size: 22px; width: 100%;">{{getPreco(produto.VALOR)}}</div>
+                                    <div class="precoProduto" style="font-size: 22px; width: 100%;">
+                                        {{getPreco(produto.VALOR)}}</div>
                                 </div>
                             </div>
                             <div class="divProduto3"></div>

@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { e } from '@angular/core/src/render3';
 import { Router } from '@angular/router';
 
 @Component({
@@ -15,7 +14,7 @@ export class PedidoComponent implements OnInit {
   codigoEndereco;
   frete = 0;
   freteDias = 0;
-  data_entrega
+  data_entrega = new Date();
   desconto = 0;
   endereco = {
     BAIRRO: "",
@@ -59,7 +58,7 @@ export class PedidoComponent implements OnInit {
     console.log(this.carrinho)
 
     this.carrinho.forEach(function (e) {
-      self.valor += e.VALOR
+      self.valor += e.VALOR * e.quantidade
       self.freteDias += e.frete
       self.frete += e.frete * 1.38
     })
@@ -127,6 +126,7 @@ export class PedidoComponent implements OnInit {
         })
       })
     })
+    console.log("Pedidos: " + self.contagemPedidos)
   }
 
   fazerPedido() {
@@ -145,7 +145,7 @@ export class PedidoComponent implements OnInit {
         fetch('/api/adicionar_venda', {
           method: 'POST', body: JSON.stringify(
             {
-              pedido: self.contagemPedidos + 1,
+              pedido: (self.contagemPedidos + 1),
               produto: a.CODIGO,
               quantidade: a.quantidade
             }
@@ -197,7 +197,9 @@ export class PedidoComponent implements OnInit {
       ano++;
     }
 
-    this.data_entrega = new Date(ano + '-' + mes + '-' + dia)
+    mes = mes - 1;
+    this.data_entrega = new Date(ano, mes, dia)
+    console.log(this.data_entrega)
   }
 
 }

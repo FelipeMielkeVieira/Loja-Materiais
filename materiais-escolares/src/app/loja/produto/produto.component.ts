@@ -207,7 +207,6 @@ export class ProdutoComponent implements OnInit {
   }
 
   produtoRota(codigo) {
-    var self = this;
     console.log(codigo)
     this.router.navigate([('/produtos/' + codigo)])
     this.codigoProduto = codigo
@@ -252,6 +251,23 @@ export class ProdutoComponent implements OnInit {
           console.log(self.avaliacoes)
         })
       })
+    })
+
+    let notaFinal;
+    if(this.produto.ESTRELAS == 0) {
+      notaFinal = this.nota;
+    } else {
+      notaFinal = (this.produto.ESTRELAS + this.nota) / 2;
+    }
+
+    fetch('/api/atualizar_avaliacao', {
+      method: 'POST', body: JSON.stringify(
+        {
+          codigo: this.codigoProduto,
+          nota: notaFinal
+        }
+      ),
+      headers: { "Content-Type": "application/json" }
     })
   }
 

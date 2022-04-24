@@ -17,7 +17,7 @@
                     <span class="qtd">{{venda.QUANTIDADE}}</span>
                 </div>
                 <div class="valorExcluir">
-                    <span style="color: #07889b; font-size: 20px">{{getPreco(material(venda.CODIGO_PRODUTO).VALOR)}}</span>
+                    <span style="color: #07889b; font-size: 20px">{{getPreco(material(venda.CODIGO_PRODUTO).VALOR * venda.QUANTIDADE)}}</span>
                 </div>
             </div>
             <div style="display: flex; padding: 5px; width: 80%; justify-content: space-between;">
