@@ -42,6 +42,7 @@ export class NavbarComponent implements OnInit {
     localStorage.setItem('pagamento', '1')
     localStorage.setItem('carrinho', JSON.stringify([]));
     this.router.navigate(['/'])
+    window.location.reload();
   }
 
   conta() {

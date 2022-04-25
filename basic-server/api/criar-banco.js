@@ -34,20 +34,6 @@ database(`CREATE TABLE IF NOT EXISTS PRODUTOS (
     console.log('Tabela Produtos com erro!')
 });
 
-database(`CREATE TABLE IF NOT EXISTS ADMINISTRADOR (
-    CODIGO INTEGER PRIMARY KEY AUTOINCREMENT,
-    NOME VARCHAR(100),
-    SENHA VARCHAR(30),
-    EMAIL VARCHAR(100),
-    TELEFONE VARCHAR(20)
-)`).then(result => {
-
-    console.log('Tabela Admin Criada!')
-
-}).catch(erro => {
-    console.log('Tabela Admin com erro!')
-});
-
 database(`CREATE TABLE IF NOT EXISTS PAGAMENTO (
     CODIGO INTEGER PRIMARY KEY AUTOINCREMENT,
     TITULAR VARCHAR(50),
