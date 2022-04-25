@@ -43,7 +43,7 @@ export class EnderecosComponent implements OnInit {
   }
 
   voltar() {
-    if(localStorage.getItem('emCompra')) {
+    if(localStorage.getItem('emCompra') == '1') {
       this.router.navigate(['/carrinho/pedido']);
     } else {
       this.router.navigate(['/usuario/'])
