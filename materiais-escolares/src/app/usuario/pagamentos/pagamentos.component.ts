@@ -73,7 +73,8 @@ export class PagamentosComponent implements OnInit {
     codigoSeguranca.id = 'codigoSeguranca'
 
     let validade = document.createElement('input')
-    validade.placeholder = '__/__/____'
+    validade.placeholder = 'Validade';
+    validade.type = 'date'
     validade.style.width = '40%'
     validade.style.padding = '5px 10px'
     validade.id = 'validade'
