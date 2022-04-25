@@ -266,6 +266,7 @@ export class ProdutoComponent implements OnInit {
       ),
       headers: { "Content-Type": "application/json" }
     })
+    this.produto.ESTRELAS = notaFinal;
   }
 
   excluirAvaliacao(index, codigo) {
